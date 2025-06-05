@@ -1,0 +1,40 @@
+﻿@model DtoCredenciales
+@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <form class="form-horizontal mt-3 form-material" id="loginform" asp-action="Login" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                <div class="Logo"><img src="@Url.Content("~/img/Logo.png")" alt="..." style="width:100%"/></div>
+                <span class="header">¡ Bienvenido ! </span>
+                <input asp-for="UsuarioEmpresarial" class="form-control" required placeholder="Usuario Empresarial" style=" color:#111111" />
+                <input asp-for="ClaveEmpresarial" class="form-control" required placeholder="Contraseña" style="color:#111111" />
+                <button type="submit" class="button sign-in">Ingresar</button>
+             
+                <button type="submit" class="button">
+                    <a class="dropdown-item" href="@Url.Action("CerrarSesion", "Cuenta", new { Area = "" })">
+                        <i data-feather="log-out"
+                           class="feather-sm text-danger me-1 ms-1"></i> Regresar al Inicio
+                    </a>
+                </button>
+                <p class="footer">
+                    Don't have an account?
+                    <a href="" class="link">Sign up, it's free!</a>
+                    <br />
+                    <a href="" class="link">Forgot password?</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

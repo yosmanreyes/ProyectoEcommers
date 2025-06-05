@@ -1,0 +1,755 @@
+﻿@{
+    ViewData["Title"] = "Ventas";
+}
+
+@section styles {
+    <link href="~/css/styletienda.css" rel="stylesheet" />
+    <link href="~/css/styletienda.css" rel="stylesheet" />
+    <link href="~/material/assets/libs/bootstrap-duallistbox/dist/bootstrap-duallistbox.css" rel="stylesheet" />
+    <link href="~/css/personalizadopdf.css" rel="stylesheet" />
+
+
+}
+
+@section scripts {
+
+
+    <script type="text/javascript">
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        // $(document).ready(function () {
+        //     $(".fechaInput").kendoDateTimePicker({
+        //         culture: "es-CO",
+        //         value: "",
+        //         interval: 1,
+        //         format: "dd/MM/yyyy hh:mm tt",
+        //         animation: {
+        //             close: {
+        //                 effects: "fadeOut zoom:out",
+        //                 duration: 300
+        //             },
+        //             open: {
+        //                 effects: "fadeIn zoom:in",
+        //                 duration: 300
+        //             }
+        //         }
+        //     });
+
+        //     $(".k-datetimepicker").css("width", "100%");
+        // });
+
+
+        function startChange() {
+            var startDate = start.value();
+            if (startDate) {
+                startDate = new Date(startDate);
+                startDate.setDate(startDate.getDate());
+            } else if (endDate) {
+                start.max(new Date(endDate));
+            } else {
+                endDate = new Date();
+                start.max(endDate);
+            }
+
+        }
+
+
+        function endChange() {
+            var endDate = end.value(),
+                startDate = start.value();
+            if (endDate) {
+                endDate = new Date(endDate);
+                endDate.setDate(endDate.getDate());
+                start.max(endDate);
+            } else if (startDate) {
+                end.min(new Date(startDate));
+            } else {
+                endDate = new Date();
+                start.max(endDate);
+            }
+        }
+
+        var start = $("#modalEditFechaCreacion").kendoDateTimePicker({
+            culture: "es-CO",
+            // min: new Date(),
+             change: startChange,
+            format: "{0:dd/MM/yyyy H:mm:ss}",
+        }).data("kendoDateTimePicker");
+
+        var end = $("#modalEditFechaEnvioProducto").kendoDateTimePicker({
+            culture: "es-CO",
+            // min: new Date(),
+            change: endChange,
+            format: "{0:dd/MM/yyyy H:mm:ss}",
+        }).data("kendoDateTimePicker");
+
+
+        var end = $("#modalEditFechaLlegadaProducto").kendoDateTimePicker({
+            culture: "es-CO",
+            // min: new Date(),
+            change: endChange,
+            format: "{0:dd/MM/yyyy H:mm:ss}",
+        }).data("kendoDateTimePicker");
+        
+        
+
+
+        var UrlGetConsultaMisventas = "@Url.Action("F_GetProductosVentas", "Venta", new { Area = "" })";
+        var UrlGetConsultaMisventasEnviadas = "@Url.Action("F_GetProductosVentasRealizadas", "Venta", new { Area = "" })";
+        var UrlUpdateProductoVenta = "@Url.Action("UpdateProductoVenta", "Venta", new { Area = "" })";
+        var UrlEnvioCorreoPersonal = "@Url.Action("EnvioCorreoPersonalBandeja", "AdminComentarios", new { Area = "" })";
+        var UrlReporteExcel = "@Url.Action("ExcelGeneral", "Venta", new { Area = "" })";
+        var UrlReporteExcel2 = "@Url.Action("ExcelGeneralventasDespachadas", "Venta", new { Area = "" })";
+        var UrlReporteExcelGeneral = "@Url.Action("ExcelTotal", "Venta", new { Area = "" })";
+        var UrlEnvioCorreoMasivo = "@Url.Action("EnvioCorreoMasivo", "AdminComentarios", new { Area = "" })";
+        var UrlGetCorreos = "@Url.Action("ConsultaDominiosBandejaVentas", "AdminComentarios", new { Area = "" })";
+        var Urlapi = "@Url.Action("GlobalVariable", "api", new { area = "" })";
+        var UrlReportePDF = "@Url.Action("DescargarPDF", "Venta", new { Area = "" })";
+        var UrlReporteGeneralPDF = "@Url.Action("DescargarGeneralPDF", "Venta", new { Area = "" })";
+        var UrlReporteGeneralPDFIndividual = "@Url.Action("DescargarIndividualPDF", "Venta", new { Area = "" })";
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+        var UrlUpdateVentaProducto = "@Url.Action("UpdateCompraAdmin", "Venta", new { Area = "" })";
+
+
+        function VisualizarPDF(id_compra) {
+
+            var V_Codigo = id_compra;
+            var UrlRptPdf = UrlReportePDF + '?_idCompra=' + id_compra;
+            var V_NumDocument = V_Codigo;
+            var Evento = "Rpt";
+            var Detalle = "Genera Reporte ";
+            $("#ViewPDF").attr('src', "@ViewBag.RutaVisualizador" + encodeURIComponent(UrlRptPdf) + "&P_IdDocument=" + V_Codigo + "&P_NumDocument=" + V_NumDocument + "&P_Tipo=1" + "&P_Evento=" + Evento + "&P_Detalle=" + Detalle + "&P_IdRol=1" + "&P_Zoom=1");
+            $('#ModalVisorPdf').modal("show");
+        }
+
+        function VisualizarGeneralPDF() {
+
+            var V_Codigo = 1;
+            var UrlRptPdf = UrlReporteGeneralPDF;
+            var V_NumDocument = V_Codigo;
+            var Evento = "Rpt";
+            var Detalle = "Genera Reporte ";
+            $("#ViewPDF").attr('src', "@ViewBag.RutaVisualizador" + encodeURIComponent(UrlRptPdf) + "&P_IdDocument=" + V_Codigo + "&P_NumDocument=" + V_NumDocument + "&P_Tipo=1" + "&P_Evento=" + Evento + "&P_Detalle=" + Detalle + "&P_IdRol=1" + "&P_Zoom=1");
+            $('#ModalVisorPdf').modal("show");
+        }
+
+        function VisualizarGeneralPDF2() {
+
+            var V_Codigo = 1;
+            var UrlRptPdf = UrlReporteGeneralPDFIndividual;
+            var V_NumDocument = V_Codigo;
+            var Evento = "Rpt";
+            var Detalle = "Genera Reporte ";
+            $("#ViewPDF").attr('src', "@ViewBag.RutaVisualizador" + encodeURIComponent(UrlRptPdf) + "&P_IdDocument=" + V_Codigo + "&P_NumDocument=" + V_NumDocument + "&P_Tipo=1" + "&P_Evento=" + Evento + "&P_Detalle=" + Detalle + "&P_IdRol=1" + "&P_Zoom=1");
+            $('#ModalVisorPdf').modal("show");
+        }
+
+
+        
+
+
+
+    </script>
+    <script src="~/areas/admin/bandejaPrueba.js?Versionx=10"></script>
+    <script src="~/material/assets/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js"></script>
+    <script src="~/material/js/pages/forms/dual-listbox/dual-listbox.js"></script>
+
+   
+      
+}
+@Html.AntiForgeryToken()
+<section class="content-header"></section>
+<div class="page-titles">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a id="no-link" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li class="active">Ventas de producto</li>
+        </ul>
+    </div>
+</div>
+<div class="card-footer" style="margin-bottom: 10px;">
+    <div class="col-md-12 text-right">
+        @*                     <a href="javascript:()" class="" title="Descargar PDF General"><i class="fa fa-file-pdf-o yellow" style="font-size: 15px;"></i></a>
+        <a href="javascript:()" class="" title="Descargar PDF Individual"><i class="fa fa-file-pdf-o yellow" style="font-size: 15px;"></i></a> *@
+
+        <button tabindex="1002" type="button" id="btnLimpiar" onclick="VisualizarGeneralPDF(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-pdf" title="Nuevo"><span class="fa fa-file-pdf-o faa-ring animated red"></span> pdf Factura General</button>
+        <button tabindex="1002" type="button" id="btnLimpiar" onclick="VisualizarGeneralPDF2(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-pdf" title="Nuevo"><span class="fa fa-file-pdf-o faa-ring animated red"></span> Pdf Factura Individual</button>
+        <button tabindex="1002" type="button" id="btnLimpiar" onclick="RptExcelGeneral(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-limpiar" title="Nuevo"><span class="fa fa-file-excel-o faa-ring animated green "></span> Excel General</button>
+        @*                     <button tabindex="31" class="btn btn-success" id="btnGetPacHospitalB" onclick="VisualizarPDF(); return false;" style="height:34px; border-radius: 0px 0px 0px 0px !important;" type="button" title="Buscar..."><b><i class="fa fa-file-pdf-o faa-pulse animated"></i></b></button> *@
+    </div>
+</div>
+<div class="card border-success" style="display:block" id="IdMisCompras">
+    <div class="card border-success">
+        <div class="card-header d-flex align-items-center">
+            @*    <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i>Bandeja Ventas</h4> *@
+            <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i><span id="lblAnotacionesVenta"></span></h4>
+            <div class="card-actions ms-auto d-flex button-group">
+                <a href="javascript:RptExcel()" class="" title="Descargar Reporte en Excel"><i class="fa fa-file-excel-o yellow" style="font-size: 15px;"></i></a>
+                <a href="javascript:OpenEnviarCorreoMasivo()" class="" title="Enviar Correo"><i class="fa fa-envelope-o yellow" style="font-size: 15px;"></i></a>
+                <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                    <i data-feather="x" class="feather-sm"></i>
+                </a>
+            </div>
+        </div>
+        <br />
+        <div class="col-md-12 text-center">
+            <button tabindex="1003" type="button" id="btnModalInsUsuarios" onclick="InsActualizabandeja(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-eliminar" title="Eliminar"><span class="fa fa-refresh faa-wrench animated"></span> Actualizar</button>
+        </div>
+        <div id="pn_Grilla" class="card-body collapse show">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive m-t-40" style="margin-top: 0px !important;">
+                        <table id="tbGrilla" class="table table-bordered table-striped" width="100%" style="margin-top: -1px !important;"></table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+     
+    </div>
+</div>
+
+
+<div class="card border-success" style="display:block" id="IdMisCompras2">
+    <div class="card border-success">
+        <div class="card-header d-flex align-items-center">
+            @*    <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i>Bandeja Ventas</h4> *@
+            <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i><span id="lblAnotacionesVenta2"></span> </h4>
+            <div class="card-actions ms-auto d-flex button-group">
+                <a href="javascript:RptExcel2()" class="" title="Descargar Reporte en Excel"><i class="fa fa-file-excel-o yellow" style="font-size: 15px;"></i></a>
+                <a href="javascript:OpenEnviarCorreoMasivo()" class="" title="Enviar Correo"><i class="fa fa-envelope-o yellow" style="font-size: 15px;"></i></a>
+                <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                    <i data-feather="x" class="feather-sm"></i>
+                </a>
+            </div>
+        </div>
+        <br />
+        <div class="col-md-12 text-center">
+            <button tabindex="1003" type="button" id="btnModalInsUsuarios" onclick="InsActualizabandeja(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-eliminar" title="Eliminar"><span class="fa fa-refresh faa-wrench animated"></span> Actualizar ventas despachadas</button>
+        </div>
+        <div id="pn_Grilla" class="card-body collapse show">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive m-t-40" style="margin-top: 0px !important;">
+                        <table id="tbGrilla2" class="table table-bordered table-striped" width="100%" style="margin-top: -1px !important;"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="txtIdComentario" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtIdeCorreo" placeholder="Doc" value="0" class="hidden" />
+<div class="modal fade" id="ModalCorreo" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;" role="document">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header card-header" style="display: flex; align-content: stretch; justify-content: space-evenly; align-items: flex-start; flex-wrap: wrap; flex-direction: row; color: white;">
+                <h2 class="text-center white-color">Envío de Notificaciones por Correo Electrónico</h2>
+                <div class="card-actions ms-auto d-flex button-group">
+                    <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                    <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close" onclick="CerrarCorreos(); return false;">
+                        <i data-feather="x" class="feather-sm"></i>
+                    </a>
+
+                </div>
+              @*   <button onclick="CerrarCorreos(); return false;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> *@
+            </div>
+            <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                <fieldset style="padding: 0px 36px 8px 36px; margin-top: 0px; margin-bottom: 10px; ">
+                    <legend style="width: calc(14.9em + .75rem + 2px) !important; font-size: 18px !important; padding: 0px 0px 0px 8px; margin-left: 9px; color: #1c7852">Envío de Correo Electrónico...</legend>
+
+                    <div class="row">
+                        <div class="col-md-6 MargFloatBoos">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtAsunto" id="txtAsunto" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Asunto:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 MargFloatBoos">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtcorreo" id="txtcorreo" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Correo:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <div class="form-group has-float-label">
+                                <textarea tabindex="101" class="form-control" placeholder=" " rows="6" id="txtMensaje" name="txtMensaje" maxlength="3980" cols="60" style="height: 215px !important; text-align:justify; margin-bottom: 0px;"></textarea>
+                                <label class="Labels">Contenido del Mensaje:</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button tabindex="7604" type="button" id="btnEnviarCorreo" onclick="EnvioCorreos(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo General"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar</button>
+                <button tabindex="7605" type="button" id="btnEnviarCorreoP" onclick="EnvioCorreosPersonal(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo Personalizado"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar</button>
+                <button type="button" data-dismiss="modal" onclick="CerrarCorreos(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="text" id="txtIdComentarioMasivo" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtIdeCorreoMasivo" placeholder="Doc" value="0" class="hidden" />
+<div class="modal fade" id="ModalCorreoMasivo" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;" role="document">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header card-header" style="display: flex; align-content: stretch; justify-content: space-evenly; align-items: flex-start; flex-wrap: wrap; flex-direction: row; color: white;">
+                <h2 class="text-center white-color">Envío de Notificaciones por Correo Electrónico</h2>
+                <div class="card-actions ms-auto d-flex button-group">
+                    <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                    <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close" onclick="CerrarCorreosMasivo(); return false;">
+                        <i data-feather="x" class="feather-sm"></i>
+                    </a>
+
+                </div>
+               @*  <button onclick="CerrarCorreosMasivo(); return false;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> *@
+            </div>
+            <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                <fieldset style="padding: 0px 36px 8px 36px; margin-top: 0px; margin-bottom: 10px; ">
+                    <legend style="width: calc(14.9em + .75rem + 2px) !important; font-size: 18px !important; padding: 0px 0px 0px 8px; margin-left: 9px; color: #1c7852">Envío de Correo Electrónico...</legend>
+                    <div class="row">
+                        <div class="col-md-6 MargFloatBoos">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtAsunto" id="txtAsuntoMasivo" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Asunto:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 MargFloatBoos">
+                            <div class="form-horizontal">
+                                <div class="form-group row" style="margin-bottom: 0px;">
+                                    <label class="col-md-7 col-form-label Labelr Labels" style="margin-top:0px;">Envío Correo Individual:</label>
+                                    <div class="col-md-5 text-left" style="padding-left:0px;" onclick="ModalInsUsuarios()">
+                                        <input tabindex="111" type="checkbox" checked data-toggle="toggle" id="CheckEstadoUsuario">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="idIndividual" style="display:block">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtcorreoMasivo" id="txtcorreoMasivo" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Correo:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="idMasivo" style="display:none">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <label class="Labels text-center">Envío Correo Masivo:</label>
+                            <div class="form-group has-float-label">
+                                <select multiple="multiple" size="10" class="duallistbox" id="selectcorreos">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <div class="form-group has-float-label">
+                                <textarea tabindex="101" class="form-control" placeholder=" " rows="6" id="txtMensajeMasivo" name="txtMensaje" maxlength="3980" cols="60" style="height: 215px !important; text-align:justify; margin-bottom: 0px;"></textarea>
+                                <label class="Labels">Contenido del Mensaje:</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button tabindex="7604" type="button" id="EnvioCorreosMasivo" onclick="EnvioCorreosMasivo(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo General"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar Masivo</button>
+                <button tabindex="7605" type="button" id="EnvioCorreosPersonalM" onclick="EnvioCorreosPersonalM(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo Personalizado"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar</button>
+                <button type="button" data-dismiss="modal" onclick="CerrarCorreosMasivo(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalProducto" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;" role="document">
+        <div class="modal-content CuadroModal">
+            <div class="card border-success" style="display:none" id="IdMisComprasEnvio">
+                <div class="card-header d-flex align-items-center">
+                    <h4 class="card-title text-white" id="idFechaCreacion"></h4>
+                    <div class="card-actions ms-auto d-flex button-group">
+                        <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                        <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close" onclick="CerrarModalProducto(); return false;">
+                            <i data-feather="x" class="feather-sm"></i>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="card-body collapse show">
+                    <fieldset style="padding: 0px 36px 8px 36px; margin-top: 0px; margin-bottom: 10px; ">
+                        <legend style="width: calc(14.9em + .75rem + 2px) !important; font-size: 18px !important; padding: 0px 0px 0px 8px; margin-left: 9px; color: #1c7852">Productos Solicitados...</legend>
+                        <h3 style="text-align: center">
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-5 MargFloatBoos" id="IdListaCompraC">
+                            </div>
+                            <div class="col-md-6 MargFloatBoos">
+                                <h5 style="text-align: center">
+                                    Mi Producto
+                                </h5>
+                                <div class="table-content table-responsive" id="IdtablaMisComprasTotal">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name">Imagen</th>
+                                                <th class="product-name">Producto</th>
+                                                <th class="product-total">Precio producto</th>
+                                                <th class="product-total">Precio Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 style="text-align: center; position: absolute;  width: 100%;  height: 1px;  background-color: #eaedff;  position: relative;  margin: 1em auto 2em; " id="idEstadoTrazabilidad">
+                        </h2>
+                        <div class="modal-footer" style="justify-content:center;">
+                            <button type="button" data-dismiss="modal" onclick="CerrarModalProducto(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Para Visualizar PDF-->
+<div class="modal fade" id="ModalVisorPdf" aria-labelledby="bs-example-modal-lg" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;">
+        <div class="modal-content CuadroModal">
+            <button tabindex="1" type="button" id="CloseModalPdf" title="Cerrar Visor PDF" class="btn btn-success" data-action="close"><span class="fas fa-sign-out-alt"></span> Cerrar</button>
+            <iframe id="ViewPDF" class="vistadocumento" style="box-shadow:4px 5px 6px #748a7b;border-radius: 14px;overflow:scroll; width: 100%; min-height: 400px; height:725px"></iframe>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal Editar Venta -->
+<!-- Modal -->
+<!-- Modal Editar -->
+<!-- Modal Editar -->
+<!-- Modal Editar -->
+<!-- Modal Editar -->
+<!-- Modal Editar -->
+<!-- Modal Editar -->
+<!-- Modal Editar -->
+<div id="modalEdit" class="modal fade" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="card-title text-black">
+                    <i class="mr-2 fa fa-server text-black"> Editar Venta: </i>
+                    <input id="modaIdVenta" value="12345" readonly style="border: none; background: transparent; font-size: inherit;" />
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="modalEditForm">
+                    <!-- Sección de Costos -->
+                    <input type="text" id="modalEditIdVenta" placeholder="Doc" value="0" class="hidden" />
+                    <div class="section-container mb-4 p-3" style="border: 2px solid #007bff; background-color: #f0f8ff;">
+                        <h5>Costos</h5>
+                        <div class="row g-3">
+                            <!-- Cantidad -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditCantidad" class="Labels">Cantidad</label>
+                                    <input type="text" class="form-control" id="modalEditCantidad" readonly>
+                                </div>
+                            </div>
+                            <!-- Precio Total -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditPrecioTotal" class="Labels">Precio Productos (X) Cantidad</label>
+                                    <input type="text" class="form-control" id="modalEditPrecioTotal" readonly>
+                                </div>
+                            </div>
+                            <!-- Costo Envío -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditCostoEnvio" class="Labels">Costo Envío</label>
+                                    <input type="text" class="form-control" id="modalEditCostoEnvio">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Precio General -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditPrecioGeneral" class="Labels">Precio General</label>
+                                    <input type="text" class="form-control" id="modalEditPrecioGeneral" readonly>
+                                </div>
+                            </div>
+                            <!-- Fecha Creación -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditFechaCreacion" class="Labels">Fecha Creación</label>
+                                    <input tabindex="2" id="modalEditFechaCreacion" type="date" placeholder="" class="Calendario" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Envío -->
+                    <div class="section-container mb-4 p-3" style="border: 2px solid #28a745; background-color: #eaf7e5;">
+                        <h5>Detalles de Envío</h5>
+                        <div class="row g-3">
+                            <!-- Fecha de Envío -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditFechaEnvioProducto" class="Labels">Fecha de Envío</label>
+                                    <input tabindex="2" id="modalEditFechaEnvioProducto" type="date" placeholder="" class="Calendario" />
+                                </div>
+                            </div>
+                            <!-- Empresa Entrega -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditEmpresaEntrega" class="Labels">Empresa Entrega</label>
+                                    <input type="text" class="form-control" id="modalEditEmpresaEntrega">
+                                </div>
+                            </div>
+                            <!-- Enviado Satisfactoriamente -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditEnviadoSatisfactoriamente" class="Labels">Enviado Satisfactoriamente</label>
+                                    <select class="form-select" id="modalEditEnviadoSatisfactoriamente">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Producto -->
+                    <div class="section-container mb-4 p-3" style="border: 2px solid #ffc107; background-color: #fff9e0;">
+                        <h5>Detalles del Producto</h5>
+                        <div class="row g-3">
+                            <!-- Fecha de Llegada -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditFechaLlegadaProducto" class="Labels">Fecha de Llegada</label>
+                                    <input tabindex="2" id="modalEditFechaLlegadaProducto" type="date" placeholder="" class="Calendario" />
+                                </div>
+                            </div>
+                            <!-- Recibió Producto -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditEstadoProducto" class="Labels">Recibió Producto</label>
+                                    <select class="form-select" id="modalEditEstadoProducto">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+          
+
+                    <!-- Sección de Dirección y Datos de Contacto -->
+                    <div class="section-container mb-4 p-3" style="border: 2px solid #17a2b8; background-color: #eaf7f9;">
+                        <h5>Datos de Entrega y Contacto</h5>
+                        <div class="row g-3">
+                            <!-- Dirección -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditNombres" class="Labels">Nombres</label>
+                                    <input type="text" class="form-control" id="modalEditNombres">
+                                </div>
+                            </div>
+                            <!-- País -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditApellidos" class="Labels">Apellidos</label>
+                                    <input type="text" class="form-control" id="modalEditApellidos">
+                                </div>
+                            </div>
+                            <!-- Departamento -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditCancelada" class="Labels">Cancelar Pedido</label>
+                                    <select class="form-select" id="modalEditCancelada">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Dirección -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditDireccion" class="Labels">Dirección</label>
+                                    <input type="text" class="form-control" id="modalEditDireccion">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditDireccionOpcional" class="Labels">Opción Dirección</label>
+                                    <textarea class="form-control" id="modalEditDireccionOpcional"></textarea>
+                                </div>
+                            </div>
+                            <!-- País -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditPais" class="Labels">País</label>
+                                    <input type="text" class="form-control" id="modalEditPais">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditDepartamento" class="Labels">Departamento</label>
+                                    <input type="text" class="form-control" id="modalEditDepartamento">
+                                </div>
+                            </div>
+                            <!-- Ciudad -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditCiudad" class="Labels">Ciudad</label>
+                                    <input type="text" class="form-control" id="modalEditCiudad">
+                                </div>
+                            </div>
+                            <!-- Código Postal -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditCodigoPostal" class="Labels">Código Postal</label>
+                                    <input type="text" class="form-control" id="modalEditCodigoPostal">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Teléfono con Indicativo -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditTelefono" class="Labels">Número Teléfono</label>
+                                    <input type="text" class="form-control" id="modalEditTelefono">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalCelularConIndicativo" class="Labels">Teléfono con Indicativo</label>
+                                    <input type="text" class="form-control" id="modalCelularConIndicativo">
+                                </div>
+                            </div>
+                            <!-- Correo Electrónico -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditCorreoElectronico" class="Labels">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="modalEditCorreoElectronico">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="mb-12">
+                                    <label for="modalEditComentario" class="Labels">Comentario</label>
+                                    <input type="text" class="form-control" id="modalEditComentario">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Nueva Sección: Entrega Producto en el Negocio -->
+                    <div class="section-container mb-4 p-3" style="border: 2px solid #6c757d; background-color: #d1d8e0;">
+                        <h5>Entrega Producto en el Negocio</h5>
+                        <div class="row g-3">
+                            <!-- Entrega Mercancia Local -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditEntregaMercanciaLocal" class="Labels">Entrega Mercancía Local</label>
+                                    <select class="form-select" id="modalEditEntregaMercanciaLocal">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Pago Nequi -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditPagoNequi" class="Labels">Pago Nequi</label>
+                                    <select class="form-select" id="modalEditPagoNequi">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Pago Daviplata -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditPagoDaviplata" class="Labels">Pago Daviplata</label>
+                                    <select class="form-select" id="modalEditPagoDaviplata">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Otro Medio de Pago -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditOtroMedioPago" class="Labels">Otro Medio de Pago</label>
+                                    <select class="form-select" id="modalEditOtroMedioPago">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Pago Efectivo -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="modalEditPagoEfectivo" class="Labels">Pago Efectivo</label>
+                                    <select class="form-select" id="modalEditPagoEfectivo">
+                                        <option value="0">N/A</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarEdicion()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,98 @@
+﻿/*body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}*/
+
+.selectPersonalizado {
+    position: relative;
+    width: 100px;
+
+}
+.selectPersonalizado3 {
+    position: relative;
+    display: inline-block;
+    padding: 0px 0px;
+    text-transform: capitalize;
+    background: #ffffff;
+    color: #222;
+    border-bottom: 1px solid #ebebeb;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+}
+
+.options-listPersonalizado {
+    width: 135px;
+    /* padding: 2px;*/
+    font-size: 14px;
+    border: none;
+    font-weight: bold;
+
+
+    /*    min-width: 100px; 
+    max-width: 300px;  */
+}
+
+/*.options-listPersonalizado2 {
+    width: 5px;*/
+    /* padding: 2px;*/
+    /*font-size: 14px;
+    border: none;
+    font-weight: bold;
+    min-width: 100px;*/ /* Ancho mínimo */
+    /*max-width: 300px;*/ /* Ancho máximo */
+/*}*/
+
+
+.options-listPersonalizado1 {
+    width: 260px;
+    padding: 15px;
+    font-size: 14px;
+    border: none;
+    font-weight: bold;
+    /*min-width: 100px;*/ /* Ancho mínimo */
+    /*max-width: 300px;*/ /* Ancho máximo */
+}
+
+.options-listPersonalizado2 {
+    width: 220px;
+    padding: 15px;
+    font-size: 14px;
+    border: none;
+    font-weight: bold;
+    /*min-width: 100px;*/ /* Ancho mínimo */
+    /*max-width: 300px;*/ /* Ancho máximo */
+}
+
+.options-listPersonalizado3 {
+    width: 240px;
+    padding: 15px;
+    font-size: 14px;
+    border: none;
+    font-weight: bold;
+
+    /*min-width: 100px;*/ /* Ancho mínimo */
+    /*max-width: 300px;*/ /* Ancho máximo */
+}
+
+
+@media only screen and (max-width: 400px) {
+    .cart__mini {
+        width: 250px;
+    }
+
+    .t-y-btn {
+        height: 49px;
+        line-height: 20px;
+        display: flex;
+        align-content: space-around;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

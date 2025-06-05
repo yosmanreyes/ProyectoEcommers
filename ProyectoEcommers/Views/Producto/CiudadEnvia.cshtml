@@ -1,0 +1,207 @@
+﻿@{
+    ViewData["Title"] = "Gestionar productos";
+}
+
+@section scripts {
+    <script>
+        var UrlGetDepartamentoDominios = "@Url.Action("F_Departamento", "Cuenta", new { Area = "" })";
+        var UrlGetPaisesDominiosX = "@Url.Action("F_GetPaises", "Cuenta", new { Area = "" })";
+        var UrlConsultaCiudadEnvia = "@Url.Action("F_GetGrillaCiudadEnvia", "Producto", new { Area = "" })";
+        var UrlUpdateCiudad= "@Url.Action("UpdateCiudad", "Producto", new { Area = "" })";
+        var UrlAddCiudad = "@Url.Action("AddCiudad", "Producto", new { Area = "" })";
+
+
+        //var UrlConsultaImagen = "@Url.Action("F_GetImagenGrilla", "Producto", new { Area = "" })";
+  
+    </script>
+    <script src="~/areas/admin/ciudadenvia.js?Versionx=10"></script>
+}
+
+<section class="content-header"></section>
+<input ID="IdProducto" Value="0" runat="server" class="hidden" />
+<div class="page-titles">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a id="no-link" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li class="active">Gestionar Costo de Envío</li>
+        </ul>
+    </div>
+</div>
+<input type="text" id="txtIdMarca" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtICategoria" placeholder="Doc" value="0" class="hidden" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card border-success">
+            <div class="card-header d-flex align-items-center">
+                <h4 class="card-title text-white"><i class="mr-2 fa fa-pencil-square-o text-white"></i>Crear/Editar Costo Envío</h4>
+                <div class="card-actions ms-auto d-flex button-group">
+                    <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                    <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                        <i data-feather="x" class="feather-sm"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body collapse show">
+                <div class="row">
+                    <div class="row" id="idDepartamento1">
+                        <div class="col-md-4 MargFloatBoos" style="height: 74px;">
+                            <div class="country-select">
+                                <label class="Labels">País:<span class="required">*</span></label>
+                                <select class="form-control InputPading select2" style="width:100%" id="IdPais">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="height: 74px;">
+                            <div class="country-select">
+                                <label class="Label">Departamento:</label>
+                                <select class="form-control select2 InputPading" style="width:104%" id="selectDepartamento">
+                                    <option value="" selected disabled>Seleccione</option>
+                                </select>
+
+                            </div>
+                        </div>
+                  @*       <div class="col-md-4" style="height: 74px;">
+                            <div class="country-select">
+                                <label class="Label">Ciudad:</label>
+                                <select class="form-control select2 InputPading" style="width:104%" id="selectCiudad">
+                                    <option value="" selected disabled>Seleccione</option>
+                                </select>
+
+                            </div>
+                        </div> *@
+                    </div>
+                </div>
+                <h4 class="card-title text-black"><i class="mr-2 fa fa-pencil-square-o text-black"></i>MODIFICA O CREA VARIABLES DEL PAIS DEPARTAMENTO COSTOS INDICATIVOS ETC...</h4>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtCodigo" type="text" id="txtCodigo" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Codigo:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtMarca" type="text" id="txtMarca" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Descripción:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtAbreviatura" type="text" id="txtAbreviatura" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Abreviatura:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtTipo" type="text" id="txtTipo" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Tipo:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtZona" type="text" id="txtZona" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Zona:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtLuge" type="text" id="txtLuge" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Luge Código:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtVigente" type="text" id="txtVigente" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Vigente:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtIndicativo" type="text" id="txtIndicativo" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Indicativo:</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 MargFloatBoos">
+                                <div class="form-group has-float-label">
+                                    <input tabindex="5" name="txtCostoEnvio" type="text" id="txtCostoEnvio" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                    <label class="Labels">Costo de Envio:</label>
+                                </div>
+                            </div>
+                 
+                  
+                        </div>
+                    </div>
+                </div>
+            
+      
+
+    
+                <div class="card-footer" style="margin-bottom: 10px;">
+                    <div class="col-md-12 text-right">
+                        <button tabindex="1001" type="button" id="btnGrabar" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-grad" title="Guardar"><span class="fa fa-floppy-o faa-wrench animated"></span> Guardar</button>
+                        <button tabindex="1002" type="button" id="Limpiar" onclick="Limpiar(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-limpiar" title="Nuevo"><span class="fa ico_limpiar faa-ring animated"></span> Nuevo</button>
+                        @*  <button tabindex="1003" type="button" id="btnEliminar" onclick="EliminarProducto($('#IdProducto').val()); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-eliminar" title="Eliminar"><span class="fas fa-trash-alt faa-ring animated"></span> Eliminar</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-success">
+            <div class="card-header d-flex align-items-center">
+                <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i>Paises Departamentos Ciudades</h4>
+                <div class="card-actions ms-auto d-flex button-group">
+                    <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                    <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                        <i data-feather="x" class="feather-sm"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="pn_Grilla" class="card-body collapse show">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive m-t-40" style="margin-top: 0px !important;">
+                            <table id="tbGrilla" class="table table-bordered table-striped" width="100%" style="margin-top: -1px !important;"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+
+
+<div class="modal fade show" id="Modal_Transacciones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scroll-long-outer-modal" aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header d-flex align-items-center">
+                <h2 class="text-center" id="TituloMensaje"></h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="ContenidoCambio"></div>
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button type="button" data-bs-dismiss="modal" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Estado Proceso-->
+<div id="Process">
+    <div class="loader_sis">
+        <div class="loader_dialoge">
+            <div class="loader_containere text-center">
+                <div class="loadere"></div>
+                <h4 class="text-white">Procesando, espere...</h4>
+            </div>
+        </div>
+    </div>
+    <div class="loader_backe"></div>
+</div>

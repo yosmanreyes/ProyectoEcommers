@@ -1,0 +1,192 @@
+﻿@{
+    ViewData["Title"] = "Administración Usuarios";
+}
+
+@section scripts{
+
+ 
+    <script>
+        var UrlGetTarjetaEmpleado = "@Url.Action("F_GetTarjetaEmpleado", "CtrUsuarios", new { Area = "" })";
+        var UrlGetEmpleadoGrilla = "@Url.Action("F_GetEmpleadoGrilla", "CtrUsuarios", new { Area = "" })";
+        var UrlGetDominioRoles = "@Url.Action("ConsultaDominios", "CtrUsuarios", new { Area = "" })";
+        var UrlInsDesactivarUsuario = "@Url.Action("InsDesactivarUsuario", "CtrUsuarios", new { Area = "" })";
+        var UrlInsUsuario = "@Url.Action("InsUsuario", "CtrUsuarios", new { Area = "" })";
+        var UrlUpdateUsuario = "@Url.Action("UpdUsuario", "CtrUsuarios", new { Area = "" })";
+    </script>
+
+    <script src="~/areas/admin/usuarios.js?Versionx=10"></script>
+}
+
+<section class="content-header"></section>
+<div class="page-titles">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a id="no-link" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li class="active">Administración Usuarios</li>
+        </ul>
+    </div>
+</div>
+<input type="text" id="IdUsuario" value="IdUsuario" class="hidden" />
+<div class="card border-success">
+    <div class="card-header d-flex align-items-center">
+
+        <h4 class="card-title text-white"><i class="mr-2 fa fa-pencil-square-o text-white"></i>Administración de Usuarios</h4>
+        <div class="card-actions ms-auto d-flex button-group">
+            <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+            <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+            <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                <i data-feather="x" class="feather-sm"></i>
+            </a>
+        </div>
+    </div>
+    <div class="card-body collapse show">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <div class="input-group">
+                                <input tabindex="1" name="txtIdentificacion" type="text" id="txtIdentificacion" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <span class="input-group-btn">
+                                    <button tabindex="2" class="btn btn-success" id="btnConsultarEmpl" onclick="GetEmpleado($('#txtIdentificacion').val()); return false;" style="height:34px; border-radius: 0px 0px 0px 0px !important;" type="button" title="Buscar..."><b><i class="fas fa-search"></i></b></button>
+                                    <button tabindex="3" class="btn btn-warning" id="BtnLimpiarEmpl" onclick="Limpiar(); return false;" style="height:34px; border-radius: 0px 5px 5px 0px !important; margin-left: -5px;" type="button" title="Limpiar Consulta"><b><i class="fa fa-eraser"></i></b></button>
+                                </span>
+                            </div>
+                            <label class="Labels">Identificación:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="5" name="txtNombres" type="text" id="txtNombres" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                            <label class="Labels">Nombres:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="4" name="txtApellidos" type="text" id="txtApellidos" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                            <label class="Labels">Apellidos:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="17" name="txtFechaNacimiento" style="width:100%" type="text" id="txtFechaNacimiento" autocomplete="off" />
+                            <label class="Labels">Fecha Nacimiento:</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="6" name="txtCorreo" type="text" id="txtCorreo" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                            <label class="Labels">Correo:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="7" name="txtDireccionResidencia" type="text" id="txtDireccionResidencia" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                            <label class="Labels">Dirección Residencia:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="8" name="txtCelular" type="number" id="txtCelular" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                            <label class="Labels">Celular:</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <select class="form-control select2 InputPading" style="width:100%" id="selectRoles">
+                                <option value="" selected disabled>Seleccione</option>
+                            </select>
+                            <label class="Labels">Roles:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <select class="form-control select2 InputPading" style="width:100%" id="selectCliente">
+                                <option value="" selected disabled>Seleccione</option>
+                            </select>
+                            <label class="Labels">Cliente:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-group has-float-label">
+                            <input tabindex="6" name="txtClave" type="text" id="txtClave" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                            <label class="Labels">Clave Temporal:</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 MargFloatBoos">
+                        <div class="form-horizontal">
+                            <div class="form-group row" style="margin-bottom: 0px;">
+                                <label class="col-md-7 col-form-label Labelr" style="margin-top:0px;">Activar Usuario:</label>
+                                <div class="col-md-5 text-left" style="padding-left:0px;" onclick="ModalInsUsuarios()">
+                                    <input tabindex="111" type="checkbox" checked data-toggle="toggle" id="CheckEstadoUsuario">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer" style="margin-bottom: 10px;">
+            <div class="col-md-12 text-right">
+                <button tabindex="1001" type="button" id="btnGrabar" onclick="InsAsignarUsuario(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-grad" title="Guardar"><span class="fa fa-floppy-o faa-wrench animated"></span> Guardar</button>
+                <button tabindex="1002" type="button" id="btnLimpiar" onclick="btnLimpiar(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-limpiar" title="Nuevo"><span class="fa ico_limpiar faa-ring animated"></span> Nuevo</button>
+                <button tabindex="1003" type="button" id="btnModalInsUsuarios" onclick="InsActualizaUsuarios(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-eliminar" title="Eliminar"><span class="fa fa-floppy-o animated"></span> Actualizar Usuario</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-success">
+    <div class="card-header d-flex align-items-center">
+        <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i>Grillas</h4>
+        <div class="card-actions ms-auto d-flex button-group">
+            <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+            <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+            <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                <i data-feather="x" class="feather-sm"></i>
+            </a>
+        </div>
+    </div>
+    <div id="pn_Grilla" class="card-body collapse show">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive m-t-40" style="margin-top: 0px !important;">
+                    <table id="tbGrilla" class="table table-bordered table-striped" width="100%" style="margin-top: -1px !important;"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade show" id="Modal_Transacciones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scroll-long-outer-modal" aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header d-flex align-items-center">
+                <h2 class="text-center" id="TituloMensaje"></h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="ContenidoCambio"></div>
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button type="button" data-bs-dismiss="modal" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div></div>
+<!-- Modal Estado Proceso-->
+@* <div id="Process">
+    <div class="loader_sis">
+        <div class="loader_dialoge">
+            <div class="loader_containere text-center">
+                <div class="loadere"></div>
+                <h4 class="text-white">Procesando, espere...</h4>
+            </div>
+        </div>
+    </div>
+    <div class="loader_backe"></div>
+</div> *@

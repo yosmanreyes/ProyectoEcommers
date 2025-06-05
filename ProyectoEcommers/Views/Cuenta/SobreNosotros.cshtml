@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutGen.cshtml";
+}
+
+@section scripts {
+
+    <script>
+        var PaginaPrincipal = 0;
+        var UrlGetPaisesDominiosX = "@Url.Action("F_GetPaises", "Cuenta", new { Area = "" })";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        var urlRedireccionaInicio = "@Url.Action("TiendaInicio", "Cuenta", new { Area = "" })";
+    </script>
+}
+
+<div class="container">
+    <section class="about__area box-plr-0 p-relative about__mt--0 ">
+        <div class="container-fluid">
+            <div class="about__inner white-bg">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="about__wrapper">
+                            <h3 style="text-align: center;">Distribuidora MAJAS</h3>
+                            <p class="about__text" style="text-align: center;">Gracias a ustedes somos una Distribuidora reconocida.</p>
+
+                            <div class="about__quote">
+                                <blockquote style="font-size: 18px;">
+                                    <p style="text-align: justify;">Su distribuidora de productos de belleza <span style="font-weight: bold;">MAJAS</span> ha sido un referente en el mercado durante más de 6 años. Desde sus inicios, se ha destacado por ofrecer una amplia variedad de productos de primera calidad que satisfacen las necesidades de sus clientes más exigentes. Con un enfoque en la excelencia y la innovación, MAJAS ha logrado consolidarse como líder en la industria, ganando la confianza y lealtad de sus clientes en todo el país.</p>
+                                </blockquote>
+
+                            </div>
+                            <p class="about__text" style="text-align: center;">Brinda a sus clientes atención de primera mano, asesorando a sus clientes en su cuidado personal y corporal...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="why__area box-plr-75">
+        <div class="container-fluid">
+            <div class="why__inner pl-90 pr-90">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="section__head mb-30">
+                            <div class="section__title">
+                                <h3>Qué hacemos</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="why__item mb-30">
+                            <div class="why__thumb w-img fix">
+                                <img src="~/img/majas.jpg" alt="">
+                            </div>
+                            <div class="why__content">
+                                <h3 style="text-align: center;">Objetivo</h3>
+                                <p style="text-align: center;">Nuestro objetivo es proporcionar productos de la más alta calidad que satisfagan las necesidades y expectativas de nuestros clientes. Nos esforzamos por ofrecer un servicio excepcional que asegure la plena satisfacción y confianza en cada compra. Queremos ser reconocidos por nuestra integridad, compromiso con la excelencia y dedicación a las relaciones a largo plazo con nuestros clientes. Al entender y anticipar las demandas del mercado, buscamos continuamente mejorar y ampliar nuestro catálogo, asegurando que cada cliente encuentre exactamente lo que necesita.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="why__item mb-30">
+                            <div class="why__thumb w-img fix">
+                                <img src="~/img/majas.jpg" alt="">
+                            </div>
+                            <div class="why__content">
+                                <h3 style="text-align: center;">Nuestra misión</h3>
+                                <p style="text-align: center;">La misión de Distribuidora de Productos de Belleza Majas es ser el proveedor líder de productos de alta calidad que responden a las diversas necesidades de nuestros clientes. Nos comprometemos a ofrecer un servicio personalizado y excepcional, creando relaciones de confianza y fidelidad. A través de la innovación constante y la mejora continua, buscamos no solo satisfacer sino superar las expectativas de nuestros clientes. Valoramos la integridad, la responsabilidad y el compromiso con la comunidad, asegurando que cada producto que ofrecemos contribuye positivamente al bienestar y satisfacción de quienes nos eligen..</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="why__item mb-30">
+                            <div class="why__thumb w-img fix">
+                                <img src="~/img/majas.jpg" alt="">
+                            </div>
+                            <div class="why__content">
+                                <h3 style="text-align: center;">Historia de nosotros</h3>
+                                <p style="text-align: center;">
+                                    Distribuidora de Productos de Belleza Majas se fundó hace más de 6 años con la visión de convertirse en un referente en la distribución de productos de alta calidad. Desde nuestros humildes comienzos, hemos trabajado arduamente para construir una empresa basada en la confianza, la calidad y el servicio al cliente.
+                                    <br />  <br />
+                                    A lo largo de los años, hemos expandido nuestra gama de productos para satisfacer las diversas necesidades de nuestros clientes, siempre manteniendo un enfoque en la excelencia y la satisfacción del cliente. Nuestra dedicación y compromiso nos han permitido crecer y adaptarnos en un mercado en constante cambio, ganando la lealtad y el respeto de nuestros clientes y socios comerciales.
+
+                                    Hoy, nos enorgullece ser una empresa reconocida y apreciada, comprometida con la innovación y la mejora continua. Nuestra historia es un testimonio de nuestro esfuerzo y determinación para ofrecer lo mejor a nuestros clientes, y seguimos avanzando con la misma pasión y dedicación que nos impulsaron desde el principio..
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    let divsCollection = document.getElementsByClassName('ocultarDivs');
+    let arrayDivs = Array.from(divsCollection);
+    arrayDivs.forEach((item) => { item.style.display = 'none' });
+</script>
+

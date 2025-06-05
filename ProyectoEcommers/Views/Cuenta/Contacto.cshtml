@@ -1,0 +1,139 @@
+﻿@model DtoComentariosClientes
+
+@{
+    Layout = "~/Views/Shared/_LayoutGen.cshtml";
+}
+
+@section scripts{
+    <script>
+        var PaginaPrincipal = 3;
+                var UrlGetPaisesDominiosX = "@Url.Action("F_GetPaises", "Cuenta", new { Area = "" })";
+        var urlMensaje = "@Url.Action("Contactos", "Cuenta", new { area = "" })";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        
+    </script>
+}
+@Html.AntiForgeryToken()
+<div class="container">
+    <main>
+        <section class="contact__area">
+            <p style="text-align: center;"><span>Como llegar:</span> <a style="color: var(--color1);" href="https://www.google.com/maps/dir//Cl.+90+%23No+87+B-44,+Bogot%C3%A1/data=!4m8!4m7!1m0!1m5!1m1!1s0x8e3f851008149a3f:0x55ad08b6c7ca2ee6!2m2!1d-74.0963418!2d4.7119733?entry=ttu">haga clic aquí</a></p>
+            <div class="container-fluid p-0">
+                <div class="row gx-0">
+                    <div class="col-xxl-12">
+                        <div class="contact__map">
+                            @*<iframe src="https://www.google.com/maps/embed?pb=!3m2!1ses!2sco!4v1703167127578!5m2!1ses!2sco!6m8!1m7!1sVRcZZ_0RYSeWhQKnOcfh1A!2m2!1d4.711870046577983!2d-74.09641281077077!3f3.5206805972025954!4f1.7423256132722855!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>*@
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7952.669304756392!2d-74.09634980742305!3d4.711806854506566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f851008149a3f%3A0x55ad08b6c7ca2ee6!2sMajas%20-%20Distribuidora%20de%20Belleza!5e0!3m2!1ses!2sco!4v1703167182274!5m2!1ses!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="contact__area box-plr-90 pt-55 pb-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-4 col-lg-5">
+                        <div class="contact__info">
+                            <h3 class="contact__title">Nuestro oficina principal.</h3>
+                            <p class="contact__text">Dsitribuidora de Belleza MAJAS te ofrece los mejores productos de cuidado corporal y de belleza.</p>
+
+                            <div class="contact__hotline d-flex align-items-center mb-35">
+                                <div class="contact__hotline-icon mr-20">
+                                    <i class="fal fa-headset"></i>
+                                </div>
+                                <div class="contact__hotline-info">
+                                    <span>Línea directa gratuita 24 horas al día, 7 días a la semana:</span>
+                                    <h6><a href="tel:3132219524">(+57) 313 221 9524</a></h6>
+                                </div>
+                            </div>
+                            <div class="contact__address mb-20">
+                                <ul>
+                                    <li>
+                                        <p><span>Dirección:</span> <a style="color: var(--color1);" href="https://www.google.com/search?sca_esv=1afa8f061832541a&rlz=1C1ALOY_esCO1041CO1041&q=distruidora+de+belleza+majas&nfpr=1&sa=X&ved=2ahUKEwikh-_1icmEAxUMRzABHT6PCFsQvgUoAXoECAwQAw&biw=1920&bih=953&dpr=1" target="_blank">Cl. 90 #No 87 B-44, Bogotá D.C. Colombia</a></p>
+                                    </li>
+                                    <li>
+                                        <p><span>Como llegar:</span> <a style="color: var(--color1);" href="https://www.google.com/maps/dir//Cl.+90+%23No+87+B-44,+Bogot%C3%A1/data=!4m8!4m7!1m0!1m5!1m1!1s0x8e3f851008149a3f:0x55ad08b6c7ca2ee6!2m2!1d-74.0963418!2d4.7119733?entry=ttu" target="_blank">haga clic aquí</a></p>
+                                    </li>
+                                    <li>
+                                        <p><span>Correo Electrónico:</span>  <a style="color: var(--color1);" href="mailto:distrimajas@gmail.com">distrimajas@gmail.com</a> </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="contact__social">
+                                <span style="color: var(--color1); font-size: 18px;">Redes Sociales:</span>
+                                <ul>
+                                    <li>
+                                        <a href="https://api.whatsapp.com/send?phone=573124219313" target="_blank"><i class="fab fa-whatsapp faa-ring animated green"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/distribuidoramajas?utm_source=qr&igsh=djFpdzllNXEya3Nmi" target="_blank"><i class="fab fa-instagram faa-ring animated"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="https://www.facebook.com/DistriMajas/" target="_blank"><i class="fab fa-facebook-f faa-ring animated blue"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-8 col-xl-8 col-lg-7">
+                        <div class="contact__form">
+                            <h3 class="contact__title">Danos tu opinion.</h3>
+                            <div class="row">
+                                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                                    <div class="country-select">
+                                        <span>Nombres completos:</span>
+                                        <input tabindex="5" name="Nombres" type="text" id="Nombres" autocomplete="off" placeholder="Nombres" class="form-control InputPading" />
+                                    </div>
+                                </div>
+                                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                                    <div class="country-select">
+                                     
+                                        <label for="email">Correo Electrónico:</label>
+                                        <input tabindex="5" type="email" name="CorreoElectronico" onblur="validarCorreosContacto()" id="CorreoElectronico" autocomplete="off" placeholder="Correo Electronico" class="form-control InputPading" />
+                                        <div id="mensajeContacto"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                                    <div class="country-select">
+                                        <label class="Labels">Seleccione el Indicativo de tu país:<span class="required">*</span></label>
+                                        <select class="form-control InputPading select2" style="width:100%" id="IdPaisIndicativoContacto">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                                    <div class="country-select">
+                                        <span>Número de Teléfono:</span>
+                                        <input tabindex="5" name="NomNumeroTelefonobres" type="number" id="NumeroTelefono" autocomplete="off" placeholder="Número Telefono" class="form-control InputPading" />
+                                    </div>
+                                </div>
+                           
+                                <div class="col-xxl-12">
+                                    <div class="country-select">
+                                        <span>Comentanos:</span>
+                                        <textarea class="form-control" placeholder=" " rows="5" id="Comentarios" name="Comentarios" maxlength="300" style="height: 90px !important; text-align:justify; margin-bottom: 0px;" tabindex="4"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-12">
+                                    <div class="contact__btn">
+                                        <button type="submit" onclick="Ins_Contacto();" class="t-y-btn">Enviar Mensaje</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<script>
+    let divsCollection = document.getElementsByClassName('ocultarDivs');
+    let arrayDivs = Array.from(divsCollection);
+    arrayDivs.forEach((item) => { item.style.display = 'none' });
+
+</script>
+
+

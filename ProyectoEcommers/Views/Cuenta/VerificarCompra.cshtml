@@ -1,0 +1,569 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_LayoutGen.cshtml";
+}
+@section styles {
+    <style>
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff3f8; /* Color de fondo original */
+        }
+        /* Estilos CSS */
+        .highlight {
+            background-color: #fff3f8;
+           /*  lightyellow */
+        }
+
+        /* Estilos opcionales para personalizar más la modal */
+        /* Estilo adicional para la modal y los botones */
+        /* Estilo adicional para el botón de WhatsApp */
+        /* Estilo para la cabecera de la modal */
+        #recogerModal .modal-header {
+            background-image: linear-gradient(267deg, #681976 11%, #010454 82%) !important; /* Gradiente morado */
+            text-align: center;
+            padding: 20px;
+        }
+
+        #recogerModal .modal-title {
+            font-family: 'Arial', sans-serif;
+            font-size: 28px; /* Tamaño más grande */
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Otros estilos para los botones y modal */
+        #recogerModal .modal-content {
+            background-color: #fce4f4;
+            border: 2px solid #d4af37;
+        }
+
+        #recogerModal #whatsappBtn {
+            background-color: #25D366; /* Verde WhatsApp */
+            color: white;
+            border: none;
+        }
+
+            #recogerModal #whatsappBtn:hover {
+                background-color: #128C7E;
+            }
+
+        #recogerModal #confirmarBtn {
+            border-color: #d4af37;
+            color: #60076a;
+        }
+
+            #recogerModal #confirmarBtn:hover {
+                background-color: #b530e2;
+                color: white;
+                border-color: #b530e2;
+            }
+        /* Estilos para la cabecera de la modal */
+        /* Estilos para la cabecera de la modal */
+        #paymentModal .modal-header {
+            background-image: linear-gradient(267deg, #681976 11%, #010454 82%) !important; /* Gradiente atractivo morado */
+            text-align: center;
+            padding: 20px;
+        }
+
+        #paymentModal .modal-title {
+            font-family: 'Arial', sans-serif;
+            font-size: 24px; /* Tamaño de letra más grande */
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Estilo para los botones */
+        #paymentModal .modal-body button {
+            font-weight: bold;
+            border-radius: 25px;
+            margin-top: 15px;
+            width: 80%;
+            padding: 12px; /* Ajuste de padding para que los botones se vean más grandes */
+        }
+
+        /* Botón de Mercado Pago (azul claro) */
+        #paymentModal #mercadoPagoBtn {
+            background-color: #007eb5 !important; /* Azul claro */
+            color: white;
+            border: none;
+        }
+
+            #paymentModal #mercadoPagoBtn:hover {
+                background-color: #b530e2 !important; /* Verde claro cuando pasa el mouse */
+            }
+
+        /* Botón para recoger en el negocio */
+        #paymentModal #recogerBtn {
+            background-color: transparent;
+            border: 2px solid #d4af37; /* Dorado para el borde */
+            color: #681976; /* Morado para el texto */
+        }
+
+            #paymentModal #recogerBtn:hover {
+                background-color: #b530e2; /* Fondo morado cuando pasa el mouse */
+                color: white; /* Cambia la letra a blanco */
+                border-color: #b530e2; /* Borde morado cuando pasa el mouse */
+            }
+
+        /* Enlace de WhatsApp */
+        #paymentModal #whatsappLink a {
+            background-color: #b530e2; /* Verde WhatsApp */
+            color: white;
+            border-radius: 25px;
+            width: 80%;
+            display: inline-block;
+            text-align: center;
+        }
+
+            #paymentModal #whatsappLink a:hover {
+                background-color: #128C7E;
+            }
+
+        /* Alineación y estilo de los textos */
+        #paymentModal .modal-body p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+
+
+ 
+    </style>
+}
+
+@section scripts {
+<script src="https://sdk.mercadopago.com/js/v2" async defer></script>
+<script src="https://sdk.mercadopago.com/js/v2?version=latest"></script>
+<script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+
+    <script type='text/javascript'>
+        var PaginaPrincipal = 2;
+        var UrlGetDepartamentoDominios = "@Url.Action("F_Departamento", "Cuenta", new { Area = "" })";
+        var urlInsProductoCompra = "@Url.Action("InsCompraProducto", "Cuenta", new { Area = "" })";
+        var UrlGetPaisesDominiosX = "@Url.Action("F_GetPaises", "Cuenta", new { Area = "" })";
+        var urlInsCarritos = "@Url.Action("InsProductos", "Cuenta", new { Area = "" })";
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+        var urlCreatePreference = "@Url.Action("CreatePreference", "Cuenta", new { Area = "" })";
+        var UrlGetCostoEnvio = "@Url.Action("F_CostoDeEnvio", "Cuenta", new { Area = "" })";
+        var UrlGetCostoEnvioDepartamento = "@Url.Action("F_CostoDeEnvioDepartamento", "Cuenta", new { Area = "" })";  
+        var UrlGetCostoEnvioPais = "@Url.Action("F_CostDeEnviopais", "Cuenta", new { Area = "" })";
+        var urlInsCarritosMercadoLibre = "@Url.Action("InsProductosMercadoLibre", "Cuenta", new { Area = "" })";
+        var urlGetPublicKey = "@Url.Action("GetPublicKey", "Cuenta", new { Area = "" })";
+        var urlConsultarEstadoPago = "@Url.Action("ConsultarEstadoPago", "Cuenta", new { Area = "" })";
+        var UrlGetEnviarCorreoId = "@Url.Action("F_GetEnviarCorreoId", "Cuenta", new { Area = "" })";
+
+    </script>
+    <script src="~/js/mercadopagom.js?Versionx=10"></script>
+    <script src="~/js/validacompramercadopago.js?Versionx=10"></script>
+    @*   _________________________________________________________________________________________________________________ *@
+    <!-- Incluye la librería de Socket.IO -->
+
+
+}
+
+
+          
+
+@Html.AntiForgeryToken()
+<div class="row">
+    <section class="checkout-area pt-30 pb-30"">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="your-order mb-30 ">
+                        <h3 style="text-align: center">
+                            Detalles de facturación
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">País:<span class="required">*</span></label>
+                                    <select class="form-control InputPading select2 " style="width:100%" id="IdPais">
+                                        <option value="" selected disabled>Seleccione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label>
+                                        Nombres <span class="required">*</span>
+                                    </label>
+                                    <input tabindex="5" name="txtNombre" type="text" id="txtNombre" autocomplete="off" placeholder="Nombres" class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Apellidos:<span class="required">*</span></label>
+                                    <input tabindex="5" name="txtApellidos" type="text" id="txtApellidos" autocomplete="off" placeholder="Apellidos " class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;" >
+                                <div class="country-select">
+                                    <label class="Labels">Nombre Empresa (Opcional):</label>
+                                    <input tabindex="5" name="txtNombreEmpresa" type="text" id="txtNombreEmpresa" autocomplete="off" placeholder="Nombre Empresa. (opcional)" class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Dirección:<span class="required">*</span></label>
+                                    <input tabindex="5" name="txtDireccion" type="text" id="txtDireccion" autocomplete="off" placeholder="Dirección" class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Torre / Apartamento, suite etc. (Opcional):</label>
+                                    <input tabindex="5" name="txtoptionalDireccion" type="text" id="txtoptionalDireccion" autocomplete="off" placeholder="(opcional)" class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="row" id="idDepartamento1">
+                                <div class="col-md-12" style="height: 74px;">
+                                    <div class="country-select">
+                                        <label class="Label">Departamento:</label>
+                                        <select class="form-control select2 InputPading" style="width:104%" id="selectDepartamento">
+                                            <option value="" selected disabled>Seleccione</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="height: 74px;">
+                                    <div class="country-select">
+                                        <label class="Label">Ciudad:</label>
+                                        <select class="form-control select2 InputPading" style="width:104%" id="selectCiudad">
+                                            <option value="" selected disabled>Seleccione</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 MargFloatBoos" id="idDepartamento2" style="display:none; height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Departamento/Estado/Provincia:<span class="required">*</span></label>
+                                    <input tabindex="5" name="txtDepartamento2" type="text" id="txtDepartamento2" autocomplete="off" placeholder="Departamento/Estado/Provincia" class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 MargFloatBoos" id="IdCodigoPostal" style="display:none;  height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Código postal:<span class="required">*</span></label>
+                                    <input tabindex="5" name="txtCodigoPostal" type="text" id="txtCodigoPostal" onblur="validarCodigoPostal()" maxlength="5" oninput="this.value=this.value.replace(/[^0-9]/g,'')" autocomplete="off" placeholder="Código postal " class="form-control InputPading" />
+                                    <div id="mensajeCodigoPostal"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Seleccione el Indicativo de tu país:<span class="required">*</span></label>
+                                    <select class="form-control InputPading select2" style="width:100%" id="IdPaisIndicativo">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Teléfono Celular:<span class="required">*</span></label>
+                                
+                                    <input tabindex="5" name="txtCelular" type="number" id="txtCelular" autocomplete="off" maxlength="15" onblur="validarNumeroTelefono()" placeholder="Número Teléfono Celular " class="form-control InputPading" />
+                                    <div id="mensajeCelular"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Confirmar Teléfono Celular:<span class="required">*</span></label>
+                                    <input tabindex="5" name="txtCelulaConfirmacion" type="number" id="txtCelulaConfirmacion" onblur="validarNumeroTelefono()" autocomplete="off" maxlength="15" placeholder="Número Teléfono Celular " class="form-control InputPading" />
+                                    <div id="mensajeCelularConfirmacion"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Correo electrónico:<span class="required">*</span></label> 
+                                    <input tabindex="5" name="txtCorreoElectronico" type="email" id="txtCorreoElectronico" autocomplete="off" onblur="validarCorreo1()" placeholder="Correo electrónico " class="form-control InputPading" />
+                                    <div id="mensaje1"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 MargFloatBoos" style="height: 74px;">
+                                <div class="country-select">
+                                    <label class="Labels">Confirmar Correo electrónico :<span class="required">*</span></label> 
+                                    <input tabindex="5" name="txtCorreoElectronicoConfirmacion" type="email" id="txtCorreoElectronicoConfirmacion" onblur="validarCorreos()" autocomplete="off" placeholder="Correo electrónico" class="form-control InputPading" />
+                                    <div id="mensaje"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-12">
+                                <div class="country-select">
+                                    <span>Comentario:</span>
+                                    <textarea class="form-control" placeholder="si desea algun color o referencia en especial especificar aquí, (Opcional)" rows="5" id="txtComentario" name="txtComentario" maxlength="300" style="height: 90px !important; text-align:justify; margin-bottom: 0px;" tabindex="4"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="your-order mb-30" >
+                        <h3 style="text-align: center">
+                            Su pedido
+                        </h3>
+                        <div class="table-content table-responsive" id="IdtablaCarrito2">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="height: 74px;" class="product-name">Imagen</th>
+                                        <th style="height: 74px;" class="product-name">Producto x Unidad</th>
+                                        <th style="height: 74px;" class="product-total">Valor Unidad</th>
+                                        <th style="height: 74px;" class="product-total">Valor Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal fade" id="productModalId2" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+                                <div class="modal-content">
+                                    <div class="product__modal-wrapper p-relative">
+                                        <div class="product__modal-close p-absolute">
+                                            <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                                        </div>
+                                        <div class="product__modal-inner" id="idModalProducto2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row" id="IdCostoEnvio">
+                            <div class="col-md-5 ml-auto">
+                                <label>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="cart-page-total" id="idtotalCarrito2">
+                                    <h2>Total Carrito</h2>
+                                    <ul class="mb-20">
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                  
+                            <section>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="checkoutOne1">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="false" aria-controls="bankOne">
+                                            Distribuidora MAJAS: ¡Tu mejor opción en compras!
+                                        </button>
+                                    </h2>
+                                    <div id="bankOne" class="accordion-collapse collapse show" aria-labelledby="checkoutOne1" data-bs-parent="#checkoutAccordion">
+                                        <div class="accordion-body">
+                                            ¿Sabías que ahora puedes realizar tus pagos de manera más fácil? En Distribuidora Majas aceptamos pagos a través de WhatsApp, Nequi y muchas otras opciones. Contáctanos y disfruta de nuestras excelentes ofertas y servicios.
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                        <section class="best__sell pt-15 pb-0 grey-bg-2" id="IdRedireciona"> </section>
+                        <!-- Modal de selección de pago con un diseño atractivo -->
+                        <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" id="modalHeader" style="background-image: linear-gradient(267deg, #681976 11%, #010454 82%);">
+                                        <h5 class="modal-title" id="paymentModalLabel" style="font-family: 'Lucida Grande', sans-serif; color: white; font-size: 24px;">
+                                            ¡Elige tu método de pago!
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="text-align: center; font-family: 'Arial', sans-serif;">
+                                        <p style="font-size: 16px; color: #444;">¿Cómo te gustaría pagar tu pedido? Elige la opción que más te convenga:</p>
+
+                                        <!-- Botón Pagar con Mercado Pago -->
+                                        <button type="button" class="btn" id="mercadoPagoBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px;">
+                                            Pagar con Mercado Pago
+                                        </button>
+
+                                        <!-- Botón Recoger en el negocio -->
+                                        <button type="button" class="btn" id="recogerBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px;">
+                                            Recoger en el negocio y pagar en efectivo, Nequi o Daviplata
+                                        </button>
+
+                                        <!-- Enlace de WhatsApp (solo visible cuando se elige "Recoger en el negocio") -->
+                                        <div id="whatsappLink" style="display: none; margin-top: 20px;">
+                                            <p style="color: #444; font-size: 14px;">Si tienes alguna duda, puedes contactarnos por WhatsApp para cerrar la compra:</p>
+                                            <a href="https://api.whatsapp.com/send?phone=573124219313" target="_blank" class="btn btn-success" style="width: 80%; border-radius: 25px;">
+                                                <i class="fab fa-whatsapp faa-ring animated green"></i> Chatear por WhatsApp
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Botón para realizar el pedido -->
+                        <div class="row">
+                            <div class="order-button-payment mt-20" id="IdOcultaRealizarPedido" style="text-align: center; height: 24px; display: block;">
+                                <button type="button" class="t-y-btn t-y-btn-var(--color1)" id="realizarPedidoBtn">Realizar pedido</button>
+                                <button id="checkout-btn"></button>
+                            </div>
+
+                            <div class="order-button-payment mt-20" id="IdOcultaMercadoPago" style="text-align: center; display: none;">
+                                <button type="submit" id="button-checkout" class=""></button>
+                                <div class="accordion-item" id="IdMercadoPago" style="display: none;">
+                                    <h2 class="accordion-header" id="checkoutOne2">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
+                                            Transferencia con Mercado Pago
+                                        </button>
+                                    </h2>
+                                    <div id="bankOne" class="accordion-collapse collapse show" aria-labelledby="checkoutOne3" data-bs-parent="#checkoutAccordion">
+                                        <div class="accordion-body">
+                                            Todos los pagos se procesan con Mercado Pago, nuestra propia plataforma para pagar de forma segura. Por eso, no importa cómo pagues (en efectivo en puntos de pago o con tarjeta de crédito), ¡tu dinero siempre está protegido!.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal de selección de pago con un diseño atractivo -->
+            @*             <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #f9c1c1;">
+                                        <h5 class="modal-title" id="paymentModalLabel" style="font-family: 'Lucida Grande', sans-serif; color: #8a2c2c;">¡Elige tu método de pago!</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="text-align: center; font-family: 'Arial', sans-serif;">
+                                        <p style="font-size: 16px; color: #444;">¿Cómo te gustaría pagar tu pedido? Elige la opción que más te convenga:</p>
+
+                                        <button type="button" class="btn btn-danger" id="mercadoPagoBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px;">
+                                            Pagar con Mercado Pago
+                                        </button>
+
+                                        <button type="button" class="btn btn-outline-danger" id="recogerBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px;">
+                                            Recoger en el negocio y pagar en efectivo, Nequi o Daviplata
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                            <div class="row">
+                        <div class="order-button-payment mt-20" id="IdOcultaRealizarPedido" style="text-align: center; height: 24px; display: block;">
+                                <button type="button" class="t-y-btn t-y-btn-var(--color1)" id="realizarPedidoBtn">Realizar pedido</button>
+                            <button id="checkout-btn"></button>
+                        </div>
+
+
+                            <div class="order-button-payment mt-20" id="IdOcultaMercadoPago" style="text-align: center; display: none;">
+                            <button type="submit" id="button-checkout" class=""></button>
+                                <div class="accordion-item" id="IdMercadoPago" style="display: none;">
+                                <h2 class="accordion-header" id="checkoutOne2">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
+                                        Transferencia con Mercado Pago
+                                    </button>
+                                </h2>
+                                <div id="bankOne" class="accordion-collapse collapse show" aria-labelledby="checkoutOne3" data-bs-parent="#checkoutAccordion">
+                                    <div class="accordion-body">
+                                        Todos los pagos se procesan con Mercado Pago, nuestra propia plataforma para pagar de forma segura. Por eso, no importa cómo pagues (en efectivo en puntos de pago o con tarjeta de crédito), ¡tu dinero siempre está protegido!.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+ 
+                            </div> *@
+                     
+                 
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+ 
+
+</div>
+
+<!-- Modal de selección de pago -->
+
+<!-- Botón para realizar el pedido -->
+@* <div class="row">
+    <div class="order-button-payment mt-20" style="text-align: center; height: 24px;">
+        <button type="button" class="t-y-btn t-y-btn-var(--color1)" id="realizarPedidoBtn">Realizar pedido</button>
+    </div>
+</div>
+
+<!-- Tu código actual de Mercado Pago -->
+<div class="order-button-payment mt-20" id="IdOcultaMercadoPago" style="text-align: center; display: none;">
+    <button type="submit" id="button-checkout" class=""></button>
+    <div class="accordion-item" id="IdMercadoPago" style="display: none;">
+        <h2 class="accordion-header" id="checkoutOne2">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
+                Transferencia con Mercado Pago
+            </button>
+        </h2>
+        <div id="bankOne" class="accordion-collapse collapse show" aria-labelledby="checkoutOne3" data-bs-parent="#checkoutAccordion">
+            <div class="accordion-body">
+                Todos los pagos se procesan con Mercado Pago, nuestra propia plataforma para pagar de forma segura. Por eso, no importa cómo pagues (en efectivo en puntos de pago o con tarjeta de crédito), ¡tu dinero siempre está protegido!.
+            </div>
+        </div>
+    </div>
+</div> *@
+<!-- Modal bonita para mensaje de recoger el producto -->
+<!-- Modal bonita para mensaje de recoger el producto -->
+<!-- Modal bonita para mensaje de recoger el producto -->
+<!-- Modal bonita para mensaje de recoger el producto -->
+<div class="modal fade" id="recogerModal" tabindex="-1" aria-labelledby="recogerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #ffff; border: 2px solid #d4af37;">
+            <div class="modal-header" id="modalHeader" style="background-image: linear-gradient(267deg, #681976 11%, #010454 82%);">
+                <h5 class="modal-title" id="recogerModalLabel">
+                    ¡Recogerás el producto en el negocio MAJAS!
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align: center; font-family: 'Arial', sans-serif; color: #60076a;">
+                <p style="font-size: 24px; font-weight: bold; color: #28a745; text-align: center;">¡TU PEDIDO ESTÁ EN PREPARACIÓN!</p>
+                <p style="font-size: 18px; text-align: center;">Podrás pagar de manera segura con <strong>efectivo</strong>, <strong>Nequi</strong> o <strong>Daviplata</strong>.</p>
+                <p style="font-size: 18px; font-weight: bold; color: #FFA5C6; text-align: center;">¡Recuerda que no se trendra en cuenta el precio de envío <span style="color: #28a745;">GRACIAS</span>! 🚚</p>
+                <p style="font-size: 18px; text-align: center;">¿Quieres chatear con nosotros para validar tu compra?</p>
+               
+            
+
+                <button type="button" class="btn" id="whatsappBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px; background-color: #25D366; color: white; border: none;">
+                    Chatear por WhatsApp
+                </button>
+
+                <button type="button" class="btn btn-outline-warning" id="confirmarBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px; border-color: #d4af37; color: #60076a;">
+                    ¡Entendido!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* <!-- Botón de "Recoger en el negocio" -->
+<button type="button" class="btn btn-outline-danger" id="recogerBtn" style="font-weight: bold; width: 80%; margin-top: 15px; border-radius: 25px;">
+    Recoger en el negocio y pagar en efectivo, Nequi o Daviplata
+</button> *@
+
+
+<script>
+
+    let divsCollection = document.getElementsByClassName('ocultarDivs');
+    let arrayDivs = Array.from(divsCollection);
+    arrayDivs.forEach((item) => { item.style.display = 'none' });
+</script>
+

@@ -1,0 +1,236 @@
+﻿@model IEnumerable<DtoSliderComentarios>
+
+
+
+@section styles{
+    <style type="text/css">
+        .jssorb05 {
+            position: absolute;
+        }
+
+            .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                background-image: url('img\b05.png') no-repeat;
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+            .jssorb05 div {
+                background-position: -7px -7px;
+            }
+
+                .jssorb05 div:hover, .jssorb05 .av:hover {
+                    background-position: -37px -7px;
+                }
+
+            .jssorb05 .av {
+                background-position: -67px -7px;
+            }
+
+            .jssorb05 .dn, .jssorb05 .dn:hover {
+                background-position: -97px -7px;
+            }
+
+        .jssora22l, .jssora22r {
+            display: block;
+            position: absolute;
+            width: 40px;
+            height: 58px;
+            cursor: pointer;
+            background-image: url('img\a22.png') center center no-repeat;
+            overflow: hidden;
+           
+        }
+
+        .jssora22l {
+            background-position: -10px -31px;
+        }
+
+        .jssora22r {
+            background-position: -70px -31px;
+        }
+
+        .jssora22l:hover {
+            background-position: -130px -31px;
+        }
+
+        .jssora22r:hover {
+            background-position: -190px -31px;
+        }
+
+        .jssora22l.jssora22ldn {
+            background-position: -250px -31px;
+        }
+
+        .jssora22r.jssora22rdn {
+            background-position: -310px -31px;
+        }
+
+        .jssora22l.jssora22lds {
+            background-position: -10px -31px;
+            opacity: .3;
+            pointer-events: none;
+        }
+
+        .jssora22r.jssora22rds {
+            background-position: -70px -31px;
+            opacity: .3;
+            pointer-events: none;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/lib/js_slider/jssor.slider-22.0.15.mini.js"></script>
+    <script src="~/lib/kendo/js/kendo.all.min.js"></script>
+    <script src="~/lib/kendo/js/cultures/kendo.culture.es-co.min.js"></script>
+    <script src="~/areas/admin/mensaje.js?Versionx=10"></script>
+    <script type='text/javascript'>
+        var UrlIns_Mensajes = "@Url.Action("Ins_Mensajes", "Slider", new { Area = "" })";
+        var UrlGetMenajeGrilla = "@Url.Action("P_GetMensajeGrilla", "Slider", new { Area = "" })";
+        var UrlInsIdMensaje = "@Url.Action("InsIdMensaje", "Slider", new { Area = "" })";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+  
+        $(document).ready(function () {
+            var d = new Date();
+            $("#txtFechaComentario").kendoDateTimePicker({
+                culture: "es-CO",
+                value: new Date(),
+                interval: 1,
+                format: "{0:dd/MM/yyyy HH:mm:ss}",
+                animation: {
+                    close: {
+                        effects: "fadeOut zoom:out",
+                        duration: 300
+                    },
+                    open: {
+                        effects: "fadeIn zoom:in",
+                        duration: 300
+                    }
+                }
+            });
+        });
+    </script>
+}
+<section class="content-header"></section>
+<div class="page-titles">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a id="no-link" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li class="active">Reporte</li>
+        </ul>
+    </div>
+</div>
+<input type="text" id="txtCategoria" class="hidden" />
+<input type="text" id="hidEmplConsecutivo" class="hidden" />
+<input type="text" id="hidEmplUndeConsecutivo" class="hidden" />
+<input type="text" id="hidEmplUndeFuerza" class="hidden" />
+<input type="text" id="hidGradoFun" class="hidden" />
+<input type="text" id="hid_undelabora" class="hidden" />
+
+<div class="card border-success card card-outline-info">
+    <div class="card-header d-flex align-items-center">
+        <div class="card-actions ml-auto" style="margin-right: 21px !important;">
+            <a class="" data-action="collapse"><i class="ti-minus yellow" style="font-weight: bold;font-size: 15px;"></i></a>
+            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand yellow" style="font-weight: bold;font-size: 15px;"></i></a>
+        </div>
+    </div>
+    <div class="card-body collapse show">
+        <div class="row">
+            <div class="col-md-4 MargFloatBoos">
+            </div>
+            <div class="col-md-4 MargFloatBoos">
+                <div class="form-group has-float-label">
+                    <input tabindex="2" name="txtTituloComentario" type="text" id="txtTituloComentario" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                    <label class="Labels">Titulo Mensajes:</label>
+                </div>
+            </div>
+            <div class="col-md-4 MargFloatBoos">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group has-float-label">
+
+                    <textarea class="form-control" placeholder=" " rows="5" id="txtComentario" name="txtComentario" maxlength="500" style="height: 130px !important; text-align:justify; margin-bottom: 0px;" tabindex="4"></textarea>
+                    <label class="Labels">Mensajes:</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="card-footer">
+            <div class="col-md-12 text-center">
+                <button tabindex="10" type="button" id="btnGrabar" onclick="Ins_Mensaje(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-grad"><span class="fa fa-floppy-o faa-wrench animated"></span> Guardar</button>
+                <button tabindex="13" type="button" id="btnLimpiar" onclick="Limpiar(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-limpiar" title="Limpiar la consulta"><span class="fa ico_limpiar faa-ring animated"></span> Limpiar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-success card card-outline-info">
+    <div class="card-header d-flex align-items-center">
+        <h4 class="m-b-0 text-white"><i class="mr-2 fas fa-balance-scale text-white"></i>Registro Mensajes</h4>
+        <div class="card-actions ml-auto" style="margin-right: 21px !important;">
+            <a class="" data-action="collapse"><i class="ti-minus yellow" style="font-weight: bold;font-size: 15px;"></i></a>
+            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand yellow" style="font-weight: bold;font-size: 15px;"></i></a>
+        </div>
+    </div>
+    <div class="card-body collapse show">
+        <div class="row">
+            <div class="col-md-4 MargFloatBoos">
+            </div>
+            <div class="col-md-4 MargFloatBoos">
+                <div class="form-group has-float-label">
+                    <input tabindex="2" name="txtTituloComentario" type="text" id="txtTituloComentario" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                    <label class="Labels">Titulo Mensajes:</label>
+                </div>
+            </div>
+            <div class="col-md-4 MargFloatBoos">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group has-float-label">
+
+                    <textarea class="form-control" placeholder=" " rows="5" id="txtComentario" name="txtComentario" maxlength="500" style="height: 130px !important; text-align:justify; margin-bottom: 0px;" tabindex="4"></textarea>
+                    <label class="Labels">Mensajes:</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="card-footer">
+            <div class="col-md-12 text-center">
+                <button tabindex="10" type="button" id="btnGrabar" onclick="Ins_Mensaje(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-grad"><span class="fa fa-floppy-o faa-wrench animated"></span> Guardar</button>
+                <button tabindex="13" type="button" id="btnLimpiar" onclick="Limpiar(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-limpiar" title="Limpiar la consulta"><span class="fa ico_limpiar faa-ring animated"></span> Limpiar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-success">
+    <div class="card-body collapse show">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive m-t-40" style="margin-top: 0px !important;">
+                    <table id="tbUsuarios" class="table table-bordered table-striped" width="100%" style="margin-top: -1px !important;"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalTransacciones" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header card-header">
+                <h2 class="text-center" id="TituloMensaje"></h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="ContenidoCambio"></div>
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button type="button" data-dismiss="modal" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

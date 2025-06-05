@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutGen.cshtml";
+}
+
+<style>
+    .pagination {
+        margin-top: 10px;
+    }
+
+        .pagination button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+            .pagination button:hover {
+                background-color: #333;
+            }
+
+    .info {
+        margin-bottom: 10px;
+    }
+
+        .info span {
+            color: #333;
+        }
+</style>
+
+@section scripts{
+    <script type='text/javascript'>
+        var PaginaPrincipal = 4;
+        
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+    </script>
+}
+<div class="container">
+    <section class="cart-area pt-30 pb-30">
+        <div class="container">
+            <div class="row your-order mb-30">
+                <h3 style="text-align: center; margin: 1em;">
+                    Editar Carrito
+                </h3>
+                <div class="col-12">
+                    <div class="table-content table-responsive">
+                        <div class="info">
+                            <span id="cantidadProductos"></span>
+                            <span id="paginaActual"></span>
+                        </div>
+
+                        <table class="table" id="IdtablaCarrito">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Imagen</th>
+                                    <th class="cart-product-name">Producto</th>
+                                    <th class="product-price">Precio por Unidad</th>
+                                    <th class="product-quantity">Cantidad</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="pagination" id="botonesNavegacion">
+                            <!-- Aquí se agregarán los botones de navegación dinámicamente -->
+                        </div>
+                    </div>
+                    <div class="modal fade" id="productModalId1" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+                            <div class="modal-content">
+                                <div class="product__modal-wrapper p-relative">
+                                    <div class="product__modal-close p-absolute">
+                                        <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                                    </div>
+                                    <div class="product__modal-inner" id="idModalProducto1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                    <div class="row">
+                        <div class="col-md-5 ml-auto" style="text-align: center">
+                            <div class="cart-page-total" id="idtotalCarrito">
+                                <h2>Total Carrito</h2>
+                                <ul class="mb-20">
+                                </ul>
+                                <a class="t-y-btn w-100 mb-10" href="@Url.Action("VerificarCompra", "Cuenta", new { Area = "" })">COMPRAR AHORA</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    let divsCollection = document.getElementsByClassName('ocultarDivs');
+    let arrayDivs = Array.from(divsCollection);
+    arrayDivs.forEach((item) => { item.style.display = 'none' });
+</script>
+

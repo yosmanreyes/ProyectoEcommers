@@ -1,0 +1,200 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutGen.cshtml";
+}
+
+<head>
+    <title>Distribuidora Majas - Venta de Productos de Belleza Online</title>
+    <meta name="description" content="Compra productos de belleza de alta calidad: maquillaje, cuidado de la piel, cabello, y más. Entrega rápida y segura a tu hogar.">
+    <meta name="keywords" content="productos de belleza, maquillaje, cuidado de la piel, productos para el cabello, cosméticos, belleza online">
+
+    <!-- Open Graph for Facebook -->
+    <meta property="og:title" content="Distribuidora Majas - Venta de Productos de Belleza">
+    <meta property="og:description" content="Compra los mejores productos de belleza online: maquillaje, cuidado de la piel, fragancias y mucho más. ¡Disfruta de un 10% de descuento en tu primera compra!">
+    <meta property="og:image" content="https://www.distribuidoramajas.com/img/majas.jpg">
+    <meta property="og:url" content="https://www.distribuidoramajas.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Distribuidora Majas - Productos de Belleza">
+    <meta name="twitter:description" content="Compra los mejores productos de belleza online. Cuidado de la piel, maquillaje, cabello y más. Envíos rápidos y seguros.">
+    <meta name="twitter:image" content="https://www.distribuidoramajas.com/img/majas.jpg">
+
+    <!-- Meta Robots -->
+    <meta name="robots" content="index,follow">
+
+    <!-- Google Analytics Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K2N6K0C3T9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-K2N6K0C3T9');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+@section styles{
+<style>
+
+    .pagination {
+        margin-top: 10px;
+    }
+
+        .pagination button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+            .pagination button:hover {
+                background-color: #333;
+            }
+
+    .info {
+        margin-bottom: 10px;
+    }
+
+        .info span {
+            color: #333;
+        }
+
+
+</style>
+
+
+}
+
+
+@section scripts {
+  
+    <script>
+        var PaginaPrincipal = 5;
+        var UrlGetConsultaMicomptasR = "@Url.Action("F_GetProductosMisCompras", "Producto", new { Area = "" })";
+        var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+        var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+        var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+        var urlConsultarEstadoPago = "@Url.Action("ConsultarEstadoPago", "Cuenta", new { Area = "" })";
+          
+    </script>
+  @*   <script src="~/lib/pdfwebbs/web/jquery.min.js"></script> *@
+ @*    <script src="~/material/js/micompra.js"></script> *@
+}
+
+<div class="row">
+    <h3 style="text-align: center">
+        Mis Compras Realizadas
+    </h3>
+    <div class="row" style="text-align: center">
+        <div class="col-lg-12;" style="display: flex; justify-content: space-around;">
+            <div class="col-lg-4 MargFloatBoos">
+                <div class="subscribe__form subscribe__form2">
+                    <input type="email" id="txtConsultaMiscompra" placeholder="Introduzca su correo electrónico aquí..." value="">  <div id="mensajeCodigoMiCompra"></div>
+                    <button tabindex="24" type="button" id="btnGrabaMisCompras" title="Guardar solicitud" onclick="GetMisCompras(); return false;" class="t-y-btn-sub" !important;" style="display:block" ><span class="fas fa-search animated"></span> Mis Compras </button>
+                    <button tabindex="24" type="button" id="btnGrabaMisComprasCelular" title="Guardar solicitud" onclick="GetMisCompras(); return false;" class="t-y-btn-sub2" !important;" style="display:none"><span class="fas fa-search animated"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="checkout-area pt-30 pb-30">
+        <div class="container">
+            <div class="row" style="display:none" id="IdMisCompras">
+                <div class="col-md-12 MargFloatBoos">
+                    <div class="your-order mb-30 ">
+                        <div class="table-content table-responsive">
+                            <div class="info">
+                                <span id="cantidadProductos" style="color: black;"></span>
+                                <span id="paginaActual" style="color: black;"></span>
+                            </div>
+
+                            <table class="table" id="IdtablaMisCompras">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Detalle</th>
+                                        <th class="product-quantity">Fecha compra</th>
+                                        <th class="product-thumbnail">Cantidad de Productos</th>
+                                        <th class="product-price">Precio Productos</th>
+                                        <th class="cart-product-name">Costo de Envío</th>
+                                        <th class="cart-product-name">Costo Total</th>
+                                    
+                                        <th class="product-subtotal">Dirección de Envío</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class="pagination" id="botonesNavegacion">
+                                <!-- Aquí se agregarán los botones de navegación dinámicamente -->
+                            </div>
+                            <div class="modal fade" id="productModalId3" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+                                    <div class="modal-content">
+                                        <div class="product__modal-wrapper p-relative">
+                                            <div class="product__modal-close p-absolute">
+                                                <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                                            </div>
+                                            <div class="product__modal-inner" id="idModalProducto3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="checkout-area pt-30 pb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 MargFloatBoos" style="display:none" id="IdMisComprasEnvio">
+                    <div class="your-order mb-30 ">
+                        <h3 style="text-align: center" id="idFechaCreacion">
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-5 MargFloatBoos" id="IdListaCompraC">
+                            </div>
+                            <div class="col-md-6 MargFloatBoos">
+                                <h5 style="text-align: center">
+                                    Mi Producto
+                                </h5>
+                                <div class="table-content table-responsive" id="IdtablaMisComprasTotal">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name">Imagen</th>
+                                                <th class="product-name">Producto</th>
+                                                <th class="product-total">Precio producto</th>
+                                                <th class="product-total">Precio Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 style="text-align: center; position: absolute;  width: 100%;  height: 1px;  background-color: #eaedff;  position: relative;  margin: 1em auto 2em; " id="idEstadoTrazabilidad">
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    let divsCollection = document.getElementsByClassName('ocultarDivs');
+    let arrayDivs = Array.from(divsCollection);
+    arrayDivs.forEach((item) => { item.style.display = 'none' });
+</script>
+
+
+
+
+

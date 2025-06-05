@@ -1,0 +1,67 @@
+﻿
+@model List<DtoMenu>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+
+<nav class="sidebar-nav">
+    <ul id="sidebarnav">
+        <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu"></span></li>
+        <li class="sidebar-item" style="margin-top: -23px;"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "Home", new { Area = "" })" aria-expanded="false"><i class="fa ico_inicio"></i><span class="hide-menu">Inicio</span></a></li>
+
+        @{
+            // Ahora 'GetObject' debería ser reconocido
+            var listaMenu = Accessor.HttpContext.Session.GetObject<List<DtoMenu>>("ListaMenu");
+            var listaMenuGeneral = Accessor.HttpContext.Session.GetObject<List<DtoMenu>>("ListaMenuGeneral"); // Corregí el typo 'Geral'
+        }
+
+        @foreach (var item in listaMenuGeneral) // Asegúrate de usar 'listaMenuGeneral' aquí
+        {
+            var listaSubMenu = listaMenu.Where(x => x.PADREID == item.IDMENU).ToList();
+
+            @* Hay un pequeño error aquí: 'listaSubMenu' es una lista, no un entero.
+               Deberías usar 'listaSubMenu.Any()' o 'listaSubMenu.Count > 0'
+               if (listaSubMenu.Count > 0)
+            *@
+
+            @if (listaSubMenu.Any())
+            {
+                <li class="sidebar-item">
+                    <a id="TituloNivelUno" name="TituloNivelUno" class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="@item.ICONO"></i><span class="hide-menu">@item.DESCRIPCION</span></a>
+                    <ul aria-expanded="false" class="collapse first-level">
+
+                        @foreach (var subItem in listaSubMenu)
+                        {
+                            @if (subItem.VISTA == null)
+                            {
+                                <li class="sidebar-item">
+                                    <a id="OK Titulos Nivel Uno con Hijos" class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><span class="hide-menu letraMenu">@subItem.DESCRIPCION</span></a>
+                                    <ul aria-expanded="false" class="collapse first-level">
+
+                                        @{
+                                            var listaSub = listaMenu.Where(x => x.PADREID == subItem.IDMENU).ToList();
+
+                                            foreach (var SubMenu in listaSub)
+                                            {
+                                                <li id="ok Titulo Hijos nivel Uno" class="sidebar-item"><a href="@Url.Action(SubMenu.VISTA, SubMenu.CONTROLADOR, new { area=SubMenu.AREA })" onclick="$('#Process').css('display','block')" class="sidebar-link letraMenu"><span class="hide-menu text-cyan">@SubMenu.DESCRIPCION</span></a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li id="Titulos Nivel Uno sin hijos frm" class="sidebar-item"><a href="@Url.Action(subItem.VISTA, subItem.CONTROLADOR, new { area=subItem.AREA })" class="sidebar-link"><span class="hide-menu">@subItem.DESCRIPCION</span></a></li>
+                            }
+                        }
+
+                    </ul>
+                </li>
+
+            }
+        }
+
+        @* <li class="nav-devider"></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../../Documentation/document.html" aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span class="hide-menu">Manual Usuario</span></a></li>*@
+    </ul>
+</nav>

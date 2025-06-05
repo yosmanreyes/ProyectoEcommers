@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Ventas";
+}
+
+
+@section styles{
+
+    <link href="~/css/styletienda.css" rel="stylesheet" />
+    <link href="~/material/assets/libs/bootstrap-duallistbox/dist/bootstrap-duallistbox.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+    <script>
+        var UrlGetConsultaComentarios = "@Url.Action("F_GetConsultaCorreos", "AdminComentarios", new { Area = "" })";
+        var UrlUpdateProductoVenta = "@Url.Action("UpdateProductoVenta", "Venta", new { Area = "" })";
+        var UrlEnvioCorreoPersonal = "@Url.Action("EnvioCorreoPersonalUnion", "AdminComentarios", new { Area = "" })";
+        var UrlEnvioCorreoMasivo = "@Url.Action("EnvioCorreoMasivo", "AdminComentarios", new { Area = "" })";
+        var UrlReporteExcel = "@Url.Action("ExcelGeneralCorreos", "AdminComentarios", new { Area = "" })";
+        var UrlGetCorreos = "@Url.Action("ConsultaDominiosCorreosGeneral", "AdminComentarios", new { Area = "" })";
+    </script>
+
+
+    <script src="~/areas/admin/adminenviocorreos.js?Versionx=10"></script>
+    <script src="~/material/assets/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js"></script>
+    <script src="~/material/js/pages/forms/dual-listbox/dual-listbox.js">    </script>
+    <script>
+        function agregarCorreo() {
+            var textarea = document.getElementById('email');
+
+            // Obtener el valor actual del textarea y el nuevo correo
+            var emails = textarea.value;
+            var nuevoCorreo = prompt("Ingrese el nuevo correo electrónico:");
+
+            // Concatenar el nuevo correo al valor actual
+            if (emails !== "") {
+                emails += ", " + nuevoCorreo;
+            } else {
+                emails = nuevoCorreo;
+            }
+
+            // Actualizar el valor del textarea
+            textarea.value = emails;
+        }
+    </script>
+}
+
+<section class="content-header"></section>
+<div class="page-titles">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a id="no-link" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li class="active">Bandeja Admisntracion Correos Electrónicos</li>
+        </ul>
+    </div>
+</div>
+<div class="card border-success" style="display:block" id="IdMisCompras">
+    <div class="card border-success">
+        <div class="card-header d-flex align-items-center">
+            <h4 class="card-title text-white"><i class="mr-2 fa fa-server text-white"></i>Bandeja Admistracion Correos Electrónicos</h4>
+            <div class="card-actions ms-auto d-flex button-group">
+                <a href="javascript:RptExcel()" class="" title="Descargar Reporte en Excel"><i class="fa fa-file-excel-o yellow" style="font-size: 15px;"></i></a>
+                <a href="javascript:OpenEnviarCorreoMasivo()" class="" title="Enviar Correo"><i class="fa fa-envelope-o yellow" style="font-size: 15px;"></i></a>
+                <a class="link text-white d-flex align-items-center" data-action="collapse"><i class="ti-minus"></i></a>
+                <a class="mb-0 btn-minimize text-white link d-flex align-items-center" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                <a class="mb-0 link d-flex text-white align-items-center pe-0" data-action="close">
+                    <i data-feather="x" class="feather-sm"></i>
+                </a>
+            </div>
+        </div>
+        <div id="pn_Grilla" class="card-body collapse show">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive m-t-40" style="margin-top: 0px !important;">
+                        <table id="tbGrilla" class="table table-bordered table-striped" width="100%" style="margin-top: -1px !important;"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="txtIdComentario" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtIdComentario2" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtIdEnvia" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtIdeCorreo" placeholder="Doc" value="0" class="hidden" />
+<div class="modal fade" id="ModalCorreo" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;" role="document">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header card-header" style="display: flex; align-content: stretch; justify-content: space-evenly; align-items: flex-start; flex-wrap: wrap; flex-direction: row; color: white;">
+                <h2 class="text-center white-color">Envío de Notificaciones por Correo Electrónico</h2>
+                <button onclick="CerrarCorreos(); return false;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                <fieldset style="padding: 0px 36px 8px 36px; margin-top: 0px; margin-bottom: 10px; ">
+                    <legend style="width: calc(14.9em + .75rem + 2px) !important; font-size: 18px !important; padding: 0px 0px 0px 8px; margin-left: 9px; color: #1c7852">Envío de Correo Electrónico...</legend>
+
+                    <div class="row">
+                        <div class="col-md-6 MargFloatBoos">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtAsunto" id="txtAsunto" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Asunto:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 MargFloatBoos">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtcorreo" id="txtcorreo" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Correo:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <div class="form-group has-float-label">
+                                <textarea tabindex="101" class="form-control" placeholder=" " rows="6" id="txtMensaje" name="txtMensaje" maxlength="3980" cols="60" style="height: 215px !important; text-align:justify; margin-bottom: 0px;"></textarea>
+                                <label class="Labels">Contenido del Mensaje:</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button tabindex="7604" type="button" id="btnEnviarCorreo" onclick="EnvioCorreos(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo General"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar</button>
+                <button tabindex="7605" type="button" id="btnEnviarCorreoP" onclick="EnvioCorreosPersonal(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo Personalizado"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar</button>
+                <button type="button" data-dismiss="modal" onclick="CerrarCorreos(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="txtIdComentarioMasivo" placeholder="Doc" value="0" class="hidden" />
+<input type="text" id="txtIdeCorreoMasivo" placeholder="Doc" value="0" class="hidden" />
+<div class="modal fade" id="ModalCorreoMasivo" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;" role="document">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header card-header" style="display: flex; align-content: stretch; justify-content: space-evenly; align-items: flex-start; flex-wrap: wrap; flex-direction: row; color: white;">
+                <h2 class="text-center white-color">Envío de Notificaciones por Correo Electrónico</h2>
+                <button onclick="CerrarCorreosMasivo(); return false;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                <fieldset style="padding: 0px 36px 8px 36px; margin-top: 0px; margin-bottom: 10px; ">
+                    <legend style="width: calc(14.9em + .75rem + 2px) !important; font-size: 18px !important; padding: 0px 0px 0px 8px; margin-left: 9px; color: #1c7852">Envío de Correo Electrónico...</legend>
+
+                    <div class="row">
+                        <div class="col-md-6 MargFloatBoos">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtAsunto" id="txtAsuntoMasivo" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Asunto:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 MargFloatBoos">
+                            <div class="form-horizontal">
+                                <div class="form-group row" style="margin-bottom: 0px;">
+                                    <label class="col-md-7 col-form-label Labelr Labels" style="margin-top:0px;">Envío Correo Individual:</label>
+                                    <div class="col-md-5 text-left" style="padding-left:0px;" onclick="ModalInsUsuarios()">
+                                        <input tabindex="111" type="checkbox" checked data-toggle="toggle" id="CheckEstadoUsuario">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="idIndividual" style="display:block">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <div class="form-group has-float-label">
+                                <input tabindex="100" name="txtcorreoMasivo" id="txtcorreoMasivo" type="text" autocomplete="off" placeholder=" " class="form-control InputPading" />
+                                <label class="Labels">Correo:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="idMasivo" style="display:none">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <label class="Labels text-center">Envío Correo Masivo:</label>
+                            <div class="form-group has-float-label">
+                                <select multiple="multiple" size="10" class="duallistbox" id="selectcorreos">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:17px;">
+                            <div class="form-group has-float-label">
+                                <textarea tabindex="101" class="form-control" placeholder=" " rows="6" id="txtMensajeMasivo" name="txtMensaje" maxlength="3980" cols="60" style="height: 215px !important; text-align:justify; margin-bottom: 0px;"></textarea>
+                                <label class="Labels">Contenido del Mensaje:</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button tabindex="7604" type="button" id="EnvioCorreosMasivo" onclick="EnvioCorreosMasivo(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo General"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar Masivo</button>
+                <button tabindex="7605" type="button" id="EnvioCorreosPersonalM" onclick="EnvioCorreosPersonalM(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btnudp hidden" title="Envío Correo Personalizado"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Enviar</button>
+                <button type="button" data-dismiss="modal" onclick="CerrarCorreosMasivo(); return false;" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

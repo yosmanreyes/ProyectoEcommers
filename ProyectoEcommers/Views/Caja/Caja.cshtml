@@ -1,0 +1,602 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Venta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .venta-card {
+            background-color: #fff;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60%;
+            z-index: 1; /* Mantenerlo encima de otros elementos */
+        }
+
+            .venta-card h2 {
+                text-align: center;
+                font-size: 22px;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .product-grid-wrapper {
+            margin-top: 20px;
+            width: 100%;
+            overflow-x: auto;
+            max-width: 755px !important;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .product-grid {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+        }
+
+            .product-grid th, .product-grid td {
+                padding: 0px 8px;
+                border: 1px solid #ddd;
+                text-align: center;
+                font-size: 12px;
+            }
+
+            .product-grid th {
+                background-color: #f2f2f2;
+            }
+
+        .total-section {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+            .total-section p {
+                font-size: 18px;
+                color: #555;
+                margin: 10px 0;
+            }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .btn:hover {
+                background-color: #218838;
+            }
+
+        .payment-method {
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .small-btn {
+            font-size: 14px;
+            padding: 8px 12px;
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+            .small-btn:hover {
+                background-color: #138496;
+            }
+
+        .payment-method select {
+            width: 45%;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+            .input-container .form-group {
+                width: 100%;
+            }
+
+        .discount-btn {
+            font-size: 16px;
+            padding: 8px 12px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+            .discount-btn:hover {
+                background-color: #c82333;
+            }
+
+        .product-grid-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .form-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .form-section-left {
+            width: 60%;
+        }
+
+        .form-section-right {
+            width: 35%;
+        }
+
+        .product-grid-wrapper {
+            margin-top: 20px;
+            overflow-x: auto;
+            max-width: 600px;
+            height: 300px;
+        }
+
+        .total-section-wrapper {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .total-section {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .product-grid input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .product-grid button {
+            font-size: 10px;
+            padding: 4px 8px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .product-grid button:hover {
+                background-color: #e60000;
+            }
+
+        #valorPaga {
+            font-size: 32px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        #vueltos {
+            font-size: 28px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        #totalVenta {
+            font-size: 48px; /* Aumentar el tamaño del texto */
+            color: #fff; /* Blanco para que el texto sea legible */
+            font-weight: bold;
+            background-color: #ff9900; /* Fondo naranja brillante */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Estilo de la fila seleccionada */
+        .selected {
+            background-color: #ffeb3b;
+        }
+
+        /* Estilo para los botones de minimizar y cerrar */
+        .minimize-btn, .close-btn {
+            background-color: #007bff; /* Color azul */
+            color: white;
+            border: none;
+            font-size: 24px; /* Tamaño grande para el texto */
+            padding: 10px 15px; /* Tamaño adecuado */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s; /* Transición suave para el color y el hover */
+            margin-left: 5px; /* Separar un poco los botones */
+        }
+
+        .minimize-btn {
+            background-color: #ffc107; /* Color amarillo para el botón de minimizar */
+        }
+
+        .close-btn {
+            background-color: #dc3545; /* Color rojo para el botón de cerrar */
+        }
+
+            .minimize-btn:hover, .close-btn:hover {
+                background-color: #0056b3; /* Azul más oscuro al pasar el ratón para el de minimizar */
+            }
+
+            .minimize-btn:active, .close-btn:active {
+                transform: scale(0.95); /* Efecto de presionar con animación */
+            }
+
+        /* Agregar bordes y efecto para un diseño más bonito */
+        .minimize-btn, .close-btn {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+        }
+
+    </style>
+</head>
+<body>
+
+    <button class="btn" onclick="abrirVenta()">Abrir Nueva Venta</button>
+
+    <div id="ventanasContainer"></div>
+
+    <script>
+        let ventanaCount = 0;
+        let productos = [];
+        let totalVenta = 0;
+        let ivaAplicado = false;
+        let descuentoPorcentaje = 0;
+
+        function abrirVenta() {
+            ventanaCount++;
+
+            const contenedor = document.getElementById("ventanasContainer");
+
+            const ventana = document.createElement("div");
+            ventana.className = "venta-card";
+            ventana.setAttribute("id", "venta-" + ventanaCount);
+
+            ventana.innerHTML = `<div class="header" style="display: flex; justify-content: space-between; flex-wrap: nowrap;  background-color: #f5edfe;">
+                                                            <h2>Venta #${ventanaCount}</h2>
+                                            <div>
+                                                <button class="minimize-btn" onclick="minimizarVenta(this)">_</button>
+                                                <button class="close-btn" onclick="cerrarVenta(this)">X</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="content">
+                                            <div class="total-section-wrapper" style="text-center">
+                                                <div class="total-section">
+                                                    <h4><strong>Total de la Venta</strong></h4><br />
+                                                    <p> <span id="totalVenta">0.00</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-section">
+
+                                                <div class="form-section-left">
+                                                    <div class="input-container">
+                                                        <div class="form-group">
+                                                            <label for="codigo">Código de Producto (QR)</label>
+                                                            <input type="text" class="codigo" id="codigo" placeholder="Escanea el código del producto" oninput="cambiarColor(this)" onkeydown="registrarProductoConEnter(event)">
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn" onclick="registrarProducto()">Registrar Producto</button>
+
+                                                    <div class="product-grid-wrapper">
+                                                        <table class="product-grid" id="productGrid">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Producto</th>
+                                                                    <th>Marca</th>
+                                                                    <th>Cantidad</th>
+                                                                    <th>Precio</th>
+                                                                    <th>Total</th>
+                                                                    <th>Eliminar</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="productList">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-section-right">
+                                                    <div class="payment-method">
+                                                        <button class="small-btn" onclick="aplicarIVA()">IVA</button>
+                                                        <div>
+                                                            <label for="formaPago">Forma de Pago</label>
+                                                            <select id="formaPago" onchange="calcularVuelto()">
+                                                                <option value="Efectivo">Efectivo</option>
+                                                                <option value="Nequi">Nequi</option>
+                                                                <option value="Daviplata">Daviplata</option>
+                                                                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                                                                <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="valorPaga">Valor con el que paga el cliente</label>
+                                                        <input type="text" id="valorPaga" class="large-input" placeholder="Valor que paga" oninput="formatearNumero(this)">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="vueltos">Vueltos</label>
+                                                        <input type="text" id="vueltos" class="large-input" readonly placeholder="Vueltos a entregar">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="descuento">Descuento (%)</label>
+                                                        <input type="number" id="descuento" placeholder="Ingrese el descuento %" value="0" oninput="aplicarDescuento()">
+                                                    </div>
+
+                                                    <button class="btn" onclick="registrarCompra()">Registrar Compra</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="total-section-wrapper">
+                                                <div class="total-section">
+                                                    <p><strong>IVA:</strong> <span id="iva">0.00</span></p>
+                                                    <p><strong>Descuento Aplicado:</strong> <span id="descuentoAplicado">0.00</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+
+            contenedor.appendChild(ventana);
+
+            const verticalOffset = ventanaCount * 100;
+            ventana.style.top = `${verticalOffset}px`;
+            ventana.style.left = '20px';
+
+            makeDraggable(ventana);
+        }
+
+        function formatearNumero(input) {
+            let valor = input.value.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
+            let formateado = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Agregar puntos
+            input.value = formateado;
+            calcularVuelto();
+        }
+
+        function calcularVuelto() {
+            const valorPaga = parseFloat(document.getElementById("valorPaga").value.replace(/\./g, '') || 0);
+            const totalConIVA = parseFloat(document.getElementById("totalVenta").textContent) || 0;
+            const vuelto = valorPaga - totalConIVA; // Se resta el total con IVA y descuento
+            document.getElementById("vueltos").value = vuelto >= 0 ? nuevoFormatoNumero(vuelto) : "0.00"; // Mostrar el vuelto con puntos
+        }
+
+        function nuevoFormatoNumero(numero) {
+            return numero.toLocaleString('de-DE');
+        }
+
+        function registrarProducto() {
+            const codigoProducto = document.getElementById("codigo").value;
+            if (codigoProducto) {
+                let producto = productos.find(p => p.codigo === codigoProducto);
+                if (producto) {
+                    producto.cantidad += 1;
+                } else {
+                    producto = {
+                        codigo: codigoProducto,
+                        nombre: `Producto ${codigoProducto}`,
+                        marca: `Marca ${codigoProducto}`,
+                        cantidad: 1,
+                        precio: Math.floor(Math.random() * 100) + 10,
+                    };
+                    productos.push(producto);
+                }
+                actualizarGrilla();
+                calcularTotal();
+            } else {
+                alert("Por favor ingresa un código válido.");
+            }
+        }
+
+        function actualizarGrilla() {
+            const productList = document.getElementById("productList");
+            productList.innerHTML = "";
+
+            productos.forEach((producto, index) => {
+                const totalProducto = producto.precio * producto.cantidad;
+                const row = document.createElement("tr");
+                row.setAttribute("data-index", index);
+                row.setAttribute("tabindex", "0"); // Añadir para hacer la fila seleccionable con el teclado
+                row.innerHTML = `
+                                            <td>${producto.nombre}</td>
+                                            <td>${producto.marca}</td>
+                                            <td><input type="number" value="${producto.cantidad}" onchange="actualizarCantidad('${producto.codigo}', this.value)" /></td>
+                                            <td>${producto.precio.toFixed(2)}</td>
+                                            <td>${totalProducto.toFixed(2)}</td>
+                                            <td><button class="btn btn-danger" onclick="eliminarProducto(${index})">Eliminar</button></td>
+                                        `;
+                row.addEventListener("click", () => seleccionarFila(row)); // Seleccionar fila al hacer clic
+                productList.appendChild(row);
+            });
+        }
+
+        function eliminarProducto(index) {
+            productos.splice(index, 1);
+            actualizarGrilla();
+            calcularTotal();
+        }
+
+        function seleccionarFila(fila) {
+            // Quitar la clase de cualquier fila previamente seleccionada
+            const filas = document.querySelectorAll("#productList tr");
+            filas.forEach(f => f.classList.remove("selected"));
+
+            // Añadir la clase "selected" a la fila seleccionada
+            fila.classList.add("selected");
+        }
+
+        function actualizarCantidad(codigo, cantidad) {
+            const producto = productos.find(p => p.codigo === codigo);
+            if (producto) {
+                producto.cantidad = parseInt(cantidad);
+                actualizarGrilla();
+                calcularTotal();
+            }
+        }
+
+        function calcularTotal() {
+            totalVenta = 0;
+            productos.forEach(producto => {
+                totalVenta += producto.precio * producto.cantidad;
+            });
+
+            let iva = 0;
+            if (ivaAplicado) {
+                iva = totalVenta * 0.19;
+            }
+
+            let descuentoAplicado = 0;
+            if (descuentoPorcentaje > 0) {
+                descuentoAplicado = totalVenta * (descuentoPorcentaje / 100);
+                totalVenta -= descuentoAplicado;
+            }
+
+            document.getElementById("totalVenta").textContent = (totalVenta + iva).toFixed(2);
+            document.getElementById("iva").textContent = iva.toFixed(2);
+            document.getElementById("descuentoAplicado").textContent = descuentoAplicado.toFixed(2);
+
+            calcularVuelto();
+        }
+
+        function aplicarIVA() {
+            ivaAplicado = !ivaAplicado;
+            calcularTotal();
+        }
+
+        function aplicarDescuento() {
+            descuentoPorcentaje = parseFloat(document.getElementById("descuento").value) || 0;
+            calcularTotal();
+        }
+
+        function registrarCompra() {
+            alert("Compra registrada exitosamente.");
+        }
+
+        function registrarProductoConEnter(event) {
+            if (event.key === "Enter") {
+                registrarProducto();
+            }
+        }
+
+        // Detectar la tecla F8 y eliminar la fila seleccionada
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "F8") {
+                const filaSeleccionada = document.querySelector(".selected");
+                if (filaSeleccionada) {
+                    const index = parseInt(filaSeleccionada.getAttribute("data-index"));
+                    eliminarProducto(index); // Eliminar la fila seleccionada
+                }
+            }
+        });
+
+        function makeDraggable(ventana) {
+            const header = ventana.querySelector(".header");
+            let offsetX = 0, offsetY = 0, isDragging = false;
+
+            // Asegúrate de que la ventana tenga posición "absolute"
+            ventana.style.position = "absolute";
+
+            header.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.clientX - ventana.offsetLeft;
+                offsetY = e.clientY - ventana.offsetTop;
+
+                // Establecemos el z-index para que la ventana se muestre encima de otros elementos
+                ventana.style.zIndex = 1000;
+
+                // Evitar la selección de texto mientras arrastras la ventana
+                e.preventDefault();
+
+                document.addEventListener('mousemove', moveAt);
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', moveAt);
+
+                    // Mantener el z-index al soltar la ventana (no volver a cambiarlo a 0 o por debajo)
+                    ventana.style.zIndex = 1000;
+                });
+            });
+
+            function moveAt(e) {
+                if (isDragging) {
+                    ventana.style.left = e.clientX - offsetX + 'px';
+                    ventana.style.top = e.clientY - offsetY + 'px';
+                }
+            }
+        }
+
+
+        // Función para minimizar la ventana
+        function minimizarVenta(btn) {
+            const ventana = btn.closest(".venta-card");
+            const contenido = ventana.querySelector(".content");
+            contenido.style.display = contenido.style.display === "none" ? "block" : "none";
+        }
+
+        // Función para cerrar la ventana
+        function cerrarVenta(btn) {
+            const ventana = btn.closest(".venta-card");
+            ventana.remove();
+        }
+    </script>
+</body>
+</html>
