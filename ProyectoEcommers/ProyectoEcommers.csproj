@@ -597,8 +597,8 @@
     <Folder Include="wwwroot\Content\Content\Plantilla\material\src\assets\scss\custom\structure\rtl\" />
     <Folder Include="wwwroot\Content\Content\Plantilla\material\src\assets\scss\custom\theme-colors\" />
     <Folder Include="wwwroot\Content\Content\Plantilla\material\src\assets\scss\custom\widgets\" />
-    <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\Areas\" />
+    <Folder Include="wwwroot\img\Carta\" />
   </ItemGroup>
 
   <ItemGroup>

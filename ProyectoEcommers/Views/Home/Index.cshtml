@@ -393,7 +393,7 @@
     <!-- ============================================================== -->
     <!-- Carrusel -->
     <!-- ============================================================== -->
-
+@* 
     <div class="row" id="idMensaje" style="height: 0px; margin-top: 0px; display: none;">
         <div class="col-md-12">
             <div class="form-group">
@@ -403,27 +403,27 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
     <div class="row text-center" style="margin-top: 50px;">
         <div class="card-body ">
-            <h1 style="font-size: 20px">¡Aquí encuentras los mejores productos de Belleza!</h1>
+            <h1 style="font-size: 20px">¡ADMINISTRACIÓN!</h1>
             <br />
             <div class="text-center">
-                <label class="faa-burst  animated" style="color:#000000 !important; font-weight: bold !important; animation-duration: 5s; font-family: Gadugi !important; font-size: 30px !important; font-style: normal !important; ">Ditribuidora de Productos de Belleza</label>
+                <label class="faa-burst  animated" style="color:#000000 !important; font-weight: bold !important; animation-duration: 5s; font-family: Gadugi !important; font-size: 30px !important; font-style: normal !important; "> <img src="~/img/Logo.png" width="500" height="100" class="img-responsive"></label>
             </div>
         </div>
     </div>
     <div id="SliderSuperior" class="row" style="margin-top:0px;">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="form-group" style="box-shadow: 1px 3px 15px #48a262">
                 <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1300px; height: 350px; overflow: hidden; visibility: hidden;">
                     <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width:1300px; height:350px; overflow: hidden;">
-             @*            @foreach (var item in Model.ToList())
+                        @foreach (var item in Model)
                         {
                             <div>
                                 <a u=image href="#"><img src="@Url.Content(item.Ruta)" alt="" /></a>
                             </div>
-                        } *@
+                        }
                     </div>
                     <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
                         <div data-u="prototype" style="width:16px;height:16px;"></div>
@@ -433,17 +433,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+   @*      <div class="col-md-3">
             <div class="purse">
                 <div class="coin" style="margin-left: 55px;margin-top: 17px;">
                     <div class="front"></div>
                     <div class="back"></div>
                     <div class="side">
-                        <img src="~/img/Majas1.png" width="500" height="100" class="img-responsive">
+                        <img src="~/img/Logo.png" width="500" height="100" class="img-responsive">
                     </div>
                 </div>
             </div>
-        </div>
+        </div> *@
     </div>
 </div>
 

@@ -50,7 +50,7 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Definir el esquema y la collation por defecto
-            modelBuilder.HasDefaultSchema("distri21_bdtienda").UseCollation("utf8mb4_unicode_ci");
+            modelBuilder.HasDefaultSchema("ecommers").UseCollation("utf8mb4_unicode_ci");
 
             // Configuración de las entidades
             modelBuilder.Entity<Ctr_usuarios>(entity =>

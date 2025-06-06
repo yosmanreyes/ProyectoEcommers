@@ -1666,7 +1666,11 @@ namespace ProyectoEcommers.Controllers
             return Ok(new { publicKey });
         }
 
-
+        public IActionResult CartaMariaBonita(string? returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            return View();
+        }
 
 
 

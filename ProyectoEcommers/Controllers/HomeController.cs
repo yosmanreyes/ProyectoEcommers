@@ -14,9 +14,52 @@ public class HomeController : Controller
     //    _logger = logger;
     //}
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        try
+        {
+            var ImagenesSlider = await _BLConsultasExternas.F_GetCarruselImagenesAsyc();
+
+            var SlidersView = new List<DtoSlider>();
+
+            foreach (var item in ImagenesSlider.Respuesta)
+            {
+                string ruta = ConsultarRuta(Convert.ToInt32(item.Consecutivo));
+                string ruta1 = "";
+
+                if (ruta == null || ruta == "")
+                {
+                    ruta1 = F_GetImagenes(Convert.ToInt32(item.Consecutivo), item.ContentType, item.Foto);
+                }
+                else
+                {
+                    ruta1 = ruta;
+                }
+                var SliderView = new DtoSlider
+                {
+                    Consecutivo = item.Consecutivo,
+                    ContentType = item.ContentType,
+                    FileName = item.FileName,
+                    Ruta = ruta1
+                };
+                SlidersView.Add(SliderView);
+            }
+            return View(SlidersView);
+
+        }
+        catch (Exception e)
+        {
+            var SlidersView = new List<DtoSlider>();
+            var SliderView = new DtoSlider
+            {
+                Consecutivo = 19957,
+                ContentType = "image/jpeg",
+                FileName = "ARTE4_polired.jpg",
+                Ruta = "~/img/Carrusel/19957.jpg"
+            };
+            SlidersView.Add(SliderView);
+            return View(SlidersView);
+        }
     }
 
     //public IActionResult Privacy()

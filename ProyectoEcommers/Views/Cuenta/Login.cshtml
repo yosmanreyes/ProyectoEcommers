@@ -6,10 +6,35 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/login.css" rel="stylesheet" />
+    <style>
+        .custom-input {
+            width: 100%;
+            max-width: 400px; /* Ancho máximo */
+            padding: 12px 16px;
+            margin: 8px 0;
+            font-size: 16px;
+            color: #111111;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .custom-input::placeholder {
+                color: #999999;
+            }
+
+            .custom-input:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 8px rgba(0,123,255,0.5);
+                outline: none;
+            }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -17,8 +42,8 @@
             <form class="form-horizontal mt-3 form-material" id="loginform" asp-action="Login" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
                 <div class="Logo"><img src="@Url.Content("~/img/Logo.png")" alt="..." style="width:100%"/></div>
                 <span class="header">¡ Bienvenido ! </span>
-                <input asp-for="UsuarioEmpresarial" class="form-control" required placeholder="Usuario Empresarial" style=" color:#111111" />
-                <input asp-for="ClaveEmpresarial" class="form-control" required placeholder="Contraseña" style="color:#111111" />
+                <input asp-for="UsuarioEmpresarial" class="custom-input" required placeholder="Usuario Empresarial" />
+                <input asp-for="ClaveEmpresarial" type="password" class="custom-input" required placeholder="Contraseña" />
                 <button type="submit" class="button sign-in">Ingresar</button>
              
                 <button type="submit" class="button">

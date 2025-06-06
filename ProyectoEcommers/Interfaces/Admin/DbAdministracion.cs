@@ -179,7 +179,7 @@ namespace ProyectoEcommers.Models
 
             // Realizamos la consulta asíncrona
             var lista =  _context.ctr_menu
-                .Where(x => x.PADREID == 0) // Filtramos los menús con PADREID igual a 0
+                .Where(x => x.PADREID == 0 && x.VIGENTE == 1) // Filtramos los menús con PADREID igual a 0
                 .Select(a => new DtoMenu
                 {
                     IDMENU = a.ID_MENU,
