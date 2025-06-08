@@ -12553,7 +12553,7 @@ p {
     background-position: center center;
     background-size: cover;
 }*/
-@keyframes changeBackground {
+/*@keyframes changeBackground {
     0% {
         background-image: url('../img/ImagenPrincipal.png');
     }
@@ -12580,13 +12580,81 @@ header.masthead {
     padding-bottom: 6rem;
     text-align: center;
     color: #fff;
-    background-image: url("../img/ImagenPrincipal.png"); /* imagen inicial */
+    background-image: url("../img/ImagenPrincipal.png");*/ /* imagen inicial */
+    /*background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;*/
+    /* animación aplicada */
+    /*animation: changeBackground 20s infinite;
+}*/
+
+header.masthead {
+    position: relative; /* Crucial for positioning children absolutely */
+    padding-top: 10.5rem;
+    padding-bottom: 6rem;
+    text-align: center;
+    color: #fff;
+    /* We'll let the slider images fill the background, so no static background-image here */
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
-    /* animación aplicada */
-    animation: changeBackground 20s infinite;
+    overflow: hidden; /* Hide anything that spills out */
+}
+
+/* Styles for the main content (Welcome, Maria Bonita, Servicios) */
+.container {
+    position: relative; /* Already set inline, but good to note its importance */
+    z-index: 10; /* Already set inline, ensures it's above the slider */
+    /* Add any other styling for your content container here */
+}
+
+/* Styles for the slider container */
+#PanelEncuestax {
+    /* This div holds the slider, it needs to fill the entire header */
+    position: absolute; /* Position relative to .masthead */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Make it cover the entire masthead */
+    z-index: 1; /* Make sure it's behind the content (which has z-index: 10) */
+    overflow: hidden; /* Important for the fading effect within */
+}
+
+#PanelEncuesta {
+    /* This div also needs to fill its parent (#PanelEncuestax) */
+    width: 100%;
+    height: 100%;
+    position: relative; /* For absolute positioning of single slides */
+}
+
+.single-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Start hidden */
+    transition: opacity 1.5s ease-in-out; /* Smooth transition for fading */
+}
+
+    .single-slider.active {
+        opacity: 1; /* Show active slide */
+    }
+
+    .single-slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures images cover the area without distortion */
+    }
+
+/* Optional: adjust for your custom columns if they are not already handled */
+.col-xl-9.custom-col-9.col-lg-8 {
+    /* If these classes define width/margin that affects the overall header layout,
+       you might need to adjust them or remove them from #PanelEncuestax
+       if it's meant to be a full-bleed background.
+       For a full-bleed background slider, you might only need #PanelEncuestax directly. */
 }
 
 

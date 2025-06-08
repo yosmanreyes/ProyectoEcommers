@@ -133,8 +133,8 @@ function OpenEnviarCorreo(_idComentario, _correo, _idComentario2, idEnvio) {
     $("#txtIdComentario2").val(_idComentario2);
     $("#txtIdEnvia").val(idEnvio);    
     $("#txtcorreo").val(_correo);
-    $("#txtAsunto").val("Distribuidora de Belleza Majas, agradece por sus comentarios");
-    $("#txtMensaje").val("Para majas es muy importante por contar con su comentarios y sugerencias, vamos a validar sus caso con los directivos con el fin de mejorar nuestros servicios, Gracias");
+    $("#txtAsunto").val("Maria Bonita, agradece por sus comentarios");
+    $("#txtMensaje").val("Maria Bonita es muy importante por contar con su comentarios y sugerencias, vamos a validar sus caso con los directivos con el fin de mejorar nuestros servicios, Gracias");
 
 }
 function LimpiarCorreo() {
@@ -449,8 +449,8 @@ function OpenEnviarCorreoMasivo() {
     $("#txtIdComentarioMasivo").val(0);
     $("#txtcorreoMasivo").val("");
 
-    $("#txtAsuntoMasivo").val("Distribuidora de Belleza Majas, agradece por sus comentarios");
-    $("#txtMensajeMasivo").val("Para majas es muy importante por contar con su comentarios y sugerencias, vamos a validar sus caso con los directivos con el fin de mejorar nuestros servicios, Gracias");
+    $("#txtAsuntoMasivo").val("Maria Bonita, agradece por sus comentarios");
+    $("#txtMensajeMasivo").val("Maria Bonita es muy importante por contar con su comentarios y sugerencias, vamos a validar sus caso con los directivos con el fin de mejorar nuestros servicios, Gracias");
 
     /*    LimpiarCorreo();*/
 }

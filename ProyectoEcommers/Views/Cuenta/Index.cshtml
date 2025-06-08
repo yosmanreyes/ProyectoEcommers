@@ -1,4 +1,5 @@
-﻿﻿@{
+﻿
+﻿@{
     Layout = "~/Views/Shared/_LayoutGen.cshtml";
 }
 @{
@@ -22,6 +23,7 @@
     <link href="~/css/googlefontsroboto.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/css/styles.css" rel="stylesheet" />
+
     <style>
         /*       body {
                            font-family: Arial, sans-serif;
@@ -160,7 +162,17 @@
 
 
         .portfolio-background2 {
-            background: radial-gradient(circle, red, black);
+            background: linear-gradient( 124deg, rgba(129, 10, 10, 0.83), /* rojo muy oscuro translúcido */
+            rgba(139, 0, 0, 0.7), /* rojo oscuro */
+            rgba(165, 139, 42, 0.6), /* rojo medio */
+            rgba(205, 92, 92, 0.6), /* rojo claro */
+            rgba(220, 20, 60, 0.7), /* rojo brillante */
+            rgba(165, 139, 42, 0.6), /* rojo medio */
+            rgba(139, 0, 0, 0.7), /* rojo oscuro */
+            rgba(165, 139, 42, 0.6), /* marrón rojizo */
+            rgba(110, 15, 15, 0.8), /* rojo oscuro */
+            rgba(60, 10, 10, 0.75) /* rojo muy oscuro */
+            ) !important;
             /* Ajusta el tamaño del patrón */
             /* Si usas imagen, descomenta estas líneas para que se vea bien */
             /* background-size: cover;
@@ -199,6 +211,16 @@
                 text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* mejora legibilidad */
             }
 
+        .portfolio-background4 {
+            background: rgba(0, 0, 0, 0.4); /* fondo negro translúcido simple */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            min-height: 500px;
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+        }
+
      /*    .row {
             margin-right: 0;
             margin-left: 0;
@@ -219,7 +241,49 @@
             border-radius: 0; 
         }
  */
+
+
     </style>
+
+    @section scripts{
+    <script type='text/javascript'>
+            var UrlConsultaImagenSliderPrincipal = "@Url.Action("Tiendas", "Cuenta", new { Area = "" })";
+            var urlMensaje = "@Url.Action("Contactos", "Cuenta", new { area = "" })";
+            var UrlImgCarrusel = "@Url.Content("~/img/Carrusel/")";
+            var UrlAlertSucess = "@Url.Content("~/img/alertsucess.png")";
+            var UrlAlertError = "@Url.Content("~/img/AlertError.png")";
+            var UrlImgProductos = "@Url.Content("~/img/Productos/")";
+
+ 
+    </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const sliderContainer = document.getElementById('PanelEncuesta');
+                const slides = sliderContainer.querySelectorAll('.single-slider');
+                let currentSlide = 0;
+                const slideInterval = 4000; // Time in milliseconds (e.g., 4000ms = 4 seconds per slide)
+
+                function showSlide(index) {
+                    slides.forEach(slide => {
+                        slide.classList.remove('active');
+                    });
+                    slides[index].classList.add('active');
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
+
+                showSlide(currentSlide);
+                setInterval(nextSlide, slideInterval);
+
+                sliderContainer.classList.remove('hidden'); // Ensure slider is visible
+            });
+        </script>
+
+    }
 
 </head>
 
@@ -231,13 +295,70 @@
     <br />
 
 
-    <header class="masthead"> 
+ @*    <header class="masthead"> 
         <div class="container">
             <div class="masthead-subheading">Welcome!</div>
             <div class="masthead-heading text-uppercase">Maria Bonita</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">Servicios</a>
         </div>
+    </header> *@
+    <header class="masthead">
+        <div class="container" style="position: relative; z-index: 10; text-align: center; color: white;">
+            <div class="masthead-subheading">Welcome!</div>
+            <div class="masthead-heading text-uppercase">Maria Bonita</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#services">Servicios</a>
+        </div>
+
+        <div class="col-xl-9 custom-col-9 col-lg-8" id="PanelEncuestax">
+            <div id="PanelEncuesta" class="slider__inner slider-active hidden">
+                <div class="single-slider w-img">
+                    <img id="img1" src="../img/ImagenPrincipal.png" alt="slider image 1">
+                </div>
+                <div class="single-slider w-img">
+                    <img id="img2" src="../img/ImagenPrincipal2.jpeg" alt="slider image 2">
+                </div>
+                <div class="single-slider w-img">
+                    <img id="img3" src="../img/ImagenPrincipal3.jpeg" alt="slider image 3">
+                </div>
+                <div class="single-slider w-img">
+                    <img id="img4" src="../img/ImagenPrincipal4.jpeg" alt="slider image 4">
+                </div>
+                <div class="single-slider w-img">
+                    <img id="img5" src="../img/ImagenPrincipal5.jpeg" alt="slider image 5">
+                </div>
+            </div>
+        </div>
     </header>
+
+
+
+@*     <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome!</div>
+            <div class="masthead-heading text-uppercase">Maria Bonita</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#services">Servicios</a>
+
+            <div class="col-xl-12 custom-col-12 col-lg-12" id="PanelEncuestax">
+                <div id="PanelEncuesta" class="slider__inner slider-active hidden">
+                    <div class="single-slider w-img">
+                        <img id="img1" src="../img/ImagenPrincipal.png" alt="slider image 1">
+                    </div>
+                    <div class="single-slider w-img">
+                        <img id="img2" src="../img/ImagenPrincipal2.jpeg" alt="slider image 2">
+                    </div>
+                    <div class="single-slider w-img">
+                        <img id="img3" src="../img/ImagenPrincipal3.jpeg" alt="slider image 3">
+                    </div>
+                    <div class="single-slider w-img">
+                        <img id="img4" src="../img/ImagenPrincipal4.jpeg" alt="slider image 4">
+                    </div>
+                    <div class="single-slider w-img">
+                        <img id="img5" src="../img/ImagenPrincipal5.jpeg" alt="slider image 5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header> *@
 
     <section class="page-section portfolio-background" id="portfolio2">
         <div class="container">
@@ -465,62 +586,13 @@
                 <h3 class="section-subheading text-muted">Para sosotros es un placer atenderlos ¡Visítanos pronto!</h3>
                 @*                 <p style="text-align: center; color: black"><span>Como llegar:</span> <a style="color: black" href="https://www.google.com/maps/dir//4.667417,-74.117868/4.667417,-74.117868,17z?entry=ttu&g_ep=EgoyMDI1MDUyNi4wIKXMDSoASAFQAw%3D%3D">haga clic aquí</a></p> *@
             </div>
-
+            <div class="row">
             <div class="map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7953.224287425856!2d-74.1193061!3d4.6630437!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b28b8fdbe07%3A0x89786b606869a49a!2sMaria%20Bonita!5e0!3m2!1ses!2sco!4v1748544900727!5m2!1ses!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            @*           <div class="col-lg-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="..." />
-                        <h4 style=" color: black !important;">Parveen Anand</h4>
-                        <p class="text-muted" >Lead Designer</p>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="..." />
-                        <h4 style=" color: black !important;">Diana Petersen</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="..." />
-                        <h4 style=" color: black !important;">Larry Parker</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div> *@
-            @* 
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <p class="large text-muted">
-                        Encuentranos en la Cra. 75 #24b-40, Bogotá Modelia, Colombia <br /><br />
-                        <strong>Contactanos Fácil</strong><br />
-                        Correo: grupolasantaclub@gmail.com <br />
-                        Celular: +57 313 427 5802 <br /><br />
-                        <strong>Nuestros Horarios</strong><br />
-                        Lunes y Martes <strong>Cerrado</strong><br />
-                        Miércoles y Jueves de <strong>7:00 P.M. a 5:00 A.M.</strong><br />
-                        Viernes y Sábado de <strong>7:00 P.M. a 5:00 A.M.</strong><br />
-                        Domingo y Festivos <strong>Cerrado</strong><br />
-
-                        ¡Nos vemos pronto!.
-                    </p>
-                </div>
             </div>
- *@
-
             <div class="row">
-                <div class="col-lg-12 mx-auto text-center contact-info">
+                <div class="col-lg-10 mx-auto text-center ">
                     <p>
                         Encuéntranos en la <br />
                         <span class="fw-bold">Cra. 75 #24b-40, Bogotá Modelia, Colombia</span>
@@ -547,7 +619,7 @@
     <!-- Clients-->
     <div class="py-5">
         <div class="container">
-            <div class="row align-items-center">
+   @*          <div class="row align-items-center">
                 <div class="col-md-3 col-sm-6 my-3">
                     <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="img/logos/microsoft.svg" alt="..." aria-label="Microsoft Logo" /></a>
                 </div>
@@ -560,7 +632,7 @@
                 <div class="col-md-3 col-sm-6 my-3">
                     <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="img/logos/ibm.svg" alt="..." aria-label="IBM Logo" /></a>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
     <!-- Contact-->
@@ -568,6 +640,7 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Reservas</h2>
+
                 <h3 class="section-subheading text-muted">
                     Ofrecemos reservaciones para mesas VIP, grupos grandes y eventos privados.
                     ¡No te quedes fuera de la fiesta!
@@ -580,54 +653,60 @@
             <!-- To make this form functional, sign up at-->
             <!-- https://startbootstrap.com/solution/contact-forms-->
             <!-- to get an API token!-->
-            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                <div class="row align-items-stretch mb-5">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <!-- Name input-->
-                            <input class="form-control" id="name" type="text" placeholder="Tu Nombre *" data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="name:required">Se requiere un nombre.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- Email address input-->
-                            <input class="form-control" id="email" type="email" placeholder="Tu Correo Electrónico *" data-sb-validations="required,email" />
-                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">El correo electrónico no es válido..</div>
-                        </div>
-                        <div class="form-group mb-md-0">
-                            <!-- Phone number input-->
-                            <input class="form-control" id="phone" type="tel" placeholder="Tu Número de Celaular *" data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">Se requiere un número de teléfono.</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group form-group-textarea mb-md-0">
-                            <!-- Message input-->
-                            <textarea class="form-control" id="message" placeholder="Tu Mensaje *" data-sb-validations="required"></textarea>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">Se requiere un mensaje.</div>
+            <div id="contactForm">
+                <div class="col-xxl-12 col-xl-12 col-lg-12">
+                    <div class="contact__form">
+                    @*     <h3 class="contact__title">Danos tu opinion.</h3> *@
+                        <div class="row">
+                            <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                <div class="country-select">
+                                    <span>Nombres completos:</span>
+                                    <input tabindex="5" name="Nombres" type="text" id="Nombres" autocomplete="off" placeholder="Nombres" class="form-control InputPading" />
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                <div class="country-select">
+
+                                    <label for="email">Correo Electrónico:</label>
+                                    <input tabindex="5" type="email" name="CorreoElectronico" onblur="validarCorreosContacto()" id="CorreoElectronico" autocomplete="off" placeholder="Correo Electronico" class="form-control InputPading" />
+                                    <div id="mensajeContacto"></div>
+                                </div>
+                            </div>
+                          
+                           <div class="col-xxl-6 col-xl-6 col-lg-6 ">
+                                <div class="country-select">
+                                    <span>Número de Teléfono:</span>
+                                    <input tabindex="5" name="NomNumeroTelefonobres" type="number" id="NumeroTelefono" autocomplete="off" placeholder="Número Telefono" class="form-control InputPading" />
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-12">
+                                <div class="country-select">
+                                    <span>Comentanos:</span>
+                                    <textarea class="form-control" placeholder=" " rows="5" id="Comentarios" name="Comentarios" maxlength="300" style="height: 90px !important; text-align:justify; margin-bottom: 0px;" tabindex="4"></textarea>
+                                </div>
+                            </div>
+                        
                         </div>
                     </div>
                 </div>
+                <br />
                 <!-- Submit success message-->
                 <!---->
                 <!-- This is what your users will see when the form-->
                 <!-- has successfully submitted-->
-                <div class="d-none" id="submitSuccessMessage">
-                    <div class="text-center text-white mb-3">
-                        <div class="fw-bolder">Form submission successful!</div>
-                        To activate this form, sign up at
-                        <br />
-                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                    </div>
-                </div>
+    
                 <!-- Submit error message-->
                 <!---->
                 <!-- This is what your users will see when there is-->
                 <!-- an error submitting the form-->
                 <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                 <!-- Submit Button-->
-                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Guardar Reserva</button></div>
-            </form>
+                <div class="text-center">
+                    <button type="submit" onclick="Ins_Contacto();" class="btn btn-primary btn-xl">Guardar Reserva</button>
+                </div>
+               @*  <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit" onclick="Ins_Contacto();">Guardar Reserva</button></div> *@
+            </div>
         </div>
     </section>
     <!-- Footer-->
@@ -1054,6 +1133,8 @@
             </div>
         </div>
     </div>
+
+
 @*     <div class="modal fade show" id="cartaMariaBonitaX" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <!-- Tamaño grande -->

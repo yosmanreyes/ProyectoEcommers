@@ -2,26 +2,26 @@
 
 
 
-    if (PaginaPrincipal == 1) {
+    //if (PaginaPrincipal == 1) {
 
-        const panelEncuesta = document.getElementById('sliderSection');
-        /*      panelEncuesta.classList.remove('visible');*/
-        panelEncuesta.classList.add('visible');
-        tiempoInicio();
-        consultarImagenesPeriodicamente();
-        ConsultaProductosGeral(0, 0);
-        GetConsultaDominios();
-        consultarImagenesIzquierdaPeriodicamente()
-        ConsultaImagenInferior();
-        ConsultaImagenComentarios();
-        GetMensajeScroll();
-        cargueImagen();
+    //    const panelEncuesta = document.getElementById('sliderSection');
+    //    /*      panelEncuesta.classList.remove('visible');*/
+    //    panelEncuesta.classList.add('visible');
+    //    tiempoInicio();
+      consultarImagenesPeriodicamente();
+    //    ConsultaProductosGeral(0, 0);
+    //    GetConsultaDominios();
+    //    consultarImagenesIzquierdaPeriodicamente()
+    //    ConsultaImagenInferior();
+    //    ConsultaImagenComentarios();
+    //    GetMensajeScroll();
+  /*      cargueImagen();*/
   
 
-    }
-    else {
-        tiempoFinal();
-    }
+    //}
+    //else {
+    //    tiempoFinal();
+    //}
 
 
     document.addEventListener('DOMContentLoaded', function () {

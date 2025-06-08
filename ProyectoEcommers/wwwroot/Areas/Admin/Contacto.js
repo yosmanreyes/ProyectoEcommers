@@ -1,10 +1,53 @@
-﻿function Ins_Contacto() {
+﻿//function ModalExitoso(titulo, texto) {
+//    $("#TituloMensaje").html("<h3><img src='/img/AlertSucess.png' width='50' height='50' />&nbsp" + titulo + "</h3>");
+//    $("#ContenidoCambio").html("<div class='alert alert-success' role='alert' style='text-align: justify; font-size:20px;'><span class='fas fa-info'></span>&nbsp" + texto + "</div>");
+//    $('#Modal_Transacciones').modal("show");
+//}
+//function ModalError(titulo, texto) {
+//    $("#TituloMensaje").html("<h3><img src='/img/AlertError.png' width='50' height='50' />&nbsp" + titulo + "</h3>");
+//    $("#ContenidoCambio").html("<div class='alert alert-danger' role='alert' style='text-align: justify; font-size:20px;'><span class='fas fa-info'></span>&nbsp" + texto + "</div>");
+//    $('#Modal_Transacciones').modal("show");
+//}
+
+
+//function create(Type, Mensaje, Icon) {
+//    VanillaToasts.create({
+//        title: 'Estimado(a) Cliente...',
+//        text: Mensaje,
+//        type: Type,
+//        icon: Icon,
+//        timeout: '6000'
+//    });
+//}
+
+function ModalExitoso(titulo, texto) {
+    $("#TituloMensaje").html("<h3><img src='/img/AlertSucess.png' width='50' height='50' />&nbsp" + titulo + "</h3>");
+    $("#ContenidoCambio").html("<div class='alert alert-success' role='alert' style='text-align: justify; font-size:20px;'><span class='fas fa-info'></span>&nbsp" + texto + "</div>");
+    $('#Modal_Transacciones').modal("show");
+}
+function ModalError(titulo, texto) {
+    $("#TituloMensaje").html("<h3><img src='/img/AlertError.png' width='50' height='50' />&nbsp" + titulo + "</h3>");
+    $("#ContenidoCambio").html("<div class='alert alert-danger' role='alert' style='text-align: justify; font-size:20px;'><span class='fas fa-info'></span>&nbsp" + texto + "</div>");
+    $('#Modal_Transacciones').modal("show");
+}
+
+function create(Type, Mensaje, Icon) {
+    VanillaToasts.create({
+        title: 'Estimado(a) Cliente...',
+        text: Mensaje,
+        type: Type,
+        icon: Icon,
+        timeout: '6000'
+    });
+}
+
+function Ins_Contacto() {
     let _Nombres = $("#Nombres").val();
     let _CorreoElectronico = $("#CorreoElectronico").val();
     let _NumeroTelefono = Number($("#NumeroTelefono").val());
     let _Comentarios = $("#Comentarios").val();
 
-    var Indicativo = $("#IdPaisIndicativoContacto").val();
+    var Indicativo = '+57';
     let _Indicativo = Indicativo;
 
     if (_Nombres == "") {
@@ -30,8 +73,7 @@
         create('error', 'Ingresa su comentario por favor...', UrlAlertError);
         return;
     }
-
-    var token = document.getElementsByName("__RequestVerificationToken")[0].value; // Usa el nombre del encabezado configurado
+ // Usa el nombre del encabezado configurado
     let Archivo = new FormData();
 
     Archivo.append('Nombres', _Nombres);
@@ -39,7 +81,7 @@
     Archivo.append('NumeroTelefono',  _NumeroTelefono);
     Archivo.append('Comentarios', _Comentarios);
     Archivo.append('NumeroTelefonoConIndicativo', Indicativo + _NumeroTelefono);
-    Archivo.append('__RequestVerificationToken', token);
+
 
     $.ajax({
         type: 'POST',
@@ -53,7 +95,7 @@
         success: function (response) {
             if (response.success == true) {
                 Limpiar();
-                create('success', 'MAJAS, Agradece por sus comentarios, inquietudes y sugerencias, para nosotros es muy importante...', UrlAlertSucess);
+                create('success', 'Maria Bonita, Agradece por sus comentarios, inquietudes y sugerencias, para nosotros es muy importante...', UrlAlertSucess);
                 return;
             }
 
@@ -72,14 +114,12 @@ function Limpiar() {
     $("#CorreoElectronico").val("");
     $("#NumeroTelefono").val("");
     $("#Comentarios").val("");
-    $("#IdPaisIndicativoContacto").val(0);
-    $("#IdPaisIndicativoContacto").trigger('change.select2');
-    $("#IdPaisIndicativoContacto").trigger("chosen:updated");
+
 }
 
-if (PaginaPrincipal == 3) {
-    CargarListaIndicativos();
-}
+//if (PaginaPrincipal == 3) {
+//    CargarListaIndicativos();
+//}
 function CargarListaIndicativos() {
     let container = document.querySelector('#IdPaisIndicativoContacto');
     if (container != null) { 

@@ -8,6 +8,7 @@
     @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
     @*  <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="~/css/styles.css" />
+    <link href="~/css/vanillatoasts.css" rel="stylesheet" />
 
 
 
@@ -53,7 +54,12 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+@*     <script src="~/js/site.js" asp-append-version="true"></script> *@
+    <script src="~/js/vanillatoasts.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/areas/admin/tienda.js"></script>
+    <script src="~/areas/admin/contacto.js?Versionx=10"></script>
+
 
 </head>
 <body>
@@ -124,3 +130,32 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<div class="modal fade show" id="Modal_Transacciones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scroll-long-outer-modal" aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content CuadroModal">
+            <div class="modal-header d-flex align-items-center">
+                <h2 class="text-center" id="TituloMensaje"></h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="ContenidoCambio"></div>
+            </div>
+            <div class="modal-footer" style="justify-content:center;">
+                <button type="button" data-bs-dismiss="modal" style="border-radius: 0px 16px 0px 16px !important;" class="btn btn-cerrar"><span class="fas fa-sign-out-alt faa-horizontal animated"></span> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Estado Proceso-->
+<div id="Process">
+    <div class="loader_sis">
+        <div class="loader_dialoge">
+            <div class="loader_containere text-center">
+                <div class="loadere"></div>
+                <h4 class="text-white">Procesando, espere...</h4>
+            </div>
+        </div>
+    </div>
+    <div class="loader_backe"></div>
+</div>

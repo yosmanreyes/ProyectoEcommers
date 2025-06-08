@@ -108,7 +108,7 @@
                         </li>
                     </ul>
 
-                    @if (Convert.ToInt32(CantidadVentaProductos.CantidadVentaProducto) > 0)
+             @*        @if (Convert.ToInt32(CantidadVentaProductos.CantidadVentaProducto) > 0)
                     {
                         <li class="dropdown messages-menu" style="display: flex !important; justify-content: space-evenly; align-items: center; font-size: 27px !important;">
                             <a class="nav-link sidebartoggler d-md-block waves-effect" title="Compra Realiza" onclick="$('#Process').css('display','block')" href="@Url.Action("Bandeja", "Venta", new { Area = ""}) ">
@@ -116,7 +116,7 @@
                                 <span class="label2 label2-danger" style="color: red !important;">@Convert.ToInt32(CantidadVentaProductos.CantidadVentaProducto)</span>
                             </a>
                         </li>
-                    }
+                    } *@
                     @if (Convert.ToInt32(CantidadMensaje.CantidadMensajes) > 0)
                     {
                         <li class="dropdown messages-menu" style="display: flex !important; justify-content: space-evenly; align-items: center; font-size: 27px !important;">

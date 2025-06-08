@@ -1026,7 +1026,6 @@ namespace ProyectoEcommers.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<JsonResult> Contactos(string Nombres, string CorreoElectronico, string NumeroTelefono, string Comentarios, string NumeroTelefonoConIndicativo)
         {
             try
@@ -1045,7 +1044,7 @@ namespace ProyectoEcommers.Controllers
                 var Resultado = await _IDbComentarios.Ins_Comentarios(insComentarios);
                 if (Resultado > 0)
                 {
-                    var re = EnviarCorreoElectronico(CorreoElectronico);
+                    //var re = EnviarCorreoElectronico(CorreoElectronico);
                     return Json(new { success = true, data = 1, mensaje = "" });
                 }
                 else
@@ -1122,7 +1121,7 @@ namespace ProyectoEcommers.Controllers
             string remitente = "distrimajas@gmail.com";
             string destinatario = _email;
             string asunto = "Gracias por Suscríbete al Boletín";
-            string cuerpo = "Su distribuidora Majas agradece la suscripción, próximamente estarás recibiendo nuestros últimos productos y descuentos";
+            string cuerpo = "Maria Bonita agradece la suscripción, próximamente estarás recibiendo nuestros últimos productos y descuentos";
 
             var mensaje = new MimeMessage();
             mensaje.From.Add(MailboxAddress.Parse(remitente));
@@ -1566,7 +1565,7 @@ namespace ProyectoEcommers.Controllers
             string asunto = "Gracias por realizar su compra";
 
             // Construye el cuerpo del correo electrónico
-            string cuerpo = $"Señor(a) {_nombres} {_apellidos},\r\n\r\nSu distribuidora Majas agradece por su compra.\r\n\r\nAquí está la lista de productos adquiridos:\r\n\r\n";
+            string cuerpo = $"Señor(a) {_nombres} {_apellidos},\r\n\r\nMaria Bonita agradece por su compra.\r\n\r\nAquí está la lista de productos adquiridos:\r\n\r\n";
 
             foreach (var producto in listaProductos)
             {
@@ -1618,11 +1617,11 @@ namespace ProyectoEcommers.Controllers
         //    string remitente = "distrimajas@gmail.com";
         //    string destinatario = _email;
         //    string asunto = "Gracias por realizar su compra";
-        //    string cuerpo = "señor(a)\r\n" + _nombres + " " + _apellidos + "\r\n\r\nSu distribuidora Majas agradece por su compra, se envía el paso a paso con el fin de que usted puede realizar seguimiento a su pedido en la siguiente URL https://DistribuidoraMajas.com/Cuenta/MiCompra, anexa su correo electrónico y listo, o si desea Ingrese a la página web y en mi carrito de compras le das clic el botón  mis compras realizadas ingresas su correo electrónico y listo, de igual manera se puede comunicar de forma directa con nuestros asesores al número telefónico 3132219524, gracias por preferirnos.\r\n\r\nDirección de Envío:  " + _direccion + " " + _direccioOpcional + " -9584\r\n\r\n\r\nAtentamente,\r\n\r\n\r\n\r\nMAJAS\r\nDistribuidora de Productos de Belleza .";
+        //    string cuerpo = "señor(a)\r\n" + _nombres + " " + _apellidos + "\r\n\r\nMaria Bonita agradece por su compra, se envía el paso a paso con el fin de que usted puede realizar seguimiento a su pedido en la siguiente URL https://DistribuidoraMajas.com/Cuenta/MiCompra, anexa su correo electrónico y listo, o si desea Ingrese a la página web y en mi carrito de compras le das clic el botón  mis compras realizadas ingresas su correo electrónico y listo, de igual manera se puede comunicar de forma directa con nuestros asesores al número telefónico 3132219524, gracias por preferirnos.\r\n\r\nDirección de Envío:  " + _direccion + " " + _direccioOpcional + " -9584\r\n\r\n\r\nAtentamente,\r\n\r\n\r\n\r\nMAJAS\r\nDistribuidora de Productos de Belleza .";
 
 
         //    // Código existente para construir el cuerpo del correo electrónico
-        //    //string cuerpo = "señor(a)\r\n" + _nombres + " " + _apellidos + "\r\n\r\nSu distribuidora Majas agradece por su compra. Aquí está la lista de productos:\r\n\r\n";
+        //    //string cuerpo = "señor(a)\r\n" + _nombres + " " + _apellidos + "\r\n\r\nMaria Bonita agradece por su compra. Aquí está la lista de productos:\r\n\r\n";
 
 
         //    var mensaje = new MimeMessage();

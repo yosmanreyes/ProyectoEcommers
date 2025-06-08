@@ -14,24 +14,4 @@ $(document).ajaxStop(function () {
 
 });
 
-function ModalExitoso(titulo, texto) {
-    $("#TituloMensaje").html("<h3><img src='/img/AlertSucess.png' width='50' height='50' />&nbsp" + titulo + "</h3>");
-    $("#ContenidoCambio").html("<div class='alert alert-success' role='alert' style='text-align: justify; font-size:20px;'><span class='fas fa-info'></span>&nbsp" + texto + "</div>");
-    $('#Modal_Transacciones').modal("show");
-}
-function ModalError(titulo, texto) {
-    $("#TituloMensaje").html("<h3><img src='/img/AlertError.png' width='50' height='50' />&nbsp" + titulo + "</h3>");
-    $("#ContenidoCambio").html("<div class='alert alert-danger' role='alert' style='text-align: justify; font-size:20px;'><span class='fas fa-info'></span>&nbsp" + texto + "</div>");
-    $('#Modal_Transacciones').modal("show");
-}
-
-function create(Type, Mensaje, Icon) {
-    VanillaToasts.create({
-        title: 'Estimado(a) Cliente...',
-        text: Mensaje,
-        type: Type,
-        icon: Icon,
-        timeout: '6000'
-    });
-}
 
