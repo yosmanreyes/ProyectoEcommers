@@ -262,7 +262,7 @@ namespace ProyectoEcommers.Models
                         image.Mutate(x => x.Resize(new ResizeOptions
                         {
                             Mode = ResizeMode.Crop,
-                            Size = new Size(855, 525)
+                            Size = new Size(5088, 3392)
                         }));
 
                         // Guardar la imagen procesada en la ruta especificada
@@ -516,7 +516,7 @@ namespace ProyectoEcommers.Models
                         image.Mutate(x => x.Resize(new ResizeOptions
                         {
                             Mode = ResizeMode.Crop,
-                            Size = new Size(335, 252)
+                            Size = new Size(1080, 1920)
                         }));
 
                         // Guardar la imagen procesada sin metadata en el disco
@@ -722,7 +722,7 @@ namespace ProyectoEcommers.Models
                         image.Mutate(x => x.Resize(new ResizeOptions
                         {
                             Mode = ResizeMode.Crop,
-                            Size = new Size(486, 220)
+                            Size = new Size(1080, 1920)
                         }));
 
                         // Guardar la imagen procesada en el archivo

@@ -400,7 +400,7 @@ a:not([href]) {
     }
 .modal-header {
     border-bottom-color: #30da51;
-    background-image: linear-gradient(to bottom, rgb(232 239 241) 0%, rgb(253, 253, 253) 9%, rgb(236 246 248) 34%, rgb(211 241 229) 62%, rgb(123 196 205) 94%, rgb(13 61 114) 100%);
+/*    background-image: linear-gradient(to bottom, rgb(232 239 241) 0%, rgb(253, 253, 253) 9%, rgb(236 246 248) 34%, rgb(211 241 229) 62%, rgb(123 196 205) 94%, rgb(13 61 114) 100%);*/
 }
 .modal-footer {
     border-top: 1px solid #e9ecef !important;

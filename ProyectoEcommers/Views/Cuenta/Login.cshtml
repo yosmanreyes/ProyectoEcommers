@@ -45,13 +45,12 @@
                 <input asp-for="UsuarioEmpresarial" class="custom-input" required placeholder="Usuario Empresarial" />
                 <input asp-for="ClaveEmpresarial" type="password" class="custom-input" required placeholder="Contraseña" />
                 <button type="submit" class="button sign-in">Ingresar</button>
-             
-                <button type="submit" class="button">
-                    <a class="dropdown-item" href="@Url.Action("CerrarSesion", "Cuenta", new { Area = "" })">
-                        <i data-feather="log-out"
-                           class="feather-sm text-danger me-1 ms-1"></i> Regresar al Inicio
+                <button type="submit" class="button" style="color: white;">
+                    <a class="dropdown-item" href="@Url.Action("CerrarSesion", "Cuenta", new { Area = "" })" style="color: white;">
+                        <i data-feather="log-out" class="feather-sm text-danger me-1 ms-1"></i> Regresar al Inicio
                     </a>
                 </button>
+
                 <p class="footer">
                     Don't have an account?
                     <a href="" class="link">Sign up, it's free!</a>

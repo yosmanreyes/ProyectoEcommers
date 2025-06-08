@@ -11,13 +11,16 @@
       consultarImagenesPeriodicamente();
     //    ConsultaProductosGeral(0, 0);
     //    GetConsultaDominios();
-    //    consultarImagenesIzquierdaPeriodicamente()
-    //    ConsultaImagenInferior();
+    consultarImagenesIzquierdaPeriodicamente()
+    ConsultaImagenInferior();
     //    ConsultaImagenComentarios();
     //    GetMensajeScroll();
-  /*      cargueImagen();*/
-  
-
+    /*      cargueImagen();*/
+    //setTimeout(function () {
+    //    $('#ModalEvento').modal('show');
+    //}, 100);
+/*    $('#ModalEvento').modal('show');*/
+ /*   $('#ModalEvento').modal('hide');*/
     //}
     //else {
     //    tiempoFinal();
@@ -326,9 +329,9 @@ async function consultarImagenesIzquierdaPeriodicamente() {
     await ConsultaImagenIzquierda();
 
     // Establecer intervalo para consultas periódicas cada 1 hora
-    setInterval(async () => {
-        await ConsultaImagenIzquierda();
-    }, 60 * 60 * 1000); // 60 minutos * 60 segundos * 1000 milisegundos = 1 hora
+    //setInterval(async () => {
+    //    await ConsultaImagenIzquierda();
+    //}, 60 * 60 * 1000); // 60 minutos * 60 segundos * 1000 milisegundos = 1 hora
 }
 
 // Función asincrónica para consultar las imágenes izquierdas desde el servidor
@@ -336,6 +339,7 @@ async function ConsultaImagenIzquierda() {
     try {
         const panelEncuestaIzquierda = document.getElementById('PanelEncuestaIzquierda');
         panelEncuestaIzquierda.classList.remove('visible');
+
         const response = await $.ajax({
             type: 'POST',
             url: UrlConsultaImagenIzquierda
@@ -343,20 +347,65 @@ async function ConsultaImagenIzquierda() {
 
         if (response.success) {
             const tipo = response.data;
-            tipo.forEach((item, index) => {
-                document.getElementById(`imge${index + 1}`).setAttribute('src', `${UrlImg + item.Ruta}`);
-            });
-            panelEncuestaIzquierda.classList.add('visible');
+
+            // Validamos si al menos hay una imagen con ruta válida
+            const hayImagenes = tipo.some(item => item.Ruta && item.Ruta.trim() !== '');
+
+            if (hayImagenes) {
+                tipo.forEach((item, index) => {
+                    const imgElement = document.getElementById(`imge${index + 1}`);
+                    if (imgElement) {
+                        imgElement.setAttribute('src', `${UrlImg + item.Ruta}`);
+                    }
+                });
+                panelEncuestaIzquierda.classList.add('visible');
+
+                // Mostrar el modal solo si hay imágenes
+                $('#ModalEvento').modal('show');
+
+            } else {
+                // No hay imágenes válidas, no mostrar modal ni panel
+                panelEncuestaIzquierda.classList.remove('visible');
+                $('#ModalEvento').modal('hide');
+            }
+
         } else {
             console.error('La consulta no fue exitosa.');
+            $('#ModalEvento').modal('hide');
+            panelEncuestaIzquierda.classList.remove('visible');
         }
     } catch (error) {
-        /*   console.error('Error al realizar la consulta:', error);*/
+        //console.error('Error al realizar la consulta:', error);
+        $('#ModalEvento').modal('hide');
+        panelEncuestaIzquierda.classList.remove('visible');
     }
 }
 
+//async function ConsultaImagenIzquierda() {
+//    try {
+//        const panelEncuestaIzquierda = document.getElementById('PanelEncuestaIzquierda');
+//        panelEncuestaIzquierda.classList.remove('visible');
+//        const response = await $.ajax({
+//            type: 'POST',
+//            url: UrlConsultaImagenIzquierda
+//        });
+
+//        if (response.success) {
+//            const tipo = response.data;
+//            tipo.forEach((item, index) => {
+//                document.getElementById(`imge${index + 1}`).setAttribute('src', `${UrlImg + item.Ruta}`);
+//            });
+//            panelEncuestaIzquierda.classList.add('visible');
+//        } else {
+//            console.error('La consulta no fue exitosa.');
+//        }
+//    } catch (error) {
+//        /*   console.error('Error al realizar la consulta:', error);*/
+//    }
+//}
+
 // Llamar a la función para iniciar la consulta periódica de imágenes izquierdas
-consultarImagenesIzquierdaPeriodicamente();
+/*consultarImagenesIzquierdaPeriodicamente();*/
 
 async function ConsultaImagenInferior() {
     try {
@@ -1228,7 +1277,7 @@ function Getsubscribete() {
 }
 
 /*if (PaginaPrincipal == 2) {*/
-GetConsultapaisesDominios();
+/*GetConsultapaisesDominios();*/
 
 /*}*/
 var listaPais = [];

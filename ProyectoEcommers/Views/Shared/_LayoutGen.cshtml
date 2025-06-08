@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>María Bonita</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/vanillatoasts.css" rel="stylesheet" />
     @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
     @*  <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" /> *@
-    <link rel="stylesheet" href="~/css/styles.css" />
-    <link href="~/css/vanillatoasts.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+@*     <link rel="stylesheet" href="~/css/styles.css" /> *@
+
 
 
 
@@ -54,11 +56,13 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 @*     <script src="~/js/site.js" asp-append-version="true"></script> *@
     <script src="~/js/vanillatoasts.js"></script>
     <script src="~/js/site.js"></script>
     <script src="~/areas/admin/tienda.js"></script>
     <script src="~/areas/admin/contacto.js?Versionx=10"></script>
+    <script src="~/areas/admin/sliderizquierdo.js"></script>
 
 
 </head>
@@ -131,7 +135,7 @@
 </body>
 </html>
 
-<div class="modal fade show" id="Modal_Transacciones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scroll-long-outer-modal" aria-modal="true" role="dialog">
+@* <div class="modal fade show" id="Modal_Transacciones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scroll-long-outer-modal" aria-modal="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content CuadroModal">
             <div class="modal-header d-flex align-items-center">
@@ -146,9 +150,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> *@
 <!-- Modal Estado Proceso-->
-<div id="Process">
+@* <div id="Process">
     <div class="loader_sis">
         <div class="loader_dialoge">
             <div class="loader_containere text-center">
@@ -158,4 +162,4 @@
         </div>
     </div>
     <div class="loader_backe"></div>
-</div>
+</div> *@
