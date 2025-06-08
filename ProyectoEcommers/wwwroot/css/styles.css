@@ -13199,7 +13199,6 @@ section#contact {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #212529;
         color: #fff;
         width: 45px;
         height: 45px;
@@ -13209,8 +13208,19 @@ section#contact {
         transition: background-color 0.3s ease;
     }
 
+        /* Colores por red social */
+        .social-fixed a.instagram {
+            background-color: #E1306C; /* Rosa de Instagram */
+        }
+
+        .social-fixed a.tiktok {
+            background-color: #D2B48C; /* Café claro */
+            color: #000; /* Ícono en negro para buen contraste */
+        }
+
+        /* Hover general (puedes personalizar también si quieres) */
         .social-fixed a:hover {
-            background-color: #000;
+            background-color: #0dcaf0;
         }
 
 /* Responsive para móviles */
@@ -13220,7 +13230,7 @@ section#contact {
         bottom: 53px;
         right: 15px;
         flex-direction: row;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: #3b74ae;
         padding: 10px;
         border-radius: 30px;
     }
@@ -13231,3 +13241,4 @@ section#contact {
             font-size: 18px;
         }
 }
+
