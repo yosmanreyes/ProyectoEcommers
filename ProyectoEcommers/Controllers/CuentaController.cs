@@ -1585,8 +1585,8 @@ namespace ProyectoEcommers.Controllers
             cuerpo += $"Dirección opcional: {_direccioOpcional}\r\n\r\n";
 
             cuerpo += $"Puede seguir el estado de su pedido Ingresando a la página web en la siguiente URL: https://distribuidoramajas.com/Cuenta/MiCompra ingresa su correo electrónico le clic en el boton buscar y listo, o si desea en mi carrito de compras le das clic el botón mis compras realizadas ingresas su correo electrónico ...\r\n\r\n";
-            cuerpo += $"Para consultas adicionales, comuníquese con nuestros asesores al número telefónico 3132219524.\r\n\r\n";
-            cuerpo += $"Gracias por preferirnos.\r\n\r\nAtentamente,\r\nMAJAS\r\nDistribuidora de Productos de Belleza .";
+            cuerpo += $"Para consultas adicionales, comuníquese con nuestros asesores al número telefónico 3134275802.\r\n\r\n";
+            cuerpo += $"Gracias por preferirnos.\r\n\r\nAtentamente,\r\nMARIA\r\nBONITA .";
 
             var mensaje = new MimeMessage();
             mensaje.From.Add(MailboxAddress.Parse(remitente));
