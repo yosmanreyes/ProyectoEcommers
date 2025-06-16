@@ -13,6 +13,8 @@
     src: url('../../../plantilla/fonts/harringt.ttf') format('truetype');
 }
 
+
+
 .btn-primary,
 .btn-outline-primary {
     box-shadow: 0 2px 2px rgba(116, 96, 238, 0.05);
@@ -13361,7 +13363,7 @@ a.text-dark-info:hover, a.text-dark-info:focus {
 }
 
 .text-muted {
-    color: #a1aab2 !important;
+    color: #b1aab2 !important;
 }
 
 .text-black-50 {
@@ -26013,9 +26015,5 @@ input[type=number]::-webkit-outer-spin-button {
     position: relative;
     display: inline-block;
 }
-
-
-
-
 
 

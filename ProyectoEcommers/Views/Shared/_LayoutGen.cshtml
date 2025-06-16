@@ -12,7 +12,44 @@
 @*     <link rel="stylesheet" href="~/css/styles.css" /> *@
 
 
+<style>
+        /* --- Estilos Generales (para Escritorio y como base) --- */
+        .navbar-nav .nav-item .nav-link {
+            position: relative;
+            color: white; /* Ajusta según tu diseño */
+            padding-bottom: 0.6rem; /* Deja espacio para la barra */
+            transition: color 0.3s ease-in-out;
+            overflow: hidden; /* Importante para el efecto de expansión */
+        }
 
+            .navbar-nav .nav-item .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 0.2px; /* Grosor general para escritorio */
+                background: linear-gradient(to right, #FFD700, #DAA520); /* Degradado de oro */
+                transform: scaleX(0); /* Inicialmente oculta la barra */
+                transform-origin: bottom center; /* Animación desde el centro */
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Efecto "cargado" */
+            }
+
+
+
+        /* --- Efecto para el enlace activo (En ESCRITORIO Y MÓVIL) --- */
+        /* Cuando el enlace está activo, la barra siempre se muestra */
+        .navbar-nav .nav-item .nav-link.active::after {
+            transform: scaleX(1); /* La barra siempre visible si el enlace está activo */
+        }
+
+        .navbar-nav .nav-item .nav-link.active {
+            color: #FFD700; /* Color del texto si el enlace está activo */
+        }
+
+
+
+</style>
 
 
 
@@ -66,7 +103,7 @@
 
 
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="74">
     <header>
 
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" style="background-color:black " id="mainNav">
@@ -77,15 +114,21 @@
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">                     
+                    <ul class="navbar-nav text-uppercase ms-auto py-3 py-lg-0">                     
                         <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Mariachi">Mariachi en vivo</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio2">Próximos Eventos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Galeria</a></li>                    
                         <li class="nav-item"><a class="nav-link" href="#team">Ubicación</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Comentarios</a></li>
                         <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartaMariaBonita">Carta</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Cuenta" asp-action="Login">Iniciar Sesión</a></li>
+                  @*       <li class="nav-item"><a class="nav-link" asp-controller="Cuenta" asp-action="Login">Iniciar Sesión</a></li> *@
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Cuenta" asp-action="Login">
+                                <img src="~/img/Inicio.png" alt="" style="width: 30px; height: 30px;">
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
