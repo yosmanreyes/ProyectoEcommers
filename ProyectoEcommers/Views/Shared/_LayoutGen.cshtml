@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>María Bonita</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="~/css/vanillatoasts.css" rel="stylesheet" />
-    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+@*     <link href="~/css/vanillatoasts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" /> *@
     @*  <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" /> *@
     <link href="~/css/styles.css" rel="stylesheet" />
 @*     <link rel="stylesheet" href="~/css/styles.css" /> *@
 
 
 <style>
-        /* --- Estilos Generales (para Escritorio y como base) --- */
+/* 
         .navbar-nav .nav-item .nav-link {
             position: relative;
-            color: white; /* Ajusta según tu diseño */
-            padding-bottom: 0.6rem; /* Deja espacio para la barra */
+            color: white; 
+            padding-bottom: 0.6rem;
             transition: color 0.3s ease-in-out;
-            overflow: hidden; /* Importante para el efecto de expansión */
+            overflow: hidden; 
         }
 
             .navbar-nav .nav-item .nav-link::after {
@@ -28,26 +28,32 @@
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                height: 0.2px; /* Grosor general para escritorio */
-                background: linear-gradient(to right, #FFD700, #DAA520); /* Degradado de oro */
-                transform: scaleX(0); /* Inicialmente oculta la barra */
-                transform-origin: bottom center; /* Animación desde el centro */
-                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Efecto "cargado" */
+                height: 0.2px;
+                background: linear-gradient(to right, #FFD700, #DAA520); 
+                transform: scaleX(0); 
+                transform-origin: bottom center; 
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
             }
 
+       
+            .navbar-nav .nav-item .nav-link:hover::after {
+                transform: scaleX(1); 
+            }
 
+            .navbar-nav .nav-item .nav-link:hover {
+                color: #FFD700; 
+            }
 
-        /* --- Efecto para el enlace activo (En ESCRITORIO Y MÓVIL) --- */
-        /* Cuando el enlace está activo, la barra siempre se muestra */
-        .navbar-nav .nav-item .nav-link.active::after {
-            transform: scaleX(1); /* La barra siempre visible si el enlace está activo */
-        }
+       
+       
+            .navbar-nav .nav-item .nav-link.active::after {
+                transform: scaleX(1); 
+            }
 
-        .navbar-nav .nav-item .nav-link.active {
-            color: #FFD700; /* Color del texto si el enlace está activo */
-        }
-
-
+            .navbar-nav .nav-item .nav-link.active {
+                color: #FFD700;
+            }
+ */
 
 </style>
 
@@ -90,6 +96,9 @@
             document.querySelector('#chat-widget .chat-header button').addEventListener('click', toggleChatWidget);
         });
     </script>
+
+
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

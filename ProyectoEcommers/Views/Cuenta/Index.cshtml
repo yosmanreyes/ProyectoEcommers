@@ -336,7 +336,9 @@
                 background-clip: content-box, border-box;
             }
 
-  
+ 
+        /* Estilo personalizado para el padding en pantallas medianas y superiores */
+   
 
 
  
@@ -398,9 +400,14 @@
     <br />
 
     <header class="masthead">
-        <div class="container" style="position: relative; z-index: 10; text-align: center; color: white;">
-            <div class="masthead-subheading">Welcome!</div>
-            <div class="masthead-heading text-uppercase">Maria Bonita</div>
+        <div class="container" style="position: relative; z-index: 5; text-align: center; color: white;">
+            <div class="masthead-subheading">
+                <div class="masthead-heading text-uppercase"></div>
+                <div class="masthead-heading text-uppercase"></div>
+                Donde el Mariachi canta, la banda retumba <br> y tú eres el alma de la fiesta!
+            </div>
+          <br />
+     
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">Servicios</a>
         </div>
 
@@ -446,8 +453,7 @@
         <div class="container">
             <div class="text-center">
                 <br />
-                <h2 class="section-heading text-uppercase" style="color: white !important;"></h2>
-            
+                <h2 class="section-heading text-uppercase" style="color: white !important;"></h2>      
                 <h3 class="section-subheading text-muted" style="color:white">Disfruta de nuestros diferentes eventos.</h3>
             </div>
 
@@ -758,13 +764,11 @@
             </div> *@
 
             <div class="row align-items-center justify-content-center g-4">
-                <div class="col-12 col-md-5 text-center text-md-start" style="padding-left: 40px;">
+                <div class="col-12 col-md-5 text-center text-md-start ps-md-30px">
                     <p>
                         <i class="fas fa-map-marker-alt me-2" style="color: #e91e63;"></i>
                         Encuéntranos en la <br />
-                        <span class="fw-bold">Cra. 75 #24b-40, Bogotá Modelia, Colombia</span>
-                    </p>
-                    <p>
+                        <span class="fw-bold">Cra. 75 #24b-40, Bogotá Modelia, Colombia</span>             
                         <strong>Contáctanos Fácil</strong><br />
                         <i class="fas fa-envelope me-2" style="color: #007bff;"></i>
                         Correo:
@@ -774,6 +778,9 @@
                         <i class="fas fa-phone me-2" style="color: #90ee90;"></i>
                         Celular:
                         <a href="tel:+573134275802" class="text-decoration-none text-primary">+57 313 427 5802</a><br />
+                        <a href="https://wa.me/573134275802" class="text-decoration-none text-success fw-bold" target="_blank">
+                            ¡Haz tu reserva por WhatsApp!
+                        </a>
                     </p>
                 </div>
 
@@ -781,16 +788,14 @@
                     <img src="@Url.Content("~/img/Logo.png")" alt="Logo" class="img-fluid" style="max-width: 150px;" />
                 </div>
 
-                <div class="col-12 col-md-5 text-center text-md-start" style="padding-left: 140px;">
+                <div class="col-12 col-md-5 text-center text-md-start ps-md-140px">
                     <p>
                         <strong>Nuestros Horarios</strong><br />
                         Lunes y Martes <span class="text-danger fw-semibold">Cerrado</span><br />
                         Miércoles y Jueves de <span class="text-success fw-semibold">7:00 P.M. a 5:00 A.M.</span><br />
                         Viernes y Sábado de <span class="text-success fw-semibold">7:00 P.M. a 5:00 A.M.</span><br />
                         Domingo y Festivos <span class="text-danger fw-semibold">Cerrado</span><br />
-                        <a href="https://wa.me/573134275802" class="text-decoration-none text-success fw-bold" target="_blank">
-                            ¡Haz tu reserva por WhatsApp!
-                        </a>
+                     
                     </p>
                 </div>
             </div>
@@ -925,9 +930,10 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">Project Name</h2>
                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             
                 </div>
                 <div class="modal-body">
                     <img class="img-fluid d-block mx-auto" src="img/portfolio/1.jpeg" alt="..." />
@@ -952,6 +958,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">Project Name</h2>
                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -984,7 +991,7 @@
                   
 
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
                     <div class="banner__area" id="PanelEncuestaIzquierda">
                         <div class="banner__item mb-20 w-img col-lg-12 col-sm-12 mb-4">
                             <div class="evento-item">
@@ -1022,6 +1029,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">Project Name</h2>
                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1050,6 +1058,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">Project Name</h2>
                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1078,6 +1087,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">Project Name</h2>
                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1107,6 +1117,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">Project Name</h2>
                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1139,6 +1150,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h2 class="text-uppercase" style="color:white">MARIACHI</h2>
                     <p class="item-intro text-muted">
                         ¡Los Mejores Eventos al Puro Estilo Mexicano!
@@ -1175,8 +1187,9 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content CuadroModalSuave">
                 <div class="modal-header d-flex align-items-center">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="Logo text-center"><img src="@Url.Content("~/img/Logo.png")" alt="..." style="width:70%" /></div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             
                 </div>
                 <div class="modal-body">
                     <iframe src="@Url.Content("~/img/Carta/CartaMariaBonita.pdf")" width="100%" height="500px" style="border:none;"></iframe>

@@ -12596,15 +12596,15 @@ header.masthead {
 
 
     header.masthead .masthead-subheading {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-style: italic;
         line-height: 1.5rem;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
         font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 
     header.masthead .masthead-heading {
-        font-size: 3.25rem;
+        font-size: 3.00rem;
         font-weight: 700;
         line-height: 3.25rem;
         margin-bottom: 2rem;
@@ -12618,7 +12618,7 @@ header.masthead {
     }
 
         header.masthead .masthead-subheading {
-            font-size: 2.25rem;
+            font-size: 2.00rem;
             font-style: italic;
             line-height: 2.25rem;
             margin-bottom: 2rem;
@@ -13118,7 +13118,7 @@ section#team form#teamForm :-ms-input-placeholder {
 
 
 section#Mariachi {
-    background-color: #212529;
+/*    background-color: #212529;*/
     background-image: url("../img/FondoEvento3.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -13366,7 +13366,7 @@ section#Mariachi {
         }
 
 /* Responsive para móviles */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .social-fixed {
         top: unset;
         bottom: 53px;
@@ -13382,5 +13382,225 @@ section#Mariachi {
             height: 40px;
             font-size: 18px;
         }
+}*/
+
+
+
+/* --- Estilos por defecto (Escritorio y tabletas grandes) --- */
+.page-section#Mariachi .container > .row {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Espacio entre la imagen y el texto */
+    flex-wrap: nowrap; /* Asegura que no salten a nueva línea en escritorio si hay espacio */
 }
+
+.page-section#Mariachi .text-content {
+    flex: 1; /* Ocupa el espacio disponible */
+    text-align: left; /* Alineación del texto por defecto */
+}
+
+    .page-section#Mariachi .text-content h2 {
+        font-size: 2.5rem; /* Tamaño de fuente para el título principal */
+        margin-bottom: 20px;
+        text-align: center; /* Centrado del título */
+        color: white; /* Asegúrate de que el color sea blanco si está en un fondo oscuro */
+    }
+
+    .page-section#Mariachi .text-content p {
+        font-size: 1.125rem; /* Tamaño de fuente para el párrafo */
+        line-height: 1.6;
+        margin-bottom: 30px;
+        text-align: justify; /* Justificado para el párrafo */
+        color: white; /* Asegúrate de que el color sea blanco */
+    }
+
+.page-section#Mariachi .image-content {
+    flex: 1; /* Ocupa el espacio disponible */
+    text-align: center; /* Centra la imagen */
+}
+
+    .page-section#Mariachi .image-content img {
+        max-width: 100%; /* La imagen no excederá el ancho de su contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+        display: block; /* Elimina espacios extra debajo de la imagen */
+        border-radius: 8px; /* Opcional: bordes ligeramente redondeados */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: una sombra suave */
+    }
+
+/* --- Responsive para Móviles --- */
+@media (max-width: 768px) {
+    .page-section#Mariachi .container > .row {
+        flex-direction: column; /* Apila el texto y la imagen verticalmente */
+        gap: 20px; /* Reduce el espacio entre elementos en móvil */
+    }
+
+    .page-section#Mariachi .text-content {
+        order: 2; /* Puedes cambiar el orden si quieres que la imagen vaya primero */
+        flex: unset; /* Reinicia flex para que tome el ancho completo */
+        width: 100%;
+        text-align: center; /* Centra el texto en móvil */
+    }
+
+        .page-section#Mariachi .text-content h2 {
+            font-size: 1.8rem; /* **Reduce el tamaño del título principal** */
+            line-height: 1.2; /* Ajusta la altura de línea si es necesario */
+            margin-bottom: 15px;
+        }
+
+        .page-section#Mariachi .text-content p {
+            font-size: 1rem; /* **Reduce el tamaño del párrafo** */
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+    .page-section#Mariachi .image-content {
+        order: 1; /* Puedes cambiar el orden si quieres que el texto vaya primero */
+        flex: unset; /* Reinicia flex */
+        width: 80%; /* **Aumenta el ancho de la imagen para que no sea tan pequeña** */
+        max-width: 300px; /* Limita el tamaño máximo de la imagen para pantallas muy pequeñas */
+        margin: 0 auto; /* Centra la imagen si el ancho es menor al 100% */
+    }
+
+        .page-section#Mariachi .image-content img {
+            /* max-width: 100%; height: auto; ya está en los estilos generales y es bueno. */
+            /* Aseguramos que la imagen ocupe el ancho definido por el padre */
+            width: 100%;
+        }
+
+    /* Ajuste para el botón en móvil */
+    .page-section#Mariachi .text-center a.portfolio-link {
+        font-size: 0.9rem; /* Un poco más pequeño si es necesario */
+        padding: 10px 20px; /* Ajusta el padding */
+    }
+}
+
+/* Consideraciones adicionales para la compatibilidad con Bootstrap si lo estás usando */
+/* Si estás usando las clases `row` y `container` de Bootstrap, algunas de estas propiedades
+   pueden ser redundantes o podrían necesitar `!important` si Bootstrap tiene reglas más específicas.
+   Sin embargo, estos ajustes generalmente funcionan bien con Bootstrap si los colocas después
+   de la hoja de estilos de Bootstrap. */
+
+/* Asegúrate de que los colores de texto del encabezado principal y subencabezado estén bien definidos */
+.page-section h2.section-heading,
+.page-section h3.section-subheading {
+    color: white !important; /* Mantiene el texto en blanco */
+}
+
+
+/* --- Estilos Generales (Escritorio y Tabletas) --- */
+.page-section#Mariachi .container > .row {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los ítems en el centro */
+    gap: 40px; /* Espacio entre la imagen y el texto en escritorio */
+    flex-wrap: wrap; /* Permite que los ítems se envuelvan a la siguiente línea si no hay espacio */
+    justify-content: center; /* Centra el contenido en el medio si no ocupa todo el ancho */
+}
+
+.page-section#Mariachi .text-content {
+    flex: 1; /* Permite que el texto crezca y ocupe espacio */
+    min-width: 300px; /* Asegura que el bloque de texto tenga un ancho mínimo para legibilidad */
+    text-align: left;
+    color: white; /* Color del texto */
+}
+
+    .page-section#Mariachi .text-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center; /* Título centrado */
+    }
+
+    .page-section#Mariachi .text-content p {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        text-align: justify;
+    }
+
+.page-section#Mariachi .image-content {
+    flex: 1; /* Permite que la imagen crezca y ocupe espacio */
+    text-align: center; /* Centra la imagen dentro de su contenedor */
+    min-width: 280px; /* Ancho mínimo para la imagen en escritorio antes de saltar */
+}
+
+    .page-section#Mariachi .image-content img {
+        max-width: 100%; /* La imagen no excede el ancho de su contenedor */
+        height: auto; /* Mantiene la proporción */
+        display: block; /* Elimina espacios extra debajo */
+        margin: 0 auto; /* **Centra la imagen si es más pequeña que su contenedor** */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+/* --- Responsive para Móviles (max-width: 768px) --- */
+@media (max-width: 768px) {
+    .page-section#Mariachi .container > .row {
+        flex-direction: column; /* Apila el texto y la imagen verticalmente */
+        gap: 20px; /* Menos espacio entre elementos en móvil */
+        align-items: center; /* Centra los ítems apilados */
+    }
+
+    .page-section#Mariachi .text-content {
+        order: 2; /* Texto después de la imagen */
+        width: 90%; /* **Ocupa un 90% del ancho para un buen tamaño en móvil** */
+        max-width: 600px; /* Limita el ancho máximo del texto */
+        margin: 0 auto; /* Centra el bloque de texto */
+        padding: 0 10px; /* Pequeño padding horizontal para que el texto no se pegue a los bordes */
+    }
+
+        .page-section#Mariachi .text-content h2 {
+            font-size: 1.8rem; /* **Reduce el tamaño del título** */
+            text-align: center; /* Asegura el centrado del título en móvil */
+        }
+
+        .page-section#Mariachi .text-content p {
+            font-size: 1rem; /* **Reduce el tamaño del párrafo** */
+            text-align: justify; /* Mantiene justificado o puedes cambiar a 'center'/'left' */
+        }
+
+    .page-section#Mariachi .image-content {
+        order: 1; /* Imagen primero */
+        width: 80%; /* **La imagen ocupará el 80% del ancho del contenedor en móvil** */
+        max-width: 400px; /* Limita el tamaño máximo de la imagen para pantallas muy anchas (tablets) */
+        margin: 0 auto; /* **Centra la imagen horizontalmente** */
+        padding: 0; /* Quita padding extra si lo hubiera */
+    }
+
+        .page-section#Mariachi .image-content img {
+            width: 100%; /* La imagen se ajusta al 100% del ancho de su contenedor (.image-content) */
+            height: auto; /* Mantiene su proporción natural */
+            /* Si la imagen sigue viéndose pequeña, puedes intentar con min-height o un aspect-ratio */
+            /* Ejemplo: aspect-ratio: 4 / 5; object-fit: cover; (si las imágenes son más altas que anchas) */
+        }
+
+    /* Ajuste para el botón en móvil */
+    .page-section#Mariachi .text-center a.portfolio-link {
+        font-size: 0.95rem; /* Ajusta el tamaño del texto del botón */
+        padding: 12px 20px; /* Ajusta el padding del botón */
+    }
+}
+
+/* Asegúrate de que los colores del texto del encabezado principal y subencabezado estén bien definidos */
+.page-section h2.section-heading,
+.page-section h3.section-subheading {
+    color: white !important; /* Mantiene el texto en blanco */
+}
+
+
+
+
+
+.ps-md-140px {
+    padding-left: 0 !important; /* Por defecto en móviles */
+}
+
+@media (min-width: 768px) { /* breakpoint 'md' de Bootstrap */
+    .ps-md-140px {
+        padding-left: 140px !important;
+    }
+}
+
+
+
+
+
 
