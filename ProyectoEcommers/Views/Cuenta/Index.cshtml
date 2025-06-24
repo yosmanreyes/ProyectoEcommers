@@ -22,6 +22,7 @@
     <link href="~/css/googlefontsmontserrat.css" rel="stylesheet" />
     <link href="~/css/googlefontsroboto.css" rel="stylesheet" />
  
+
     <!-- Core theme CSS (includes Bootstrap)-->
 
 
@@ -373,14 +374,29 @@
 
  
         /* Estilo personalizado para el padding en pantallas medianas y superiores */
-   
 
+        /* El CSS se puede incluir aquí o en un archivo .css separado */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Permite que los clics pasen a través del contenedor */
+            overflow: hidden; /* Oculta partículas que salgan del contenedor */
+            z-index: -1; /* Asegura que esté detrás de otros elementos de la UI */
+        }
 
  
 
     </style>
 
-    @section scripts{
+    @section scripts {
+         <script src="~/js/tsparticles.slim.bundle.min.js"></script>
+@*         <script src="~/js/tsparticles.basic.bundle.js"></script> *@
+   
+@*         <script src="https://cdn.jsdelivr.net/npm/@tsparticles/all@3/tsparticles.all.min.js"></script> *@
+        <script src="~/js/particles.js"></script>
     <script type='text/javascript'>
             var UrlConsultaImagenSliderPrincipal = "@Url.Action("Tiendas", "Cuenta", new { Area = "" })";
                     var UrlConsultaImagenInferior = "@Url.Action("ConsultaImagenInferior", "Cuenta", new { Area = "" })";
@@ -423,11 +439,103 @@
             });
         </script>
 
+
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                // Inicializa tsParticles en tu contenedor
+                await tsParticles.load({
+                    id: "particles-container", // El ID de tu contenedor HTML
+                    options: {
+                        // Aquí van tus opciones de configuración para tsParticles
+                        // Por ejemplo, para un efecto de destello simple:
+                        background: {
+                            color: {
+                                value: "transparent",
+                            },
+                        },
+                        fpsLimit: 60,
+                        particles: {
+                            color: {
+                                value: "#ffffff", // Partículas blancas
+                            },
+                            links: {
+                                enable: false, // Sin líneas entre ellas
+                            },
+                            move: {
+                                enable: true,
+                                speed: 0.5,
+                                direction: "none",
+                                random: true,
+                                straight: false,
+                                out_mode: "out",
+                                bounce: false,
+                            },
+                            number: {
+                                value: 50, // Número de partículas
+                            },
+                            opacity: {
+                                value: { min: 0.1, max: 0.8 }, // Opacidad variable para destello
+                                random: true,
+                                animation: {
+                                    enable: true,
+                                    speed: 1,
+                                    minimumValue: 0.1,
+                                    sync: false,
+                                },
+                            },
+                            size: {
+                                value: { min: 2, max: 7 }, // Tamaño variable
+                                random: true,
+                                animation: {
+                                    enable: true,
+                                    speed: 4,
+                                    minimumValue: 0.1,
+                                    sync: false,
+                                },
+                            },
+                        },
+                        // Puedes añadir interactividad aquí si quieres (onhover, onclick, etc.)
+                        interactivity: {
+                            events: {
+                                onHover: {
+                                    enable: true,
+                                    mode: "bubble", // O "repulse", para un efecto de "empuje"
+                                },
+                                onClick: {
+                                    enable: true,
+                                    mode: "push", // Al hacer clic, se añaden partículas
+                                },
+                            },
+                            modes: {
+                                bubble: {
+                                    distance: 200,
+                                    size: 10,
+                                    duration: 2,
+                                    opacity: 0.8,
+                                    speed: 3
+                                },
+                                repulse: {
+                                    distance: 100,
+                                    duration: 0.4
+                                },
+                                push: {
+                                    quantity: 4
+                                }
+                            }
+                        },
+                        detectRetina: true,
+                    },
+                });
+            });
+        </script>
+
+
     }
 
 </head>
 
 <body id="page-top">
+    <div id="particles-container"></div>
     <br />
     <br />
     <br />
@@ -1282,3 +1390,8 @@
 
 </body>
 </html>
+
+
+
+
+

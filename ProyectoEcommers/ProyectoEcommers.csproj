@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Areas\" />
     <Folder Include="wwwroot\Content\Plantilla\material\dist\css\icons\crypto-icons\" />
     <Folder Include="wwwroot\Content\Plantilla\material\dist\css\icons\flag-icon-css\flags\" />
     <Folder Include="wwwroot\Content\Plantilla\material\dist\css\icons\font-awesome\css\" />
