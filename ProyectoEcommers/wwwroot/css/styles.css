@@ -12491,7 +12491,7 @@ p {
 
     #mainNav .navbar-nav .nav-item .nav-link {
         font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-size: 0.95rem;
+        font-size: 0.91rem;
         color: #fff;
         letter-spacing: 0.0625em;
     }
@@ -13574,7 +13574,7 @@ section#Mariachi {
 
     /* Ajuste para el botón en móvil */
     .page-section#Mariachi .text-center a.portfolio-link {
-        font-size: 0.95rem; /* Ajusta el tamaño del texto del botón */
+        font-size: 0.91rem; /* Ajusta el tamaño del texto del botón */
         padding: 12px 20px; /* Ajusta el padding del botón */
     }
 }
