@@ -290,13 +290,13 @@
                 z-index: 10; /* encima del slider */
             }
 
-        #PanelEncuesta {
-            position: absolute; /* slider detrás */
+      /*   #PanelEncuesta {
+            position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* debajo del texto */
+            z-index: 1; 
             overflow: hidden;
         }
 
@@ -314,11 +314,41 @@
             }
 
             .single-slider img {
-                position: absolute; /* slider detrás */
+                position: absolute; 
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
+            } */
+
+        #PanelEncuesta {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .single-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+            .single-slider.active {
+                display: block;
+            }
+
+            .single-slider img {
+                width: 100%;
+                height: 100%;
+          /*       object-fit: cover;  */
+                object-position: center;
             }
 
 
@@ -396,8 +426,7 @@
     <br />
     <br />
     <br />
-    <br />
-    <br />
+
 
     <header class="masthead">
         <div class="container" style="position: relative; z-index: 5; text-align: center; color: white;">
@@ -469,7 +498,7 @@
                                 CONOCE EL MEJOR MARIACHI EN VIVO DE BOGOTÁ
                             </h2>
                             <p style="font-size: 1.125rem; line-height: 1.6; margin-bottom: 30px; text-align: justify;">
-                                <span style="color: red;">María Bonita</span>: tradición que se baila, rumba que se vive. <span style="color: red;">María Bonita</span> nace en honor a la Virgen de Guadalupe, símbolo de fuerza, fe y belleza del pueblo <span style="color: green;">mexicano</span>. Más que una discoteca, es una experiencia con alma <span style="color: green;">mexicana</span> y ritmo sin fronteras. Entre mariachis, banda y crossover, cada noche se transforma en una fiesta viva, intensa y auténtica. Donde la devoción se mezcla con celebración, y la música en vivo hace latir el corazón. <span style="color: red;">María Bonita</span>: la rumba más poderosa con sabor a <span style="color: green;">México</span>.
+                                <span style="color: white;">María Bonita</span>: tradición que se baila, rumba que se vive. <span style="color: white;">María Bonita</span> nace en honor a la Virgen de Guadalupe, símbolo de fuerza, fe y belleza del pueblo <span style="color: white;">mexicano</span>. Más que una discoteca, es una experiencia con alma <span style="color: white;">mexicana</span> y ritmo sin fronteras. Entre mariachis, banda y crossover, cada noche se transforma en una fiesta viva, intensa y auténtica. Donde la devoción se mezcla con celebración, y la música en vivo hace latir el corazón. <span style="color: white;">María Bonita</span>: la rumba más poderosa con sabor a <span style="color: white;">México</span>.
                             </p>
 
 
@@ -1166,7 +1195,7 @@
 
                     <img class="img-fluid d-block mx-auto" src="img/portfolio/6.jpeg" alt="..." />
                     <p style="text-align: justify;">
-                        <span style="color: red;">María Bonita</span>: tradición que se baila, rumba que se vive. <span style="color: red;">María Bonita</span> nace en honor a la Virgen de Guadalupe, símbolo de fuerza, fe y belleza del pueblo <span style="color: green;">mexicano</span>. Más que una discoteca, es una experiencia con alma <span style="color: green;">mexicana</span> y ritmo sin fronteras. Entre mariachis, banda y crossover, cada noche se transforma en una fiesta viva, intensa y auténtica. Donde la devoción se mezcla con celebración, y la música en vivo hace latir el corazón. <span style="color: red;">María Bonita</span>: la rumba más poderosa con sabor a <span style="color: green;">México</span>.
+                        <span style="color: white;">María Bonita</span>: tradición que se baila, rumba que se vive. <span style="color: red;">María Bonita</span> nace en honor a la Virgen de Guadalupe, símbolo de fuerza, fe y belleza del pueblo <span style="color: green;">mexicano</span>. Más que una discoteca, es una experiencia con alma <span style="color: green;">mexicana</span> y ritmo sin fronteras. Entre mariachis, banda y crossover, cada noche se transforma en una fiesta viva, intensa y auténtica. Donde la devoción se mezcla con celebración, y la música en vivo hace latir el corazón. <span style="color: red;">María Bonita</span>: la rumba más poderosa con sabor a <span style="color: green;">México</span>.
                     </p>
 
 

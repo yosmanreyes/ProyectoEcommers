@@ -26020,5 +26020,32 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
+/* Estilos para pantallas de hasta 768px de ancho (típico para tablets) */
+@media (max-width: 768px) {
+    .single-slider img {
+        /* Podrías ajustar el tamaño máximo si fuera necesario, aunque max-width: 100% ya es efectivo */
+        /* max-width: 90%; */
+        margin: 0 auto; /* Centrar la imagen si es más pequeña que su contenedor */
+
+    }
+}
+
+/* Estilos para pantallas de hasta 480px de ancho (típico para móviles) */
+@media (max-width: 480px) {
+    .single-slider img {
+        /* Tal vez quieras que las imágenes sean un poco más pequeñas en móviles muy pequeños */
+        /* max-width: 95%; */
+    }
+}
+
+/* --- Estilos específicos para pantallas grandes (Escritorio) --- */
+@media (min-width: 992px) { /* Por ejemplo, a partir de 992px (típico de Bootstrap para 'lg') */
+    #PanelEncuesta {
+        height: 1000px; /* Define una altura fija deseada para el slider en escritorio */
+        /* O podrías usar min-height: 70vh; para que ocupe un 70% de la altura de la ventana */
+       /*max-height: 700px;*/ /* También puedes poner una altura máxima para evitar que sea inmensa */
+    }
+}
+
 
 
