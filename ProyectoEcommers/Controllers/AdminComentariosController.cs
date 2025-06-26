@@ -11,12 +11,14 @@ namespace ProyectoEcommers.Controllers
     using MimeKit;
 
     using Negocio.Contratos.ConsultasExternas;
+    using ProyectoEcommers.Helper;
     using ProyectoEcommers.Models;
     using System.Data;
     using System.Security.Claims;
+    using OfficeOpenXml;
 
     using static ProyectoEcommers.Controllers.CuentaController;
-
+ 
 
     [Authorize(Roles = "1,2,3,4")]
     public class AdminComentariosController : Controller
@@ -319,43 +321,43 @@ namespace ProyectoEcommers.Controllers
             return 1;
         }
         #region Reportes Excel
-        //[HttpGet]
-        //public async Task<FileContentResult> ExcelGeneral()
-        //{
-        //    try
-        //    {
-        //        var clave = User.FindFirstValue("Clave");
-        //        var retorno = await _IDbProducto.F_GetComentarios();
-        //        string[] columns = { "idComentario", "Nombres", "CorreoElectronico", "NumeroTelefono", "Comentarios", "vigente", "fechaCreacion", "maquinaCreacion" };
+        [HttpGet]
+        public async Task<FileContentResult> ExcelGeneral()
+        {
+            try
+            {
+                var clave = User.FindFirstValue("Clave");
+                var retorno = await _IDbProducto.F_GetComentarios();
+                string[] columns = { "idComentario", "Nombres", "CorreoElectronico", "NumeroTelefono", "Comentarios", "vigente", "fechaCreacion", "maquinaCreacion" };
 
-        //        byte[] filecontent = ExcelExportHelperPass.ExportExcel(retorno.ToList(), "Listado General Comentarios", Convert.ToString(clave), true, columns);
+                byte[] filecontent = ExcelExportHelperPass.ExportExcel(retorno.ToList(), "Listado General Comentarios", Convert.ToString(clave), true, columns);
 
-        //        return File(filecontent, ExcelExportHelper.ExcelContentType, "ExportToExcelTotalComentarios.xlsx");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+                return File(filecontent, ExcelExportHelper.ExcelContentType, "ExportToExcelTotalComentarios.xlsx");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         //Excel con contraseña
-        //[HttpGet]    
-        //public async Task<FileContentResult> ExcelGeneralCorreos()
-        //{
-        //    try
-        //    {
-        //        var clave = User.FindFirstValue("Clave");
-        //        var retorno = await _IDbProducto.F_GetConsultaCorreos();
-        //        string[] columns = { "idComentario", "Nombres", "NumeroTelefono", "CorreoElectronico" };
+        [HttpGet]
+        public async Task<FileContentResult> ExcelGeneralCorreos()
+        {
+            try
+            {
+                var clave = User.FindFirstValue("Clave");
+                var retorno = await _IDbProducto.F_GetConsultaCorreos();
+                string[] columns = { "idComentario", "Nombres", "NumeroTelefono", "CorreoElectronico" };
 
-        //        byte[] filecontent = ExcelExportHelperPass.ExportExcel(retorno.ToList(), "Listado General Correos", Convert.ToString(clave), true, columns);
+                byte[] filecontent = ExcelExportHelperPass.ExportExcel(retorno.ToList(), "Listado General Correos", Convert.ToString(clave), true, columns);
 
-        //        return File(filecontent, ExcelExportHelper.ExcelContentType, "ExportExcelCorreos.xlsx");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+                return File(filecontent, ExcelExportHelper.ExcelContentType, "ExportExcelCorreos.xlsx");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
         private string GetClientIpAddress(HttpContext context)
         {
