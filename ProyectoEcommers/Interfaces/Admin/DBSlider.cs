@@ -531,9 +531,10 @@ namespace ProyectoEcommers.Models
             }
             catch (Exception ex)
             {
+                throw new Exception("Error " + ex.Message, ex.InnerException);
                 // Manejo de excepciones (podrías registrar el error)
-                Console.WriteLine($"Error al guardar la imagen: {ex.Message}");
-                Reultado = -1; // Error genérico
+                //Console.WriteLine($"Error al guardar la imagen: {ex.Message}");
+                //Reultado = -1; // Error genérico
             }
 
             return Reultado;

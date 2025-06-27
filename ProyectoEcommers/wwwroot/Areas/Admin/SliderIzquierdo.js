@@ -62,7 +62,7 @@ function Ins_ImagenSlider() {
                                 title: 'Señor(a) Usuario(a:)',
                                 text: response.message
                             });
-                            window.location.reload();
+                            //window.location.reload();
                         }
 
                         else {
@@ -71,7 +71,7 @@ function Ins_ImagenSlider() {
                                 title: 'Señor(a) Usuario (a:)',
                                 text: response.message
                             });
-                            window.location.reload();
+                            //window.location.reload();
                         }
 
                     },

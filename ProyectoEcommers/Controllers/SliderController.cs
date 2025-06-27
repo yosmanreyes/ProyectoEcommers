@@ -445,7 +445,7 @@ namespace ProyectoEcommers.Controllers
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Ins_ImagenSliderIzquierdo(IFormFile Archivo, long Identificacion)
         {
-
+            try { 
             var insFotografia = new DtoSliderizquierdo();
             string ImagenBase64;
 
@@ -497,7 +497,10 @@ namespace ProyectoEcommers.Controllers
             {
                 return Json(new { success = false, data = Resultado, message = "No fue posible guardar la fotografia" });
             }
-
+            }catch (Exception e)
+            {
+                return Json(new { success = false, data = 0, message = e.InnerException.ToString() });
+            }
         }
         [HttpPost]
         public async Task<JsonResult> P_GetImagenesIzquierdo()
