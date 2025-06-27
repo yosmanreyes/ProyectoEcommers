@@ -1118,7 +1118,7 @@ namespace ProyectoEcommers.Controllers
         [HttpPost]
         public int EnviarCorreoElectronico(string _email)
         {
-            string remitente = "distrimajas@gmail.com";
+            string remitente = "grupolasantaclub@gmail.com";
             string destinatario = _email;
             string asunto = "Gracias por Suscríbete al Boletín";
             string cuerpo = "Maria Bonita agradece la suscripción, próximamente estarás recibiendo nuestros últimos productos y descuentos";
@@ -1560,7 +1560,7 @@ namespace ProyectoEcommers.Controllers
         [HttpPost]
         public int EnviarCorreoElectronicoCompra(string _email, string _direccion, string _direccioOpcional, string _nombres, string _apellidos, string Cantidad, decimal CostoEnvio, string PrecioTotal, decimal PrecioFinal, string preferenceId, string merchant_order_id, string status, List<DtoMiCarrito> listaProductos)
         {
-            string remitente = "distrimajas@gmail.com";
+            string remitente = "grupolasantaclub@gmail.com";
             string destinatario = _email;
             string asunto = "Gracias por realizar su compra";
 
@@ -1584,7 +1584,7 @@ namespace ProyectoEcommers.Controllers
             cuerpo += $"Dirección de envío: {_direccion}\r\n";
             cuerpo += $"Dirección opcional: {_direccioOpcional}\r\n\r\n";
 
-            cuerpo += $"Puede seguir el estado de su pedido Ingresando a la página web en la siguiente URL: https://distribuidoramajas.com/Cuenta/MiCompra ingresa su correo electrónico le clic en el boton buscar y listo, o si desea en mi carrito de compras le das clic el botón mis compras realizadas ingresas su correo electrónico ...\r\n\r\n";
+            cuerpo += $"Puede seguir el estado de su pedido Ingresando a la página web en la siguiente URL: https://www.mariabonita.com.co/Cuenta/MiCompra ingresa su correo electrónico le clic en el boton buscar y listo, o si desea en mi carrito de compras le das clic el botón mis compras realizadas ingresas su correo electrónico ...\r\n\r\n";
             cuerpo += $"Para consultas adicionales, comuníquese con nuestros asesores al número telefónico 3134275802.\r\n\r\n";
             cuerpo += $"Gracias por preferirnos.\r\n\r\nAtentamente,\r\nMARIA\r\nBONITA .";
 
@@ -1614,7 +1614,7 @@ namespace ProyectoEcommers.Controllers
         //[HttpPost]
         //public int EnviarCorreoElectronicoCompra(string _email, string _direccion, string _direccioOpcional, string _nombres, string _apellidos, string Cantidad, decimal CostoEnvio, string PrecioTotal, decimal PrecioFinal, string preferenceId, string merchant_order_id, string status)
         //{
-        //    string remitente = "distrimajas@gmail.com";
+        //    string remitente = "grupolasantaclub@gmail.com";
         //    string destinatario = _email;
         //    string asunto = "Gracias por realizar su compra";
         //    string cuerpo = "señor(a)\r\n" + _nombres + " " + _apellidos + "\r\n\r\nMaria Bonita agradece por su compra, se envía el paso a paso con el fin de que usted puede realizar seguimiento a su pedido en la siguiente URL https://DistribuidoraMajas.com/Cuenta/MiCompra, anexa su correo electrónico y listo, o si desea Ingrese a la página web y en mi carrito de compras le das clic el botón  mis compras realizadas ingresas su correo electrónico y listo, de igual manera se puede comunicar de forma directa con nuestros asesores al número telefónico 3132219524, gracias por preferirnos.\r\n\r\nDirección de Envío:  " + _direccion + " " + _direccioOpcional + " -9584\r\n\r\n\r\nAtentamente,\r\n\r\n\r\n\r\nMAJAS\r\nDistribuidora de Productos de Belleza .";

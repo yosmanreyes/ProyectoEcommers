@@ -73,7 +73,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMercadoPago", builder =>
     {
-        builder.WithOrigins("https://distribuidoramajas.com")
+        builder.WithOrigins("https://www.mariabonita.com.co/")
                .AllowAnyHeader()
                .AllowAnyMethod()
                .AllowCredentials(); // Permitir credenciales

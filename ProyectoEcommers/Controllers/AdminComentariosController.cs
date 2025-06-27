@@ -295,7 +295,7 @@ namespace ProyectoEcommers.Controllers
         }
         public int EnviarCorreoElectronico(string _email, string _asunto, string _mensaje)
         {
-            string remitente = "distrimajas@gmail.com";
+            string remitente = "grupolasantaclub@gmail.com";
             string destinatario = _email;
             string asunto = _asunto;
             string cuerpo = _mensaje;
