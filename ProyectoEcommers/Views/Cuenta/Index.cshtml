@@ -469,6 +469,29 @@ Layout = "~/Views/Shared/_LayoutGen.cshtml";
                 position: relative;
                 top: 100px;
             }
+
+            section#Mariachi {
+                font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+                background-position: center top;
+                padding: 20px 10px;
+            }
+
+                section#Mariachi .row {
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                section#Mariachi .text-content,
+                section#Mariachi .image-content {
+                    flex: unset !important;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                section#Mariachi img.tall-img10 {
+                    max-width: 100%;
+                    height: auto;
+                }
         }
 
         #PanelEncuesta img {
@@ -651,11 +674,11 @@ Layout = "~/Views/Shared/_LayoutGen.cshtml";
 
         <div class="col-xl-12 col-lg-12" id="PanelEncuestax">
             <div id="PanelEncuesta" class="slider__inner slider-active hidden">
-                <div class="single-slider w-img"><img id="img1" src="" alt="slider"></div>
-                <div class="single-slider w-img"><img id="img2" src="" alt="slider"></div>
-                <div class="single-slider w-img"><img id="img3" src="" alt="slider"></div>
-                <div class="single-slider w-img"><img id="img4" src="" alt="slider"></div>
-                <div class="single-slider w-img"><img id="img5" src="" alt="slider"></div>
+                <div class="single-slider w-img"><img id="img1" loading="lazy" src="" alt="slider"></div>
+                <div class="single-slider w-img"><img id="img2" loading="lazy" src="" alt="slider"></div>
+                <div class="single-slider w-img"><img id="img3" loading="lazy" src="" alt="slider"></div>
+                <div class="single-slider w-img"><img id="img4" loading="lazy" src="" alt="slider"></div>
+                <div class="single-slider w-img"><img id="img5" loading="lazy" src="" alt="slider"></div>
             </div>
         </div>
     </header>
@@ -700,12 +723,11 @@ Layout = "~/Views/Shared/_LayoutGen.cshtml";
             </div>
             <br />
             <br />
-            <br />
-            <br />   <br />
-            <br />
+            
         </div>
     </section>
-
+    <br />
+    <br />
     <section class="page-section portfolio-background" id="portfolio2">
         <div class="container">
             <div class="text-center">
