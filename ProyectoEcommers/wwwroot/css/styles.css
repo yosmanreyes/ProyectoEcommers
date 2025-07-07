@@ -12424,6 +12424,7 @@ p {
 
 .page-section {
     padding: 6rem 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
     .page-section h2.section-heading, .page-section .section-heading.h2 {
@@ -12435,8 +12436,7 @@ p {
     .page-section h3.section-subheading, .page-section .section-subheading.h3 {
         font-size: 1rem;
         font-weight: 400;
-        font-style: italic;
-        font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
         margin-bottom: 4rem;
     }
 
@@ -13052,6 +13052,7 @@ section#team {
     background-image: url("../img/map-image.png");
     background-repeat: no-repeat;
     background-position: center;
+    margin: 15px;
 }
 
 
@@ -13064,56 +13065,56 @@ section#team {
         margin-bottom: 1.5rem;
     }
 
-    section#team form#teamForm .form-group input,
-    section#team form#teamForm .form-group textarea {
-        padding: 1.25rem;
-    }
-
-        section#team form#teamForm .form-group input.form-control {
-            height: auto;
+        section#team form#teamForm .form-group input,
+        section#team form#teamForm .form-group textarea {
+            padding: 1.25rem;
         }
 
-section#team form#teamForm .form-group-textarea {
-    height: 100%;
-}
+            section#team form#teamForm .form-group input.form-control {
+                height: auto;
+            }
 
-    section#team form#teamForm .form-group-textarea textarea {
+    section#team form#teamForm .form-group-textarea {
         height: 100%;
-        min-height: 10rem;
     }
 
-section#team form#teamForm p.help-block {
-    margin: 0;
-}
+        section#team form#teamForm .form-group-textarea textarea {
+            height: 100%;
+            min-height: 10rem;
+        }
 
-section#team form#teamForm .form-control:focus {
-    border-color: #ffc800;
-    box-shadow: none;
-}
+    section#team form#teamForm p.help-block {
+        margin: 0;
+    }
 
-section#team form#teamForm ::-webkit-input-placeholder {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
-    color: #ced4da;
-}
+    section#team form#teamForm .form-control:focus {
+        border-color: #ffc800;
+        box-shadow: none;
+    }
 
-section#team form#teamForm :-moz-placeholder {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
-    color: #ced4da;
-}
+    section#team form#teamForm ::-webkit-input-placeholder {
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-weight: 700;
+        color: #ced4da;
+    }
 
-section#team form#teamForm ::-moz-placeholder {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
-    color: #ced4da;
-}
+    section#team form#teamForm :-moz-placeholder {
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-weight: 700;
+        color: #ced4da;
+    }
 
-section#team form#teamForm :-ms-input-placeholder {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
-    color: #ced4da;
-}
+    section#team form#teamForm ::-moz-placeholder {
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-weight: 700;
+        color: #ced4da;
+    }
+
+    section#team form#teamForm :-ms-input-placeholder {
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-weight: 700;
+        color: #ced4da;
+    }
 
 
 
@@ -13126,7 +13127,7 @@ section#Mariachi {
     background-attachment: scroll; /* Asegura compatibilidad móvil */
     width: 100%;
     overflow-x: hidden;
-    position: relative;
+    position: inherit;
 }
 
 
